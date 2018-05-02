@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yannisdo <yannisdo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/14 18:50:52 by yannisdo          #+#    #+#             */
-/*   Updated: 2018/04/14 18:50:53 by yannisdoublet    ###   ########.fr       */
+/*   Created: 2018/04/21 18:54:18 by yadouble          #+#    #+#             */
+/*   Updated: 2018/04/22 18:00:19 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		ft_atoi(const char *nptr)
 {
-	size_t i;
-	int res;
-	int neg;
+	size_t	i;
+	int		res;
+	int		neg;
 
 	i = 0;
 	res = 0;
@@ -28,7 +28,7 @@ int		ft_atoi(const char *nptr)
 		neg = ((nptr[i] == '-') ? -1 : 1);
 		i++;
 	}
-	while ( nptr[i] >= '0' && nptr[i] <= '9')
+	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		res = (nptr[i] - '0') + res * 10;
 		i++;
