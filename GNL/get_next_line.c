@@ -6,29 +6,28 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:03:25 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/06 18:26:44 by yannisdoublet    ###   ########.fr       */
+/*   Updated: 2018/05/07 15:17:44 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-int ft_print_str(char *str)
+char *ft_str_to_line(char **str,char **line)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while ((*str)[i])
 	{
-		ft_putstr(str);
-		if (str[i] == '\n')
+		if ((*str)[i] == '\n' || (*str)[i] == '\0')
 		{
-			str = str + i + 1;
-			return (1);
+			*line = ft_strsub((*str), 0, i);
+			*str = *str + i + 1;
+			return (*line);
 		}
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
 int		get_next_line(const int fd, char **line)
@@ -47,22 +46,8 @@ int		get_next_line(const int fd, char **line)
 			str = ft_strdup(buff);
 		else
 			str = ft_strjoin(str, buff);
-		if ((ft_print_str(str) == 1))
-				return (1);
 	}
-	return (0);
-}
-
-int		main(int argc, char **argv)
-{
-	int		fd1;
-	char	**line;
-
-	if (argc == 2)
-	{
-		fd1 = open(argv[1], O_RDONLY);
-		while (get_next_line(fd1, line) == 1)
-			;
-	}
+	if (ft_str_to_line(&str, line))
+			return (1);
 	return (0);
 }
