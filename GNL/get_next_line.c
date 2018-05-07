@@ -3,15 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:03:25 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/03 18:46:32 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/06 18:26:44 by yannisdoublet    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+
+int ft_print_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		ft_putstr(str);
+		if (str[i] == '\n')
+		{
+			str = str + i + 1;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 
 int		get_next_line(const int fd, char **line)
 {
@@ -29,21 +47,10 @@ int		get_next_line(const int fd, char **line)
 			str = ft_strdup(buff);
 		else
 			str = ft_strjoin(str, buff);
-		while (str[i])
-		{
-			ft_putchar(str[i]);
-			if (str[i] == '\n')
-				break ;
-			i++;
-		}
-		if (str[i] == '\n')
-		{
-			str = str + i + 1;
-			break ;
-			return (0);
-		}
+		if ((ft_print_str(str) == 1))
+				return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int		main(int argc, char **argv)
