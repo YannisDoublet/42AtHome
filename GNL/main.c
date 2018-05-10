@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 18:23:43 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/07 18:24:00 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/08 18:17:16 by yannisdoublet    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		fd1 = open(argv[1], O_RDONLY);
-		while (get_next_line(fd1, &line) > 0)
-		{
-			ft_putstr(line);
-			ft_strdel(&line);
-			ft_putchar('\n');
-		}
+		get_next_line(fd1, &line);
+		ft_putstr(line);
+		ft_putchar('\n');
+		get_next_line(fd1, &line);
+		ft_putstr(line);
+		ft_putchar('\n');
 	}
 	return (0);
 }

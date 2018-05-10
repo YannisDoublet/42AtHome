@@ -6,40 +6,46 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:03:25 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/07 15:17:44 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/08 19:30:22 by yannisdoublet    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-char *ft_str_to_line(char **str,char **line)
+int	ft_str_to_line(char **str,char **line)
 {
 	int	i;
 
 	i = 0;
 	while ((*str)[i])
 	{
-		if ((*str)[i] == '\n' || (*str)[i] == '\0')
+		if ((*str)[i] == '\n')
 		{
 			*line = ft_strsub((*str), 0, i);
 			*str = *str + i + 1;
-			return (*line);
+			return (1);
 		}
 		i++;
 	}
-	return (NULL);
+	if ((*str)[i] == '\0')
+	{
+		*line = ft_strsub((*str), 0, i);
+		return (0);
+	}
+	return (0);
 }
 
 int		get_next_line(const int fd, char **line)
 {
 	static	char	*str;
-	char			*buff;
-	int				ret;
-	int				i;
+	char					buff[BUFF_SIZE + 1];
+	int						ret;
+	int						i;
 
 	i = 0;
-	buff = ft_memalloc(BUFF_SIZE + 1);
-	while ((ret = read(fd, buff, BUFF_SIZE)))
+	ret = 0;
+	while ((ret = read(fd, buff, BUFF_SIZE)) > 0)
 	{
 		buff[ret] = '\0';
 		if (!str)
@@ -47,7 +53,7 @@ int		get_next_line(const int fd, char **line)
 		else
 			str = ft_strjoin(str, buff);
 	}
-	if (ft_str_to_line(&str, line))
-			return (1);
+	if (ft_str_to_line(&str, line) && ret != -1)
+		return (1);
 	return (0);
 }
