@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:03:25 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/08 19:30:22 by yannisdoublet    ###   ########.fr       */
+/*   Updated: 2018/05/10 15:16:59 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		get_next_line(const int fd, char **line)
 	ret = 0;
 	while ((ret = read(fd, buff, BUFF_SIZE)) > 0)
 	{
+		printf("hey\n");
 		buff[ret] = '\0';
 		if (!str)
 			str = ft_strdup(buff);
