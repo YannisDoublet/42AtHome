@@ -6,25 +6,11 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 10:26:26 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/10 18:30:14 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/11 22:07:52 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-int		ft_break_read(char *buff)
-{
-	int	i;
-
-	i = 0;
-	while (buff[i])
-	{
-		if (buff[i] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 int		ft_current_to_line(t_list **current, char **line)
 {
@@ -34,10 +20,11 @@ int		ft_current_to_line(t_list **current, char **line)
 	i = 0;
 	while (((char *)(*current)->content)[i])
 	{
-		if (((char *)(*current)->content)[i] == '\n')
+		if (((char *)(*current)->content)[i] == '\n') 
 		{
 			*line = ft_strsub(((char *)(*current)->content), 0, i);
-			tmp = ft_strdup(((*current)->content) + i + 1);
+			if (!(tmp = ft_strdup(((*current)->content) + i + 1)))
+				tmp = ft_strdup((*current)->content) + i;
 			free((*current)->content);
 			(*current)->content = (void *)tmp;
 			return (1);
@@ -46,8 +33,11 @@ int		ft_current_to_line(t_list **current, char **line)
 	}
 	if (!((char *)(*current)->content)[i])
 	{
-		*line = ((char *)(*current)->content) + i - 1;
-		return (0);
+		*line = ft_strsub(((char *)(*current)->content), 0, i);
+		tmp = ft_strdup(((*current)->content) + i);
+		free((*current)->content);
+		(*current)->content = (void *)tmp;
+		return (1);
 	}
 	return (0);
 }
@@ -57,7 +47,7 @@ t_list	*ft_which_fd(int fd, t_list **head)
 	t_list	*current;
 
 	current = *head;
-	while (current)
+	while (current != NULL)
 	{
 		if (fd == (int)current->content_size)
 			return (current);
@@ -78,14 +68,12 @@ int		get_next_line(const int fd, char **line)
 	char			*tmp;
 
 	ret = 0;
+	if (BUFF_SIZE < 1 || fd < 0 || line == NULL || read(fd, buff, 0) < 0)
+		return (-1);
 	ft_bzero(buff, BUFF_SIZE + 1);
 	if (!head)
-	{
 		head = ft_lstnew(buff, fd);
-		current = head;
-	}
-	else
-		current = ft_which_fd(fd, &head);
+	current = ft_which_fd(fd, &head);
 	while ((ret = read(fd, buff, BUFF_SIZE)) > 0)
 	{
 		buff[ret] = '\0';
@@ -95,10 +83,12 @@ int		get_next_line(const int fd, char **line)
 			tmp = ft_strjoin((char *)current->content, buff);
 		current->content ? free(current->content) : 1;
 		current->content = (void *)tmp;
-		if (ft_break_read(buff) == 1)
+		if (ft_strchr(buff, '\n'))
 			break ;
 	}
-	if (ft_current_to_line(&current, line))
-		return (1);
-	return (0);
+	if (ret < BUFF_SIZE && !ft_strlen((char *)current->content))
+		return (0);
+	if (!ft_current_to_line(&current, line))
+		return (0);
+	return (1);
 }
