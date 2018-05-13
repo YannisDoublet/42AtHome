@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 16:14:31 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/12 20:43:07 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/13 18:08:33 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_cutstr(t_list **current, int i)
 
 	tmp = ft_strdup((char *)(*current)->content);
 	free((*current)->content);
-	(*current)->content = ft_strsub(tmp, i + 1, ft_strlen(tmp - 1));
+	(*current)->content = ft_strsub(tmp, i + 1, ft_strlen(tmp) - i);
 	ft_strdel(&tmp);
 }
 
@@ -27,7 +27,7 @@ int		ft_current_to_line(t_list *current, char **line)
 	int	i;
 
 	i = 0;
-	while (((char *)current->content)[i] != '\n' && 
+	while (((char *)current->content)[i] != '\n' &&
 		((char *)current->content)[i] != '\0')
 		i++;
 	*line = ft_strsub((char *)current->content, 0, i);
@@ -58,10 +58,9 @@ int		get_next_line(const int fd, char **line)
 	t_list			*current;
 	char			*tmp;
 
-	ret = 0;
-	current = ft_wich_fd(&head, fd);
 	if (line == NULL || BUFF_SIZE < 1 || read(fd, buff, 0) < 0 || fd < 0)
 		return (-1);
+	current = ft_wich_fd(&head, fd);
 	if (ft_strchr((char *)current->content, '\n') == NULL)
 		while ((ret = read(fd, buff, BUFF_SIZE)) > 0)
 		{
@@ -74,7 +73,7 @@ int		get_next_line(const int fd, char **line)
 				break ;
 		}
 	ret = ft_current_to_line(current, line);
-	if (ret == 0 && ft_strchr((char *)current->content, '\n') == NULL)
+	if (ret <= 0 && !ft_strchr((char *)current->content, '\n'))
 		return (0);
 	ft_cutstr(&current, ret);
 	return (1);
