@@ -6,13 +6,13 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 13:34:58 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/13 18:08:32 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/15 15:44:13 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 32
+# define BUFF_SIZE 1
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft/includes/libft.h"

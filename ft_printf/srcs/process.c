@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/13 21:33:50 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/15 15:43:27 by yadouble         ###   ########.fr       */
+/*   Created: 2018/05/15 18:20:17 by yadouble          #+#    #+#             */
+/*   Updated: 2018/05/15 20:14:09 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/ft_printf.h"
 
-int	main(int argc, char **argv)
+int		ft_printf(const char *format, ...)
 {
-	int		fd1;
-	char	*line;
-
-	if (argc > 1)
-	{
-		fd1 = open(argv[1], O_RDONLY);
-		get_next_line(fd1, &line);
-		ft_putstr(line);
-		ft_strdel(&line);
-		ft_putchar('\n');
-	}
+	t_var	var;
+	
+	if (!ft_parser(format, &var))
+		return (0);
 	return (0);
+	
 }
