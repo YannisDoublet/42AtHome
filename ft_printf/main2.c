@@ -6,14 +6,14 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 20:01:57 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/15 20:05:14 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/17 21:36:58 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "includes/ft_printf.h"
 
 int	main(void)
 {
-	printf("%%%d\n%.5d%%%s\n", 5, 5, "yessaiiiii");
+	printf("%+d", 5);
 	return (0);
 }

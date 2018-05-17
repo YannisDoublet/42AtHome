@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   buffer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/13 21:33:50 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/15 15:43:27 by yadouble         ###   ########.fr       */
+/*   Created: 2018/05/17 21:14:53 by yadouble          #+#    #+#             */
+/*   Updated: 2018/05/17 21:55:39 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/ft_printf.h"
 
-int	main(int argc, char **argv)
+void	ft_buffer(t_var *var, char c)
 {
-	int		fd1;
-	char	*line;
-
-	if (argc > 1)
+	if (ft_strlen(var->prtf.buff) > BUFF_SIZE)
 	{
-		fd1 = open(argv[1], O_RDONLY);
-		get_next_line(fd1, &line);
-		ft_putstr(line);
-		ft_strdel(&line);
-		ft_putchar('\n');
+		write(1, var->prtf.buff, BUFF_SIZE);
+		var->prtf.bix = 0;
+		ft_bzero(var->prtf.buff, var->prtf.bix);
 	}
-	return (0);
+	var->prtf.buff[var->prtf.bix] = c;
 }
