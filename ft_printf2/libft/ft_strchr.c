@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 20:01:57 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/18 18:53:06 by yadouble         ###   ########.fr       */
+/*   Created: 2018/04/21 18:57:53 by yadouble          #+#    #+#             */
+/*   Updated: 2018/04/21 18:57:54 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strchr(const char *s, int c)
 {
-	printf("%-+8d", 9);
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (unsigned char)c)
+			return ((char *)s + i);
+		else
+			i++;
+	}
+	if (c == '\0')
+		return ((char *)s + i);
+	return (NULL);
 }

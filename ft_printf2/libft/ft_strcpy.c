@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 20:01:57 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/18 18:53:06 by yadouble         ###   ########.fr       */
+/*   Created: 2018/04/21 18:58:21 by yadouble          #+#    #+#             */
+/*   Updated: 2018/04/21 18:58:27 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	printf("%-+8d", 9);
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

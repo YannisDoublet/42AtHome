@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 20:01:57 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/18 18:53:06 by yadouble         ###   ########.fr       */
+/*   Created: 2018/04/21 19:01:26 by yadouble          #+#    #+#             */
+/*   Updated: 2018/05/13 17:24:03 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strnew(size_t size)
 {
-	printf("%-+8d", 9);
-	return (0);
+	char	*str;
+
+	if (!(str = malloc(sizeof(char) * (size))))
+		return (NULL);
+	ft_bzero(str, size);
+	return (str);
 }

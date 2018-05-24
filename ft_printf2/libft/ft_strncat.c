@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 20:01:57 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/18 18:53:06 by yadouble         ###   ########.fr       */
+/*   Created: 2018/04/10 19:53:16 by yadouble          #+#    #+#             */
+/*   Updated: 2018/04/21 19:00:49 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	printf("%-+8d", 9);
-	return (0);
+	size_t	i;
+	size_t	x;
+
+	i = 0;
+	x = 0;
+	while (s1[i])
+		i++;
+	while (x < n && s2[x])
+		s1[i++] = s2[x++];
+	s1[i] = '\0';
+	return (s1);
 }

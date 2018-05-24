@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 20:01:57 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/18 18:53:06 by yadouble         ###   ########.fr       */
+/*   Created: 2018/04/21 18:54:45 by yadouble          #+#    #+#             */
+/*   Updated: 2018/04/21 18:54:50 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int	main(void)
+int		ft_isalnum(int c)
 {
-	printf("%-+8d", 9);
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (1);
 	return (0);
 }

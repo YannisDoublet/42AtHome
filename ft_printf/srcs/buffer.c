@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 21:14:53 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/17 21:55:39 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/18 18:58:24 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	ft_buffer(t_var *var, char c)
 		var->prtf.bix = 0;
 		ft_bzero(var->prtf.buff, var->prtf.bix);
 	}
-	var->prtf.buff[var->prtf.bix] = c;
+	var->prtf.buff[var->prtf.bix++] = c;
+	printf("buffer dans ft_buffer : %s\n", var->prtf.buff);
 }

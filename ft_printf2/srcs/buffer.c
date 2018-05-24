@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   buffer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 20:01:57 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/18 18:53:06 by yadouble         ###   ########.fr       */
+/*   Created: 2018/05/17 21:14:53 by yadouble          #+#    #+#             */
+/*   Updated: 2018/05/24 22:10:17 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
-int	main(void)
+void	ft_buffer(t_var *var, char c)
 {
-	printf("%-+8d", 9);
-	return (0);
+	if (ft_strlen(var->check.buff) > BUFF_SIZE)
+	{
+		write(1, var->check.buff, BUFF_SIZE);
+		var->check.bix = 0;
+		ft_bzero(var->check.buff, var->check.bix);
+	}
+	var->check.buff[var->check.bix] = c;
+	var->check.bix++;
 }

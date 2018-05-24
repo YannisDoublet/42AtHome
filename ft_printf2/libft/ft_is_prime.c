@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 20:01:57 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/18 18:53:06 by yadouble         ###   ########.fr       */
+/*   Created: 2018/02/08 13:08:28 by yadouble          #+#    #+#             */
+/*   Updated: 2018/02/12 19:08:19 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
-
-int	main(void)
+int		ft_is_prime(int nb)
 {
-	printf("%-+8d", 9);
-	return (0);
+	int i;
+
+	i = 2;
+	if (nb <= 1)
+		return (0);
+	while (nb % i != 0)
+		i++;
+	if (i == nb)
+		return (1);
+	else
+		return (0);
 }

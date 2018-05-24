@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 20:01:57 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/18 18:53:06 by yadouble         ###   ########.fr       */
+/*   Created: 2018/04/17 14:32:58 by yadouble          #+#    #+#             */
+/*   Updated: 2018/05/13 17:51:59 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	printf("%-+8d", 9);
-	return (0);
+	char	*str;
+	size_t	n;
+
+	n = 0;
+	if (!s)
+		return (NULL);
+	str = ft_strnew(len + 1);
+	if (!str)
+		return (NULL);
+	while (n < len)
+		str[n++] = s[start++];
+	str[n] = '\0';
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:49:42 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/17 21:52:22 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/18 18:45:20 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int		ft_is_size_valid(const char *str, t_var *var)
 int		ft_parser(const char *str, t_var *var)
 {
 	var->prtf.i = 0;
-	var->prtf.bix = 0;
+	var->prtf.bix = 0;;
 	while (str[var->prtf.i])
 	{
 		if (str[var->prtf.i] == '%')
@@ -160,6 +160,7 @@ int		ft_parser(const char *str, t_var *var)
 			}
 			if (ft_is_type_valid(str, var) == 1)
 			{
+				ft_format(var); 
 				if (ft_is_flag_valid(str, var) == 1)
 					ft_flags(str, var);
 				var->flag.valid_flag = 0;
@@ -172,6 +173,7 @@ int		ft_parser(const char *str, t_var *var)
 				if (ft_is_size_valid(str, var) == 1)
 					//ft_size(t_var *var);
 				var->flag.valid_flag = 0;
+				printf("buffer dans le parser : %s\n", var->prtf.buff);
 			}
 		}
 		var->prtf.i++;

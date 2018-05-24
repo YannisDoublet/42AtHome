@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 20:01:57 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/18 18:53:06 by yadouble         ###   ########.fr       */
+/*   Created: 2018/04/21 19:01:45 by yadouble          #+#    #+#             */
+/*   Updated: 2018/04/21 19:01:47 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	printf("%-+8d", 9);
-	return (0);
+	size_t	i;
+	char	*tmp;
+
+	i = 0;
+	tmp = NULL;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			tmp = (char*)s + i;
+		i++;
+	}
+	if ((char)c == '\0')
+		return ((char*)s + i);
+	return (tmp);
 }

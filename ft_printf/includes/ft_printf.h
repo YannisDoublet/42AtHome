@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:38:04 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/17 22:00:44 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/18 18:34:50 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,32 @@
 
 typedef	struct	s_prtf
 {
-	va_list		arg;
-	char		buff[BUFF_SIZE + 1];
-	int			bix;
-	int			flags;
-	int			width;
-	int			precision;
-	int			size;
-	char		type;
-	int			i;
-	int			w;
-}				t_prtf;
+	va_list							arg;
+	char							buff[BUFF_SIZE + 1];
+	int								bix;
+	int								flags;
+	int								width;
+	int								precision;
+	int								size;
+	char							type;
+	int								i;
+	int								w;
+}									t_prtf;
 
 typedef	struct	s_flags
 {
-	int			valid_flag;
+	int								valid_flag;
 }				t_flags;
 
 typedef struct 	s_conv
 {
-	int			d;
-	int			c;
-	char		*s;
-	int			i;
-	int			u;
-	int			o;
+	long long int					d;
+	char							c;
+	char							*s;
+	long long int					i;
+	unsigned long long int			u;
+	unsigned long long int			o;
+	char							*p;
 }				t_conv;
 
 typedef	struct	s_var
@@ -74,9 +75,14 @@ int				ft_is_precision_valid(const char *str, t_var *var);
 int				ft_is_size_valid(const char *str, t_var *var);
 int				ft_is_size_valid2(const char *str, t_var *var);
 int				ft_is_type_valid(const char *str, t_var *var);
+void			ft_format(t_var *var);
 //-------------------------------CONVERSION-----------------------------------//
-//int			ft_minus_flags(const char *str, t_var *var);
+void			ft_minus_flags(const char *str, t_var *var);
 void			ft_flags(const char *str, t_var *var);
-/*---------------------------------PRINT--------------------------------------*/
+char			*ft_itoa_base(t_var *var, char *base_to);
+char			*ft_strrev(char *str);
+int				ft_putbuffer_nbr(t_var *var);
+int				ft_convert_d(t_var *var);
+//---------------------------------PRINT--------------------------------------//
 void			ft_buffer(t_var *var, char c);
 #endif
