@@ -6,27 +6,36 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 19:31:54 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/24 19:46:35 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/28 14:11:32 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char		*ft_strrev(char *str)
+int		ft_numlen(t_var *var)
 {
-	int		i;
-	int		l;
-	char	t;
+	intmax_t save;
+	intmax_t nb;
 
-	l = 0;
-	while (str[l] != '\0')
-		l++;
-	i = -1;
-	while (++i < --l)
+	ft_which_conv(var);
+	nb = var->check.nb;
+	var->check.len = 0;
+	if (nb < 0)
 	{
-		t = str[i];
-		str[i] = str[l];
-		str[l] = t;
+		if (var->check.flags != 0 && (!(var->check.prec)))
+			ft_buffer(var , '-');
+		nb *= -1;
 	}
-	return (str);
+	save = nb;
+	if (save == 0)
+	{
+		var->check.len++;
+		return (var->check.len);
+	}
+	while (save)
+	{
+		save /= 10;
+		var->check.len++;
+	}
+	return (var->check.len);
 }

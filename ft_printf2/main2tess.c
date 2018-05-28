@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   main2tess.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 20:46:12 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/25 16:16:18 by yadouble         ###   ########.fr       */
+/*   Created: 2018/05/26 18:34:18 by yadouble          #+#    #+#             */
+/*   Updated: 2018/05/28 14:19:25 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include <stdio.h>
 
-int		ft_printf(const char *format, ...)
+int		main(void)
 {
-	t_var	var;
-
-	va_start(var.check.arg, format);
-	ft_parsing_control(&var, format);
-	write(1, var.check.buff, var.check.bix);
-	return (var.check.bix);
+	printf("%jd\n", -9223372036854775808);
+	printf("%ld\n", -678);
+	return (0);
 }

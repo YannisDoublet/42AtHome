@@ -6,14 +6,14 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 21:10:28 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/24 22:45:32 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/28 14:58:31 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "includes/ft_printf.h"
 
 int 	main(void)
-{
-	ft_printf("Bonjour Shana, tu as %d ans\n", 18);
+{	
+	ft_printf("%lld", -9223372036854775808);
 	return (0);
 }

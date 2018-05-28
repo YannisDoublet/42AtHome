@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 21:35:55 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/23 17:30:56 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/28 09:49:20 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_parse_precision(const char *fmt, t_var *var)
 {
 	if (fmt[var->check.i] == '.')
 	{
+		var->check.prec |= 1;
 		var->check.i++;
 		if (fmt[var->check.i] >= '0' && fmt[var->check.i] <= '9')
 			var->check.precwidth = ft_atoi(fmt + var->check.i);

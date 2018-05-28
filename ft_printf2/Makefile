@@ -6,14 +6,14 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/21 20:44:54 by yadouble          #+#    #+#              #
-#    Updated: 2018/05/24 22:06:58 by yadouble         ###   ########.fr        #
+#    Updated: 2018/05/28 13:26:14 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = clang
 NAME = libftprintf.a
 NAMETEST = ft_printf
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
 SRCS_DIR = srcs
 OBJ_DIR = obj
 HEADER = include
@@ -42,7 +42,7 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 test : $(OBJS)
 	@make -C libft
 	@cp libft/libft.a ./$(NAME)
-	$(CC) -o $(NAMETEST) $(CFLAGS) $(OBJS) libft/libft.a srcs/main.c
+	$(CC) -o $(NAMETEST) $(OBJS) libft/libft.a ./main.c
 
 norme:
 	norminette ./libft/
