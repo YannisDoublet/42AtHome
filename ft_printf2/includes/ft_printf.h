@@ -6,13 +6,15 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 20:38:10 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/28 12:24:39 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/28 17:02:45 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # define BUFF_SIZE 256
+# define MIN_BASE abcdef
+# define MAJ_BASE ABCDEF
 # define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
 # define BYTE_TO_BINARY(byte)  \
     (byte & 0x80 ? '1' : '0'), \
@@ -63,9 +65,12 @@ void				ft_parse_type(const char *fmt, t_var *var);
 void				ft_buffer(t_var *var, char c);
 //----------------------------------PROCESS-----------------------------------//
 void				ft_process(t_var *var);
-void				ft_process_flags(t_var *var);
 void				ft_which_conv(t_var *var);
 void				ft_process_int(t_var *var);
 int					ft_numlen(t_var *var);
-void				ft_process_width_and_prec(t_var *var);
+//-----------------------------PROCESS FORMAT OPTION--------------------------//
+void				ft_process_flags(t_var *var);
+void				ft_precess_prec(t_var *var);
+void				ft_process_width(t_var *var);
+void 				ft_process_minus(t_var *var, int neg);
 #endif
