@@ -1,2 +1,2 @@
 # 42AtHome
-Les projets sur lequel je travaille sur mon Mac.
+Git personnel de stockage et de travail pour mes projets présents et futur.
