@@ -6,15 +6,16 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 20:38:10 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/28 17:02:45 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/01 11:17:15 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # define BUFF_SIZE 256
-# define MIN_BASE abcdef
-# define MAJ_BASE ABCDEF
+# define BASE_8 01234567
+# define MIN_BASE_16 "0123456789abcdef"
+# define MAJ_BASE_16 "0123456789ABCDEF"
 # define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
 # define BYTE_TO_BINARY(byte)  \
     (byte & 0x80 ? '1' : '0'), \
@@ -45,6 +46,7 @@ typedef struct	s_check
 	int				bix;
 	int				len;
 	long long int 	nb;
+	uintmax_t		unb;
 }					t_check;
 
 typedef struct		s_var
@@ -66,11 +68,23 @@ void				ft_buffer(t_var *var, char c);
 //----------------------------------PROCESS-----------------------------------//
 void				ft_process(t_var *var);
 void				ft_which_conv(t_var *var);
+void				ft_conv_type_xX(t_var *var);
+void				ft_conv_type_uU(t_var *var);
+int					ft_nb_is_neg(t_var *var);
 void				ft_process_int(t_var *var);
+void				ft_process_hexadecimal(t_var *var);
+void				ft_process_unsigned(t_var *var);
+void				ft_len(t_var *var);
+void				ft_hxlen(t_var *var);
+void				ft_unsigned_len(t_var *var);
 int					ft_numlen(t_var *var);
 //-----------------------------PROCESS FORMAT OPTION--------------------------//
 void				ft_process_flags(t_var *var);
-void				ft_precess_prec(t_var *var);
+void				ft_process_prec(t_var *var);
 void				ft_process_width(t_var *var);
 void 				ft_process_minus(t_var *var, int neg);
+int					ft_width_type_option(t_var *var);
+void				ft_prec_type_option(t_var *var);
+int					ft_flags_type_option(t_var *var);
+int					ft_minus_type_option(t_var *var, int neg);
 #endif

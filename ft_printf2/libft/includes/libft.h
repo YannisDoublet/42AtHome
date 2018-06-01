@@ -6,12 +6,13 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:34:21 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/17 18:50:58 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/05/31 16:25:28 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define BUFF_SIZE 256
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -94,4 +95,6 @@ int						ft_iscntrl(int c);
 int						ft_isupper(int c);
 int						ft_islower(int c);
 int						ft_isxdigit(int c);
+char 					*ft_uitoa_base(uintmax_t conv, char *base_to);
+char					*ft_strrev(char *str);
 #endif

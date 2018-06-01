@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 18:19:59 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/28 17:03:55 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/01 15:11:01 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,27 @@ void	ft_which_conv(t_var *var)
 	else if (var->check.conv & 32)
 		var->check.nb = va_arg(var->check.arg, size_t);
 	else if (var->check.conv == 0)
-		var->check.nb = va_arg(var->check.arg, int);
+	{
+		if (var->check.type == 'd' || var->check.type == 'i')
+			var->check.nb = va_arg(var->check.arg, int);
+		else
+			var->check.nb = va_arg(var->check.arg, long int);
+	}
+}
+
+int		ft_nb_is_neg(t_var *var)
+{
+	int neg;
+	
+	neg = 0;
+	if (var->check.nb < 0)
+	{
+		neg++;
+		if (var->check.flags == 0 && (!(var->check.prec)))
+			ft_buffer(var, '-');
+		var->check.nb *= -1;
+	}
+	return (neg);
 }
 
 void	ft_process_int(t_var *var)
@@ -39,42 +59,25 @@ void	ft_process_int(t_var *var)
 	int			neg;
 
 	i = 0;
-	neg = 0;
+	neg = ft_nb_is_neg(var);
 	len = var->check.len;
 	if (var->check.nb == 0 && (var->check.prec && (!(var->check.precwidth))))
 		return ;
-	if (var->check.nb == 0 && (var->check.prec && var->check.precwidth == 0))
-	{
-		ft_buffer(var, ' ');
-		return ;
-	}	
-	if (var->check.nb < 0)
-	{
-		neg++;
-		if (var->check.flags == 0 && (!(var->check.prec)))
-			ft_buffer(var, '-');
-		var->check.nb *= -1;
-	}
 	ft_bzero(str, BUFF_SIZE);
 	while (len--)
 	{
 		if (var->check.nb < 0)
 		{
-			str[i] = (var->check.nb % 10) * -1 + '0';
+			str[i++] = (var->check.nb % 10) * -1 + '0';
 			var->check.nb /= 10;
-			i++;
 		}
 		else if (var->check.nb >= 0)
 		{
-			str[i] = var->check.nb % 10 + '0';
+			str[i++] = var->check.nb % 10 + '0';
 			var->check.nb /= 10;
-			i++;
 		}
 	}
 	while (i > 0)
-	{
-		i--;
-		ft_buffer(var, str[i]);
-	}
+		ft_buffer(var, str[--i]);
 	ft_process_minus(var, neg);
 }

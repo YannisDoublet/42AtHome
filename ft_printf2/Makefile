@@ -6,7 +6,7 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/21 20:44:54 by yadouble          #+#    #+#              #
-#    Updated: 2018/05/28 15:47:58 by yadouble         ###   ########.fr        #
+#    Updated: 2018/05/31 19:56:30 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,10 @@ SRC = 	ft_printf.c \
 		process_int.c \
 		tools.c \
 		buffer.c \
-		format_option.c
+		format_option.c \
+		decimal_option.c \
+		process_hexadecimal.c \
+		process_unsigned.c
 SRCS = $(addprefix $(SRCS_DIR)/,$(SRC))
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
