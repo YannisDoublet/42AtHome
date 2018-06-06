@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_hexadecimal.c                              :+:      :+:    :+:   */
+/*   process_octal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/31 15:13:23 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/06 19:03:12 by yadouble         ###   ########.fr       */
+/*   Created: 2018/06/05 16:05:56 by yadouble          #+#    #+#             */
+/*   Updated: 2018/06/06 15:22:39 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	ft_conv_type_xX(t_var *var)
+void	ft_conv_type_oO(t_var *var)
 {
 	var->check.nb = 0;
 	if (var->check.conv & 1)
@@ -30,8 +30,8 @@ void	ft_conv_type_xX(t_var *var)
 	else if (var->check.conv == 0)
 		var->check.nb = va_arg(var->check.arg, unsigned int);
 }
-	
-void	ft_process_hexadecimal(t_var *var)
+
+void	ft_process_octal(t_var *var)
 {
 	int		i;
 	char	*str;
@@ -42,12 +42,10 @@ void	ft_process_hexadecimal(t_var *var)
 	if (var->check.nb == 0)
 	{
 		ft_buffer(var, '0');
+		ft_process_minus(var, 0);
 		return ;
 	}
-	if (var->check.type == 'x' || var->check.type == 'p')
-		str = ft_uitoa_base(var->check.nb, MIN_BASE_16);
-	if (var->check.type == 'X' || var->check.type == 'P')
-		str = ft_uitoa_base(var->check.nb, MAJ_BASE_16);
+	str = ft_uitoa_base(var->check.nb, BASE_8);
 	str[var->check.len] = '\0';
 	while (i < var->check.len)
 	{

@@ -6,16 +6,16 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 20:38:10 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/01 11:17:15 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/05 16:19:55 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # define BUFF_SIZE 256
-# define BASE_8 01234567
 # define MIN_BASE_16 "0123456789abcdef"
 # define MAJ_BASE_16 "0123456789ABCDEF"
+# define BASE_8 "01234567"
 # define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
 # define BYTE_TO_BINARY(byte)  \
     (byte & 0x80 ? '1' : '0'), \
@@ -70,13 +70,16 @@ void				ft_process(t_var *var);
 void				ft_which_conv(t_var *var);
 void				ft_conv_type_xX(t_var *var);
 void				ft_conv_type_uU(t_var *var);
+void				ft_conv_type_oO(t_var *var);
 int					ft_nb_is_neg(t_var *var);
 void				ft_process_int(t_var *var);
 void				ft_process_hexadecimal(t_var *var);
 void				ft_process_unsigned(t_var *var);
+void				ft_process_octal(t_var *var);
 void				ft_len(t_var *var);
 void				ft_hxlen(t_var *var);
 void				ft_unsigned_len(t_var *var);
+void				ft_octlen(t_var *var);
 int					ft_numlen(t_var *var);
 //-----------------------------PROCESS FORMAT OPTION--------------------------//
 void				ft_process_flags(t_var *var);

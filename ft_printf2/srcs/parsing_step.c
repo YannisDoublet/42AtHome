@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 21:35:55 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/31 14:38:28 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/06 19:01:57 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	ft_parse_type(const char *fmt, t_var *var)
 			(fmt[var->check.i] == 'o') || (fmt[var->check.i] == 'O') ||
 			(fmt[var->check.i] == 'u') || (fmt[var->check.i] == 'U') ||
 			(fmt[var->check.i] == 'x') || (fmt[var->check.i] == 'X') ||
-			(fmt[var->check.i] == 'c') || (fmt[var->check.i] == 'C')))
+			(fmt[var->check.i] == 'c') || (fmt[var->check.i] == 'C' ||
+			fmt[var->check.i] == 'P')))
 		{
 			var->check.type = fmt[var->check.i];
 			var->check.i++;
