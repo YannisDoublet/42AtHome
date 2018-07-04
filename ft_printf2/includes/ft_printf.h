@@ -6,16 +6,18 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 20:38:10 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/05 16:19:55 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/22 20:28:17 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# define BUFF_SIZE 256
+# define BUFF_SIZE 100
 # define MIN_BASE_16 "0123456789abcdef"
 # define MAJ_BASE_16 "0123456789ABCDEF"
 # define BASE_8 "01234567"
+# define NULLSTR "(null)"
+# define TYPE sSpPdDioOuUxXcC
 # define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
 # define BYTE_TO_BINARY(byte)  \
     (byte & 0x80 ? '1' : '0'), \
@@ -30,6 +32,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <locale.h>
+# include <limits.h>
 # include "../libft/includes/libft.h"
 
 typedef struct	s_check
@@ -47,6 +51,12 @@ typedef struct	s_check
 	int				len;
 	long long int 	nb;
 	uintmax_t		unb;
+	wchar_t			c;
+	int				a;
+	int				save_bix;
+	wchar_t			*strl;
+	char			*str;
+	int				total;
 }					t_check;
 
 typedef struct		s_var
@@ -65,6 +75,7 @@ void				ft_parse_conv(const char *fmt, t_var *var);
 void				ft_parse_type(const char *fmt, t_var *var);
 //----------------------------------BUFFER------------------------------------//
 void				ft_buffer(t_var *var, char c);
+void				ft_buffer_large_char(t_var *var, wchar_t c);
 //----------------------------------PROCESS-----------------------------------//
 void				ft_process(t_var *var);
 void				ft_which_conv(t_var *var);
@@ -76,11 +87,22 @@ void				ft_process_int(t_var *var);
 void				ft_process_hexadecimal(t_var *var);
 void				ft_process_unsigned(t_var *var);
 void				ft_process_octal(t_var *var);
+void				ft_process_large_char(t_var *var);
+void				ft_process_strings(t_var *var);
+int					ft_surrogates(t_var *var);
+int					ft_check_surrogates(t_var *var);
+void				ft_print_one_byte_char(t_var *var);
+void				ft_print_two_bytes_char(t_var *var);
+void				ft_print_three_bytes_char(t_var *var);
+void				ft_print_four_bytes_char(t_var *var);
 void				ft_len(t_var *var);
 void				ft_hxlen(t_var *var);
 void				ft_unsigned_len(t_var *var);
 void				ft_octlen(t_var *var);
 int					ft_numlen(t_var *var);
+void				ft_charlen(t_var *var);
+int					ft_get_wcharlen(wchar_t c);
+void				ft_stringlen(t_var *var);
 //-----------------------------PROCESS FORMAT OPTION--------------------------//
 void				ft_process_flags(t_var *var);
 void				ft_process_prec(t_var *var);

@@ -6,22 +6,26 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 21:10:28 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/06 19:02:40 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/30 17:22:04 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_printf.h"
 
-int 	main(void)
+int 	main(int argc, char **argv)
 {
 	int i;
-	int b;
+	wchar_t	s[4];
+	char c;
 
-	i = 0;
-	b = 42;
-	i = printf("%p", b);
+	s[0] = 0x53;
+	s[1] = 0x3abc;
+	s[2] = 0x81000;
+	s[3] = '\0';
+	setlocale(LC_ALL, "");
+	i = printf("{%05.c}", 0);
 	printf("\n%d\n", i);
-	i = ft_printf("%p", b);
+	i = ft_printf("{%05.c}", 0);
 	printf("\n%d\n", i);
 	return (0);
 }

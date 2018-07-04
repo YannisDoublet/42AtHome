@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 11:11:39 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/06 19:12:12 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/30 17:25:11 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		ft_flags_type_option(t_var *var)
 		i++;
 	if ((var->check.type == 'x' || var->check.type == 'X') && 
 		(var->check.flags & 8 && var->check.nb != 0))
+		i = i + 2;
+	if (var->check.type == 'p' || var->check.type == 'P')
 		i = i + 2;
 	if (var->check.type == 'd' || var->check.type == 'D' || 
 		var->check.type == 'i')
@@ -40,6 +42,16 @@ int		ft_flags_type_option(t_var *var)
 				ft_buffer(var, ' ');
 				i++;
 			}
+	}
+	if (var->check.flags & 16 && (var->check.type == 's' ||
+		var->check.type == 'c'))
+	{
+		if (var->check.type == 's' && !var->check.str)
+			while (i++ < var->check.width)
+				ft_buffer(var, '0');
+		while (i++ < var->check.width - var->check.len)
+			ft_buffer(var, '0');
+		i = -1;
 	}
 	return (i);
 }
@@ -61,6 +73,13 @@ int		ft_minus_type_option(t_var *var, int neg)
 	if ((var->check.type == 'o' || var->check.type == 'O') && 
 		var->check.flags & 8 && !(var->check.flags & 16) && var->check.nb != 0)
 		i++;
+	if (var->check.type == 's' && var->check.prec & 1 && !var->check.precwidth
+		&& var->check.str == NULLSTR)
+	{
+		while (i++ < var->check.width)
+			ft_buffer(var, ' ');
+		i = -1;
+	}
 	return (i);
 }
 
@@ -90,7 +109,7 @@ int		ft_width_type_option(t_var *var)
 		if (var->check.nb < 0 || var->check.flags & 2 || var->check.flags & 4)
 			i++;
 	if ((var->check.type == 'o' || var->check.type == 'O')
-		&& (var->check.flags & 8))
+		&& (var->check.flags & 8 && var->check.nb != 0))
 	{
 		i++;
 		if (var->check.prec & 1 && var->check.precwidth == 0 &&
@@ -118,7 +137,42 @@ int		ft_width_type_option(t_var *var)
 			var->check.nb == 0)
 			i = i - 2;
 	}
-	if ((var->check.nb == 0 && var->check.unb == 0) && var->check.precwidth == 0)
+	if (var->check.type == 's' && var->check.prec && !var->check.precwidth &&
+		var->check.str != NULLSTR)
+	{
+		while (i < var->check.width)
+		{
+			ft_buffer(var, ' ');
+			i++;
+		}
+		i = - 1;
+		return (i);
+	}
+	if (var->check.type == 's' && var->check.str && var->check.len == 0 &&
+		(!(var->check.flags & 1)))
+	{
+		while (i < var->check.width - var->check.len)
+		{
+			ft_buffer(var, ' ');
+			i++;
+		}
+		i = -1;
+		return (i);
+	}
+	if ((var->check.type == 'S' || (var->check.type == 's' &&
+		var->check.conv & 4)) && var->check.prec && var->check.precwidth > 0 &&
+		(!(var->check.flags & 1)))
+	{
+		while (i < var->check.width - var->check.len)
+		{
+			ft_buffer(var, ' ');
+			i++;
+		}
+		i = -1;
+		return (i);
+	}
+	if ((var->check.nb == 0 && var->check.unb == 0) &&
+		var->check.prec && var->check.precwidth == 0)
 	{
 		while (i++ < var->check.width)
 			ft_buffer(var, ' ');

@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 18:19:59 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/01 15:11:01 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/21 18:19:43 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,23 @@
 void	ft_which_conv(t_var *var)
 {
 	var->check.nb = 0;
-	if (var->check.conv & 1)
+	if (var->check.conv & 16)
+		var->check.nb = va_arg(var->check.arg, intmax_t);
+	else if (var->check.conv & 8)
+		var->check.nb = va_arg(var->check.arg, long long int);
+	else if (var->check.conv & 32)
+		var->check.nb = va_arg(var->check.arg, size_t);
+	else if (var->check.conv & 4)
+		var->check.nb = va_arg(var->check.arg, long int);
+	else if (var->check.conv < 4 && var->check.type == 'D')
+			var->check.nb = va_arg(var->check.arg, long int);
+	else if (!var->check.conv && (var->check.type == 'd' ||
+			var->check.type == 'i'))
+			var->check.nb = va_arg(var->check.arg, int);
+	else if (var->check.conv & 1)
 		var->check.nb = (short int)va_arg(var->check.arg, int);
 	else if (var->check.conv & 2)
 		var->check.nb = (char)va_arg(var->check.arg, int);
-	else if (var->check.conv & 4)
-		var->check.nb = va_arg(var->check.arg, long int);
-	else if (var->check.conv & 8)
-		var->check.nb = va_arg(var->check.arg, long long int);
-	else if (var->check.conv & 16)
-		var->check.nb = va_arg(var->check.arg, intmax_t);
-	else if (var->check.conv & 32)
-		var->check.nb = va_arg(var->check.arg, size_t);
-	else if (var->check.conv == 0)
-	{
-		if (var->check.type == 'd' || var->check.type == 'i')
-			var->check.nb = va_arg(var->check.arg, int);
-		else
-			var->check.nb = va_arg(var->check.arg, long int);
-	}
 }
 
 int		ft_nb_is_neg(t_var *var)

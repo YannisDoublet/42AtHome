@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 20:46:12 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/01 16:42:19 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/21 16:39:03 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,21 @@ int		ft_printf(const char *format, ...)
 {
 	t_var	var;
 
+	var.check.total = 0;
+	setlocale(LC_ALL, "");
+	ft_bzero(var.check.buff, BUFF_SIZE);
 	va_start(var.check.arg, format);
 	ft_parsing_control(&var, format);
-	write(1, var.check.buff, var.check.bix);
-	return (var.check.bix);
+	if (var.check.save_bix > 0 && var.check.a == -1)
+		write(1, var.check.buff, var.check.save_bix);
+	else
+		write(1, var.check.buff, var.check.bix);
+	if (var.check.a == -1)
+		return (-1);
+	else if (var.check.save_bix > 0 && var.check.a == -1)
+		return (var.check.save_bix);
+	else if (var.check.type == 'S' ||
+		(var.check.type == 's' && var.check.conv & 4))
+		return (var.check.bix + var.check.total);
+	return (var.check.bix + var.check.total);
 }

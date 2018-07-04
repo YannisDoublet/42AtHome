@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 21:35:55 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/06 19:01:57 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/19 16:08:54 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	ft_parse_type(const char *fmt, t_var *var)
 {
 	if (fmt[var->check.i])
 	{
+		var->check.c = 0;
 		if (((fmt[var->check.i] == 's') || (fmt[var->check.i] == 'S') ||
 			(fmt[var->check.i] == 'p') || (fmt[var->check.i] == 'd') ||
 			(fmt[var->check.i] == 'D') || (fmt[var->check.i] == 'i') ||
@@ -91,9 +92,12 @@ void	ft_parse_type(const char *fmt, t_var *var)
 			(fmt[var->check.i] == 'x') || (fmt[var->check.i] == 'X') ||
 			(fmt[var->check.i] == 'c') || (fmt[var->check.i] == 'C' ||
 			fmt[var->check.i] == 'P')))
-		{
 			var->check.type = fmt[var->check.i];
-			var->check.i++;
+		else
+		{
+			var->check.c = fmt[var->check.i];
+			var->check.type = 'c';
 		}
+		var->check.i++;
 	}
 }

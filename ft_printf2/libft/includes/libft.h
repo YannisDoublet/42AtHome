@@ -6,13 +6,13 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:34:21 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/31 16:25:28 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/20 16:41:51 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 256
+# define BUFF_SIZE 100
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>

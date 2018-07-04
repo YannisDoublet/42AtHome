@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 21:03:37 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/28 10:18:58 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/06/21 16:32:19 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		ft_parsing_control(t_var *var, const char *fmt)
 {
 	var->check.i = 0;
 	var->check.bix = 0;
+	var->check.a = 0;
 	while (fmt[var->check.i])
 	{
 		var->check.flags = 0;
@@ -37,22 +38,17 @@ int		ft_parsing_control(t_var *var, const char *fmt)
 		if (fmt[var->check.i] == '%')
 		{
 			var->check.i++;
-			if (fmt[var->check.i] == '%')
-			{
-				ft_buffer(var, fmt[var->check.i]);
-				var->check.i++;
-			}
-			else
-			{
-				ft_parsing_center(fmt, var);
-				ft_process(var);
-			}
+			ft_parsing_center(fmt, var);
+			ft_process(var);
+			if (var->check.type == 'C')
+				if (var->check.a != -1)
+					var->check.save_bix = var->check.bix;
 		}
 		else
 		{
 			ft_buffer(var, fmt[var->check.i]);
 			var->check.i++;
 		}
-	}
+	}	
 	return (0);
 }
