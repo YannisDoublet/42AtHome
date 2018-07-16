@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 18:41:29 by yadouble          #+#    #+#             */
-/*   Updated: 2018/07/10 11:47:33 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/14 18:53:58 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,13 @@ void	ft_addlst(t_liste **alst, t_liste *new)
 		new->next = *alst;
 		*alst = new;
 	}
+}
+
+void	ft_sortlst(t_liste *f1, t_liste *f2)
+{
+	t_liste *tmp;
+
+	tmp = f1->next;
+	f1->next = f2->next;
+	f2->next = tmp;
 }

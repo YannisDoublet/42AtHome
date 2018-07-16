@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 11:00:28 by yadouble          #+#    #+#             */
-/*   Updated: 2018/07/10 11:55:54 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/14 18:54:08 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,24 @@ int		main(int ac, char **av)
 	t_grp		*grp;
 	t_dir		*direct;
 	t_liste		*file;
-	t_liste		**head;
+	t_liste		*head;
+	t_liste		*tmp;
 	DIR			*dir;
 	char 		*str;
 	int 		i;
 
 	i = 0;
-	if (!(head = (t_liste **)malloc(sizeof(t_liste *))))
-		return (-1);
+	//if (!(head = (t_liste **)malloc(sizeof(t_liste *))))
+	//	return (-1);
 	dir = opendir(".");
 	while ((direct = readdir(dir)))
 	{
 		stat(direct->d_name, &buff);
 		file = ft_newlst(&buff, direct);
-		if (i == 0)
-			*head = file;
-		ft_addlst(head, file);
-		i++;
+		ft_addlst(&head, file);
 		/*if (ac > 1)
 		{
+			(ls -l)
 			name = getpwuid(buff.st_uid);
 			grp = getgrgid(buff.st_gid);
 			i += buff.st_blocks;
@@ -45,17 +44,18 @@ int		main(int ac, char **av)
 				buff.st_size, ctime(&buff.st_mtime));
 		}*/
 	}
-	file = *head;
+	file = head;
 	while (file->next)
 	{
-		printf("%s\n", file->name);
-		printf("%lld\n", file->size);
-		file = file->next;
-		if (file->next == NULL)
+		tmp = file->next;
+		//printf("Je suis le maillon d'après : %s\n", tmp->name);
+		if (ft_strcmp(tmp->name, file->name) < 0)
 		{
-			printf("%s\n", file->name);
-			printf("%lld\n", file->size);
+			ft_sortlst(tmp, file);
+			file = head;
 		}
+		printf("%s\n", tmp->name);
+		file = file->next;
 	}
 	//printf("total %d\n", i);
 	/*printf("Dernier changement d’état :        %s", ctime(&buff.st_ctime));

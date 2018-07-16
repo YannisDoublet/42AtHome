@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/03 13:29:46 by yadouble          #+#    #+#             */
-/*   Updated: 2018/07/10 11:44:52 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/14 18:35:23 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ int		ft_check_flags(char *flags, char c);
 //-------------------------------PROCESS--------------------------------------//
 t_liste	*ft_newlst(t_stat *buff, t_dir *direct);
 void	ft_addlst(t_liste **alst, t_liste *new);
+void	ft_sortlst(t_liste *f1, t_liste *f2);
 #endif
