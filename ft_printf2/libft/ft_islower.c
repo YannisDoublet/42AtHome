@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_islower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:38:38 by yadouble          #+#    #+#             */
-/*   Updated: 2018/04/22 17:04:00 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 15:45:16 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int		ft_islower(int c)
 {

@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 20:38:10 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/22 20:28:17 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 17:31:50 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define MAJ_BASE_16 "0123456789ABCDEF"
 # define BASE_8 "01234567"
 # define NULLSTR "(null)"
-# define TYPE sSpPdDioOuUxXcC
+# define TYPE "sSpPdDioOuUxXcC"
 # define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
 # define BYTE_TO_BINARY(byte)  \
     (byte & 0x80 ? '1' : '0'), \
@@ -68,6 +68,7 @@ typedef struct		s_var
 int					ft_printf(const char *format, ...);
 int					ft_parsing_center(const char *fmt, t_var *var);
 int					ft_parsing_control(t_var *var, const char *fmt);
+void				ft_initvar(t_var *var);
 void				ft_parse_flags(const char *fmt, t_var *var);
 void				ft_parse_width(const char *fmt, t_var *var);
 void				ft_parse_precision(const char *fmt, t_var *var);
@@ -78,10 +79,11 @@ void				ft_buffer(t_var *var, char c);
 void				ft_buffer_large_char(t_var *var, wchar_t c);
 //----------------------------------PROCESS-----------------------------------//
 void				ft_process(t_var *var);
-void				ft_which_conv(t_var *var);
-void				ft_conv_type_xX(t_var *var);
-void				ft_conv_type_uU(t_var *var);
-void				ft_conv_type_oO(t_var *var);
+void				ft_process_2(t_var *var);
+void				ft_conv_dec(t_var *var);
+void				ft_conv_type_hex(t_var *var);
+void				ft_conv_type_uns(t_var *var);
+void				ft_conv_type_oct(t_var *var);
 int					ft_nb_is_neg(t_var *var);
 void				ft_process_int(t_var *var);
 void				ft_process_hexadecimal(t_var *var);
@@ -105,8 +107,10 @@ int					ft_get_wcharlen(wchar_t c);
 void				ft_stringlen(t_var *var);
 //-----------------------------PROCESS FORMAT OPTION--------------------------//
 void				ft_process_flags(t_var *var);
+void				ft_process_flags_2(t_var *var, int i);
 void				ft_process_prec(t_var *var);
 void				ft_process_width(t_var *var);
+void				ft_process_width_2(t_var *var, int i);
 void 				ft_process_minus(t_var *var, int neg);
 int					ft_width_type_option(t_var *var);
 void				ft_prec_type_option(t_var *var);

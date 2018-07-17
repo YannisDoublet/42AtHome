@@ -6,7 +6,7 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/21 20:44:54 by yadouble          #+#    #+#              #
-#    Updated: 2018/06/13 21:33:03 by yadouble         ###   ########.fr        #
+#    Updated: 2018/07/16 17:29:09 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC = 	ft_printf.c \
 		tools.c \
 		buffer.c \
 		format_option.c \
+		format_option_2.c \
 		decimal_option.c \
 		process_hexadecimal.c \
 		process_unsigned.c \

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:29:25 by yadouble          #+#    #+#             */
-/*   Updated: 2018/04/22 17:04:21 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 15:45:26 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int		ft_isupper(int c)
 {

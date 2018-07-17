@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 11:11:39 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/30 17:25:11 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 18:56:55 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int		ft_flags_type_option(t_var *var)
 			}
 	}
 	if (var->check.flags & 16 && (var->check.type == 's' ||
-		var->check.type == 'c'))
+		var->check.type == 'c' || var->check.type == 'S'))
 	{
-		if (var->check.type == 's' && !var->check.str)
+		if (var->check.type == 's' && var->check.str == NULLSTR)
 			while (i++ < var->check.width)
 				ft_buffer(var, '0');
 		while (i++ < var->check.width - var->check.len)
@@ -73,8 +73,9 @@ int		ft_minus_type_option(t_var *var, int neg)
 	if ((var->check.type == 'o' || var->check.type == 'O') && 
 		var->check.flags & 8 && !(var->check.flags & 16) && var->check.nb != 0)
 		i++;
-	if (var->check.type == 's' && var->check.prec & 1 && !var->check.precwidth
-		&& var->check.str == NULLSTR)
+	if ((var->check.type == 's' || var->check.type == 'S') &&
+		var->check.prec & 1 && !var->check.precwidth &&
+		var->check.str == NULLSTR && (!(var->check.flags & 16)))
 	{
 		while (i++ < var->check.width)
 			ft_buffer(var, ' ');

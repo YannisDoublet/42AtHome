@@ -6,13 +6,13 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 19:52:53 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/01 15:11:02 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 15:21:52 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	ft_conv_type_uU(t_var *var)
+void	ft_conv_type_uns(t_var *var)
 {
 	var->check.unb = 0;
 	if (var->check.type == 'U')

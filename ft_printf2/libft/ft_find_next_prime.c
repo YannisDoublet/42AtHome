@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_next_prime.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 14:12:04 by yadouble          #+#    #+#             */
-/*   Updated: 2018/04/21 20:21:11 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 15:52:18 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static	int		ft_is_prime(int nb)
+#include "includes/libft.h"
+
+int		ft_is_prime(int nb)
 {
 	int			i;
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 18:58:21 by yadouble          #+#    #+#             */
-/*   Updated: 2018/04/21 18:58:27 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 15:47:48 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strcpy(char *dest, const char *src)
 {

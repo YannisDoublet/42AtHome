@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:08:28 by yadouble          #+#    #+#             */
-/*   Updated: 2018/02/12 19:08:19 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 15:44:36 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "includes/libft.h"
 
 int		ft_is_prime(int nb)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadouble <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:37:43 by yadouble          #+#    #+#             */
-/*   Updated: 2018/04/22 18:00:32 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 15:45:35 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 static void		ft_neg(int *n, int *negative)
 {

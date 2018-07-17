@@ -6,12 +6,13 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/17 19:07:52 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/20 19:34:01 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 18:06:52 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <fcntl.h>
+#include <stdio.h>
 
 int		main(int argc, char **argv)
 {

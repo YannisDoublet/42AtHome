@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 19:31:54 by yadouble          #+#    #+#             */
-/*   Updated: 2018/06/30 16:54:22 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 15:19:53 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	ft_unsigned_len(t_var *var)
 	uintmax_t nb;
 	uintmax_t save;
 
-	ft_conv_type_uU(var);
+	ft_conv_type_uns(var);
 	nb = var->check.unb;
 	var->check.len = 0;
 	save = nb;
@@ -121,7 +121,7 @@ void	ft_unsigned_len(t_var *var)
 
 void	ft_octlen(t_var *var)
 {
-	ft_conv_type_oO(var);
+	ft_conv_type_oct(var);
 	if (var->check.nb == 0)
 		var->check.len = 1;
 	else
@@ -131,7 +131,7 @@ void	ft_octlen(t_var *var)
 void	ft_hxlen(t_var *var)
 {
 	if (var->check.type == 'x' || var->check.type == 'X')
-		ft_conv_type_xX(var);
+		ft_conv_type_hex(var);
 	if (var->check.type == 'p' || var->check.type == 'P')
 		var->check.nb = va_arg(var->check.arg, unsigned long);
 	if ((var->check.nb == 0 && var->check.prec & 1 && var->check.precwidth > 0)
@@ -149,7 +149,7 @@ int		ft_numlen(t_var *var)
 	intmax_t save;
 	intmax_t nb;
 
-	ft_which_conv(var);
+	ft_conv_dec(var);
 	nb = var->check.nb;
 	var->check.len = 0;
 	if (nb < 0)

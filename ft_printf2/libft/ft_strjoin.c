@@ -6,11 +6,11 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 18:59:35 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/10 18:25:59 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 15:48:12 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
