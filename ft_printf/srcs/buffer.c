@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 21:14:53 by yadouble          #+#    #+#             */
-/*   Updated: 2018/05/18 18:58:24 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/16 13:47:52 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	ft_buffer(t_var *var, char c)
 {
-	if (ft_strlen(var->prtf.buff) > BUFF_SIZE)
+	if (ft_strlen(var->check.buff) > BUFF_SIZE)
 	{
-		write(1, var->prtf.buff, BUFF_SIZE);
-		var->prtf.bix = 0;
-		ft_bzero(var->prtf.buff, var->prtf.bix);
+		write(1, var->check.buff, BUFF_SIZE);
+		var->check.total += var->check.bix;
+		ft_bzero(var->check.buff, var->check.bix);
+		var->check.bix = 0;
 	}
-	var->prtf.buff[var->prtf.bix++] = c;
-	printf("buffer dans ft_buffer : %s\n", var->prtf.buff);
+	var->check.buff[var->check.bix] = c;
+	var->check.bix++;
 }
