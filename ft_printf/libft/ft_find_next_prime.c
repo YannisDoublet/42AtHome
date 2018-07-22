@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 14:12:04 by yadouble          #+#    #+#             */
-/*   Updated: 2018/07/16 15:52:18 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/22 17:15:05 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_is_prime(int nb)
 {
-	int			i;
+	int	i;
 
 	i = 2;
 	if (nb <= 1)
@@ -27,9 +27,9 @@ int		ft_is_prime(int nb)
 		return (0);
 }
 
-int				ft_find_next_prime(int nb)
+int		ft_find_next_prime(int nb)
 {
-	int			i;
+	int	i;
 
 	i = nb;
 	while (ft_is_prime(i) != 1)

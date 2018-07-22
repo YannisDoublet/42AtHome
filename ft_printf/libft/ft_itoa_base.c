@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*    ft_itoa_base.c                                    :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/16 15:40:49 by yadouble          #+#    #+#             */
-/*   Updated: 2018/07/16 15:51:35 by yadouble         ###   ########.fr       */
+/*   Created: 2018/07/22 17:15:42 by yadouble          #+#    #+#             */
+/*   Updated: 2018/07/22 17:16:44 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-char 	*ft_itoa_base(intmax_t conv, char *base_to)
+char	*ft_itoa_base(intmax_t conv, char *base_to)
 {
-	long int i;
-	long int base_len;
-	char str[BUFF_SIZE];
-	long int cmp;
-	uintmax_t numcpy;
+	long int	i;
+	long int	base_len;
+	char		str[BUFF_SIZE];
+	long int	cmp;
+	uintmax_t	numcpy;
 
 	base_len = ft_strlen(base_to);
 	ft_bzero(str, BUFF_SIZE);

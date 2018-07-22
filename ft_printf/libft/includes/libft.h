@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:34:21 by yadouble          #+#    #+#             */
-/*   Updated: 2018/07/16 15:42:52 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/22 17:18:37 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ int						ft_iscntrl(int c);
 int						ft_isupper(int c);
 int						ft_islower(int c);
 int						ft_isxdigit(int c);
-char 					*ft_uitoa_base(uintmax_t conv, char *base_to);
-char 					*ft_itoa_base(intmax_t conv, char *base_to);
+char					*ft_uitoa_base(uintmax_t conv, char *base_to);
+char					*ft_itoa_base(intmax_t conv, char *base_to);
 char					*ft_strrev(char *str);
 int						ft_charinstrcmp(char c, const char *str);
 #endif

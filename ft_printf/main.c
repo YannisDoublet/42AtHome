@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 21:10:28 by yadouble          #+#    #+#             */
-/*   Updated: 2018/07/18 16:27:10 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/22 16:53:57 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int 	main(int argc, char **argv)
 	s[2] = 0x81000;
 	s[3] = '\0';
 	setlocale(LC_ALL, "");
-	i = printf("u%4.2ss %-1.s\n %---5.3s ", "coco", NULL, "yooo");
+	i = printf("%S", s);
 	printf("\n%d\n", i);
-	i = ft_printf("u%4.2ss %-1.s\n %---5.3s ", "coco", NULL, "yooo");
+	i = ft_printf("%S", s);
 	printf("\n%d\n", i);
 	return (0);
 }

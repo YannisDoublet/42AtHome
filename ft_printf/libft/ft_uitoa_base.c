@@ -6,19 +6,19 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:13:22 by yadouble          #+#    #+#             */
-/*   Updated: 2018/07/16 15:43:11 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/22 17:18:07 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-char 	*ft_uitoa_base(uintmax_t conv, char *base_to)
+char	*ft_uitoa_base(uintmax_t conv, char *base_to)
 {
-	long int i;
-	long int base_len;
-	char str[BUFF_SIZE];
-	long int cmp;
-	uintmax_t numcpy;
+	long int	i;
+	long int	base_len;
+	char		str[BUFF_SIZE];
+	long int	cmp;
+	uintmax_t	numcpy;
 
 	base_len = ft_strlen(base_to);
 	ft_bzero(str, BUFF_SIZE);

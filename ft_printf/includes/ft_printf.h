@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 20:38:10 by yadouble          #+#    #+#             */
-/*   Updated: 2018/07/20 13:08:28 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/07/22 17:11:09 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void				ft_process_hexadecimal(t_var *var);
 void				ft_process_unsigned(t_var *var);
 void				ft_process_octal(t_var *var);
 void				ft_process_large_char(t_var *var);
+void				ft_process_wstrings(t_var *var);
+void				ft_process_noprec_wstrings(t_var *var, int i);
 void				ft_process_strings(t_var *var);
 int					ft_surrogates(t_var *var);
 int					ft_check_surrogates(t_var *var);
@@ -114,7 +116,11 @@ void				ft_process_width(t_var *var);
 void				ft_process_width_2(t_var *var, int i);
 void 				ft_process_minus(t_var *var, int neg);
 int					ft_width_type_option(t_var *var);
+int					ft_width_type_option_2(t_var *var, int i);
+int					ft_width_type_option_3(t_var *var, int i);
+int					ft_width_type_option_4(t_var *var, int i);
 void				ft_prec_type_option(t_var *var);
 int					ft_flags_type_option(t_var *var);
+int					ft_flags_type_option_2(t_var *var, int i);
 int					ft_minus_type_option(t_var *var, int neg);
 #endif

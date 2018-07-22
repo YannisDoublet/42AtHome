@@ -6,7 +6,7 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/21 20:44:54 by yadouble          #+#    #+#              #
-#    Updated: 2018/07/20 13:09:19 by yadouble         ###   ########.fr        #
+#    Updated: 2018/07/22 17:04:06 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,12 @@ SRC = 	ft_printf.c \
 		process.c \
 		process_int.c \
 		get_len.c \
+		get_len_2.c \
 		buffer.c \
+		format_process.c \
+		format_process_2.c \
 		format_option.c \
 		format_option_2.c \
-		decimal_option.c \
 		process_hexadecimal.c \
 		process_unsigned.c \
 		process_octal.c \
