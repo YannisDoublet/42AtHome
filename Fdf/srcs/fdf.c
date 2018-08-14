@@ -6,11 +6,11 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:48:36 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/14 15:57:37 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/14 17:51:40 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include <fdf.h>
 
 t_ligne		*create_maillon(t_ligne *head, char *line)
 {

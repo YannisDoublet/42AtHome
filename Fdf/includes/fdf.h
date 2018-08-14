@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:36:43 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/14 11:42:33 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/14 17:57:23 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
-#include "../libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 
 typedef	struct	s_ligne
 {

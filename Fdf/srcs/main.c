@@ -6,11 +6,11 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:39:40 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/14 11:39:06 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/14 17:51:46 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include <fdf.h>
 
 int		main(int argc, char **argv)
 {

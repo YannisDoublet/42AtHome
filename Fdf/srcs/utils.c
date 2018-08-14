@@ -6,11 +6,11 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 11:22:25 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/14 15:36:38 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/14 18:06:45 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include <fdf.h>
 
 int		ft_count(char *str)
 {
@@ -34,7 +34,6 @@ int		**ft_create_tab(t_ligne *head, int i)
 	int	**tab;
 	int	x;
 	int	y;
-	int	j;
 	t_ligne *current;
 
 	x = 0;

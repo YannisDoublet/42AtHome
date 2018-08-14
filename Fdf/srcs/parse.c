@@ -6,11 +6,11 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:59:45 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/07 20:40:07 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/14 17:51:53 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include <fdf.h>
 
 int		ft_parse_fdf(char *line)
 {
