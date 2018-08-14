@@ -6,13 +6,12 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 20:38:10 by yadouble          #+#    #+#             */
-/*   Updated: 2018/07/22 17:11:09 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/07 14:15:44 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# define BUFF_SIZE 100
 # define MIN_BASE_16 "0123456789abcdef"
 # define MAJ_BASE_16 "0123456789ABCDEF"
 # define BASE_8 "01234567"

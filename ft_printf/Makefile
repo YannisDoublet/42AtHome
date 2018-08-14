@@ -6,11 +6,11 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/21 20:44:54 by yadouble          #+#    #+#              #
-#    Updated: 2018/07/22 17:04:06 by yadouble         ###   ########.fr        #
+#    Updated: 2018/08/07 14:45:12 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = clang
+CC = gcc
 NAME = libftprintf.a
 NAMETEST = ft_printf
 CFLAGS = -Wall -Wextra -Werror

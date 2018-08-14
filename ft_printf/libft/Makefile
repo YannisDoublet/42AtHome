@@ -6,7 +6,7 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/10 16:15:49 by yadouble          #+#    #+#              #
-#    Updated: 2018/07/16 15:42:14 by yadouble         ###   ########.fr        #
+#    Updated: 2018/08/07 14:21:15 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,8 @@ SRCS = ft_memset.c \
 		ft_uitoa_base.c \
 		ft_itoa_base.c \
 		ft_strrev.c \
-		ft_charinstrcmp.c
+		ft_charinstrcmp.c \
+		get_next_line.c
 SRCSO = ${SRCS:.c=.o}
 
 all : $(NAME)

@@ -6,16 +6,17 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:34:21 by yadouble          #+#    #+#             */
-/*   Updated: 2018/07/22 17:18:37 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/07 14:18:42 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 100
+# define BUFF_SIZE 250000
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 typedef struct			s_list
 {
@@ -99,4 +100,5 @@ char					*ft_uitoa_base(uintmax_t conv, char *base_to);
 char					*ft_itoa_base(intmax_t conv, char *base_to);
 char					*ft_strrev(char *str);
 int						ft_charinstrcmp(char c, const char *str);
+int 					get_next_line(const int fd, char **line);
 #endif
