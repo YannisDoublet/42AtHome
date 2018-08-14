@@ -6,13 +6,15 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/10 16:15:49 by yadouble          #+#    #+#              #
-#    Updated: 2018/08/07 15:59:00 by yadouble         ###   ########.fr        #
+#    Updated: 2018/08/14 17:26:09 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = gcc
 CFLAGS = -c -Wall -Wextra -Werror
+SRCS_DIR = srcs
+OBJ_DIR = obj
 SRCS = ft_memset.c \
 		ft_bzero.c \
 		ft_memcpy.c \
@@ -83,18 +85,41 @@ SRCS = ft_memset.c \
 		ft_itoa_base.c \
 		ft_strrev.c \
 		ft_charinstrcmp.c \
-		get_next_line.c
-SRCSO = ${SRCS:.c=.o}
+		get_next_line.c \
+		ft_printf.c \
+		ft_printf/buffer.c \
+		ft_printf/format_option.c \
+		ft_printf/format_option_2.c \
+		ft_printf/format_process.c \
+		ft_printf/format_process_2.c \
+		ft_printf/get_len.c \
+		ft_printf/get_len_2.c \
+		ft_printf/parsing.c \
+		ft_printf/parsing_step.c \
+		ft_printf/process.c \
+		ft_printf/process_hexadecimal.c \
+		ft_printf/process_int.c \
+		ft_printf/process_large_char.c \
+		ft_printf/process_octal.c \
+		ft_printf/process_strings.c \
+		ft_printf/process_unsigned.c
+SRCS := $(addprefix $(SRCS_DIR)/,$(SRCS))
+OBJ = $(subst $(SRCS_DIR),$(OBJ_DIR),$(SRCS:.c=.o))
 
 all : $(NAME)
 
-$(NAME) :
-	@$(CC) $(CFLAGS) -Iincludes $(SRCS)
-	@ar rc $(NAME) $(SRCSO)
+$(NAME) : $(OBJ)
+	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
+	@chmod +x $(NAME)
+
+$(OBJ_DIR)/%.o : $(SRCS_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/ft_printf
+	@$(CC) -o $@ -Iincludes $(CFLAGS) $<
 
 clean :
-	@rm -rf $(SRCSO)
+	@rm -rf $(OBJ_DIR)
 
 fclean : clean
 	@rm -rf $(NAME)

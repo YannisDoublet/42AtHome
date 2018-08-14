@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:36:43 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/07 20:40:25 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/14 11:42:33 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,8 @@ typedef	struct	s_ligne
 }				t_ligne;
 
 int			ft_fdf(int fd);
+int			ft_read_map(int fd);
 int			ft_parse_fdf(char *line);
+int			ft_count_to_charset(char *str, char c);
+int			**ft_create_tab(t_ligne *head, int i);
 #endif

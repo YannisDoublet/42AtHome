@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:39:40 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/07 20:37:50 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/14 11:39:06 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
-		if (!ft_fdf(fd))
+		if (ft_fdf(fd) == -1)
 		{
-			printf("Map Error");
+			printf("Map Error\n");
 			return (0);
 		}
 	}
 	else
-		printf("Usage : ./fdf [*.fdf]");
+		printf("Usage : ./fdf [*.fdf]\n");
 	return (0);
 }
