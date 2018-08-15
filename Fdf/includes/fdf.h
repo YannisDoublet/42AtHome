@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:36:43 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/14 17:57:23 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/15 19:14:52 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,15 @@ typedef	struct	s_ligne
 	struct	s_ligne	*last;
 }				t_ligne;
 
+typedef	struct	s_point
+{
+	int	height;
+	int color;
+}				t_point;
+
 int			ft_fdf(int fd);
 int			ft_read_map(int fd);
 int			ft_parse_fdf(char *line);
 int			ft_count_to_charset(char *str, char c);
-int			**ft_create_tab(t_ligne *head, int i);
+t_point 	***ft_create_tab(t_ligne *head, int i);
 #endif

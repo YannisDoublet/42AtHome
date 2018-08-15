@@ -6,7 +6,7 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/10 16:15:49 by yadouble          #+#    #+#              #
-#    Updated: 2018/08/14 18:07:17 by yadouble         ###   ########.fr        #
+#    Updated: 2018/08/15 20:50:10 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,14 @@ SRCS = ft_memset.c \
 		ft_strstr.c \
 		ft_strnstr.c \
 		ft_atoi.c \
+		ft_atoi_base.c \
 		ft_bzero.c \
 		ft_isalnum.c \
 		ft_isalpha.c \
 		ft_isascii.c \
 		ft_isdigit.c \
 		ft_isprint.c \
+		ft_is_MAJ_hexa.c \
 		ft_memalloc.c \
 		ft_memdel.c \
 		ft_strclr.c \

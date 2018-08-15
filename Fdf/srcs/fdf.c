@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:48:36 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/14 17:51:40 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/15 19:13:25 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ t_ligne		*create_maillon(t_ligne *head, char *line)
 int			ft_read_map(int fd)
 {
 	t_ligne *head;
+	t_point	***tab;
 	char 	*line;
-	int		**tab;
 	int 	i;
 
 	i = 0;
 	head = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (!(head = create_maillon(head, line)))
+		if (ft_parse_fdf(line) == -1)
 			return (-1);
-		if (ft_parse_fdf(head->str) == -1)
+		if (!(head = create_maillon(head, line)))
 			return (-1);
 		i++;
 	}

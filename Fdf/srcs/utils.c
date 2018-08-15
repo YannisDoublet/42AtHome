@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 11:22:25 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/14 18:06:45 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/15 21:47:55 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,43 @@ int		ft_count(char *str)
 	return (j);
 }
 
-int		**ft_create_tab(t_ligne *head, int i)
+t_point ***ft_create_tab(t_ligne *head, int i)
 {
-	int	**tab;
-	int	x;
-	int	y;
-	t_ligne *current;
+	t_point ***tab;
+	int		x;
+	int		y;
+	t_ligne	*current;
 
 	x = 0;
 	y = 0;
 	current = head;
-	if (!(tab = malloc(sizeof(int *) * i)))
+	if (!(tab = malloc(sizeof(t_point **) * i)))
 		return (NULL);
 	while (current)
 	{
 		i = 0;
-		if (!(tab[y] = malloc(sizeof(int) * ft_count(current->str))))
+		if (!(tab[y] = malloc(sizeof(t_point *) * ft_count(current->str))))
 			return (NULL);
 		while (current->str[i])
 		{
-			tab[y][x] = ft_atoi(current->str + i);
-			while(ft_isdigit(current->str[i]))
+			if (!(tab[y][x] = malloc(sizeof(t_point))))
+				return (NULL);
+			tab[y][x]->height = ft_atoi(current->str + i);
+			while (ft_isdigit(current->str[i]))
 				i++;
 			while (!(ft_isdigit(current->str[i])) && current->str[i])
 				i++;
+			if (current->str[i] == '0' && current->str[i + 1] == 'x')
+			{
+				tab[y][x]->color = ft_atoi_base(current->str + (i + 2),
+				"0123456789ABCDEF");
+				ft_printf("%d\n", tab[y][x]->color);
+				while (!(ft_isdigit(current->str[i]) &&
+					current->str[i - 1] != ' '))
+					i++;
+			}
+			else
+				tab[y][x]->color = 0;
 			x++;
 		}
 		x = 0;
