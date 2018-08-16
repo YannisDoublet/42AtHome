@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:59:45 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/15 21:26:10 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/16 14:12:01 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int		ft_parse_fdf(char *line)
 	{
 		if (line[i] == ',')
 		{
-			if (!(a = ft_check_hexa(line, i)))
+			if ((a = ft_check_hexa(line, i)) < 0)
 				return (-1);
 			else
 				i += a;
 		}
-		if ((line[i] >= '0' && line[i] <= '9') || (line[i] == '-') ||
-			(line[i] == ' '))
+		if ((line[i] >= '0' && line[i] <= '9') || (line[i] == '-' &&
+			line[i + 1] >= '0' && line[i + 1] <= '9') || (line[i] == ' '))
 			i++;
 		else
 			return (-1);

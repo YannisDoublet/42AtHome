@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 19:20:25 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/15 21:57:11 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/16 13:41:43 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int		ft_atoi_base(char *nbr, char *base_from)
 		neg = ((nbr[i] == '-') ? -1 : 1);
 		i++;
 	}
-	while (nbr[i] && nbr[i] != '-' && nbr[i] != '+')
+	while (nbr[i] && nbr[i] != '-' && nbr[i] != '+' &&
+		((nbr[i] >= '0' && nbr[i] <= '9') || (nbr[i] >= 'A' && nbr[i] <= 'F')))
 	{
 		c = 0;
 		while (base_from[c] != nbr[i])

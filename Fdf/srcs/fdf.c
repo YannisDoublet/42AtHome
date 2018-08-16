@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:48:36 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/15 19:13:25 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/16 16:47:37 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_ligne		*create_maillon(t_ligne *head, char *line)
 	return (head);
 }
 
-int			ft_read_map(int fd)
+t_point		***ft_read_map(int fd)
 {
 	t_ligne *head;
 	t_point	***tab;
@@ -44,18 +44,35 @@ int			ft_read_map(int fd)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (ft_parse_fdf(line) == -1)
-			return (-1);
+			return (NULL);
 		if (!(head = create_maillon(head, line)))
-			return (-1);
+			return (NULL);
 		i++;
 	}
 	tab = ft_create_tab(head, i);
-	return (0);
+	return (tab);
 }
 
 int			ft_fdf(int fd)
 {
-	if (ft_read_map(fd) == -1)
+	t_point ***tab;
+	int		x;
+	int		y;
+
+	x = 0;
+	y = 0;
+	if ((tab = ft_read_map(fd)) == NULL)
 		return (-1);
+	/*while (tab[y])
+	{
+		x = 0;
+		while (tab[y][x])
+		{
+			ft_printf("y : %d et x : %d height : %d et color %d\n", y, x, tab[y][x]->height, tab[y][x]->color);
+			x++;
+		}
+		ft_printf("\n");
+		y++;
+	}*/
 	return (0);
 }
