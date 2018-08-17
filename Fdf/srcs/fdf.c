@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:48:36 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/16 16:47:37 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/17 21:09:33 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ t_ligne		*create_maillon(t_ligne *head, char *line)
 	return (head);
 }
 
-t_point		***ft_read_map(int fd)
+int		ft_read_map(int fd, t_map *map)
 {
 	t_ligne *head;
-	t_point	***tab;
 	char 	*line;
 	int 	i;
 
@@ -44,31 +43,37 @@ t_point		***ft_read_map(int fd)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (ft_parse_fdf(line) == -1)
-			return (NULL);
+			return (0);
 		if (!(head = create_maillon(head, line)))
-			return (NULL);
+			return (0);
 		i++;
 	}
-	tab = ft_create_tab(head, i);
-	return (tab);
+	map->height = i;
+	if (!(map->width = malloc(sizeof(int *) * i + 1)))
+		return (0);
+	ft_create_tab(head, i, map);
+	return (1);
 }
 
 int			ft_fdf(int fd)
 {
-	t_point ***tab;
+	t_map	*map;
 	int		x;
 	int		y;
 
-	x = 0;
 	y = 0;
-	if ((tab = ft_read_map(fd)) == NULL)
+	x = 0;
+	if (!(map = malloc(sizeof(t_map))))
 		return (-1);
-	/*while (tab[y])
+	if (ft_read_map(fd, map) == 0)
+		return (-1);
+	/*while (y < map->height)
 	{
 		x = 0;
-		while (tab[y][x])
+		while (x < map->width[y])
 		{
-			ft_printf("y : %d et x : %d height : %d et color %d\n", y, x, tab[y][x]->height, tab[y][x]->color);
+			ft_printf("y : %d et x : %d height : %d et color %d\n", y, x,
+				map->tab[y][x].height, map->tab[y][x].color);
 			x++;
 		}
 		ft_printf("\n");

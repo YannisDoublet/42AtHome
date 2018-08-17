@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 11:22:25 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/16 16:45:10 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/17 20:58:29 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,49 +29,46 @@ int		ft_count(char *str)
 	return (j);
 }
 
-t_point ***ft_create_tab(t_ligne *head, int i)
+int		ft_create_tab(t_ligne *head, int i, t_map *map)
 {
-	t_point ***tab;
 	int		x;
 	int		y;
 	t_ligne	*current;
 
-	x = 0;
 	y = 0;
 	current = head;
-	if (!(tab = (t_point ***)malloc(sizeof(t_point **) * (i + 1))))
-		return (NULL);
+	if (!(map->tab = malloc(sizeof(t_point **) * (map->height + 1))))
+		return (0);
 	while (current)
 	{
 		i = 0;
 		x = 0;
-		if (!(tab[y] = (t_point **)malloc(sizeof(t_point *) * (ft_count(current->str) + 1))))
-			return (NULL);
+		map->width[y] = ft_count(current->str);
+		if (!(map->tab[y] = malloc(sizeof(t_point *) * (map->width[y] + 1))))
+			return (0);
 		while (current->str[i])
 		{
-			if (!(tab[y][x] = (t_point *)malloc(sizeof(t_point))))
-				return (NULL);
-			tab[y][x]->height = ft_atoi(current->str + i);
+			map->tab[y][x].height = ft_atoi(current->str + i);
 			while (ft_isdigit(current->str[i]) || current->str[i] == '-')
 				i++;
 			while (!(ft_isdigit(current->str[i])) && current->str[i] &&
-				(current->str[i] != '-' || current->str[i] != ','))
+				current->str[i] != '-')
 				i++;
 			if (current->str[i] == '0' && current->str[i + 1] == 'x')
 			{
-				tab[y][x]->color = ft_atoi_base(current->str + (i + 2),
+				map->tab[y][x].color = ft_atoi_base(current->str + (i + 2),
 				"0123456789ABCDEF");
 				while (!(current->str[i - 1] == ' ' && ft_isdigit(current->str[i])))
 					i++;
 			}
 			else
-				tab[y][x]->color = 0;
+				map->tab[y][x].color = 0;
 			x++;
 		}
-		tab[y][x] = NULL;
 		y++;
 		current = current->next;
 	}
-	tab[y] = NULL;
-	return (tab);
+	map->width[y] = 0;
+	map->tab[y] = NULL;
+	return (1);
 }
