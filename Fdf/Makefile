@@ -6,13 +6,14 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/14 17:35:39 by yadouble          #+#    #+#              #
-#    Updated: 2018/08/20 12:28:31 by yadouble         ###   ########.fr        #
+#    Updated: 2018/08/20 19:09:39 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+FRAMEWORK = -framework OpenGL -framework AppKit
 SRCS_DIR = srcs
 OBJ_DIR = obj
 SRCS = fdf.c \
@@ -26,7 +27,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@make -C libft
-	@$(CC) -o $(NAME) $(CFLAGS) $(OBJ) libft/libft.a
+	@$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(FRAMEWORK) libft/libft.a minilibx_macos/libmlx.a
 
 $(OBJ_DIR)/%.o : $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)

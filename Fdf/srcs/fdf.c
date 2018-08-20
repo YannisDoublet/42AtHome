@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:48:36 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/20 14:36:39 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/08/20 18:02:26 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ int			ft_fdf(int fd, t_mlx mlx)
 		x = 0;
 		while (x < map->width[y])
 		{
-			mlx_pixel_put(mlx.mlx_ptr, mlx.win_ptr, (x * mlx.x_size + map->tab[y][x].height) / map->width[y], (y * mlx.y_size + map->tab[y][x].height) / map->height, 0xFFFFFF);
+			mlx_pixel_put(mlx.mlx_ptr, mlx.win_ptr,
+			(x * mlx.x_size + map->tab[y][x].height) / map->width[y],
+			(y * mlx.y_size + map->tab[y][x].height) / map->height, 0xFFFFFF);
 			x++;
 		}
 		y++;
