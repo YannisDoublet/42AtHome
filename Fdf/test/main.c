@@ -12,9 +12,81 @@
 
 #include <fdf.h>
 
-int		ft_pixel(int button, t_test *mlx)
+void	ft_bresenham(int x1, int y1, int x2, int y2, t_test *mlx)
 {
-	mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, mlx->x, mlx->y, 0xFFFFFFF);
+	int ex = abs(x2 - x1);
+	int ey = abs(y2 - y1);
+	int dx = 2 * ex;
+	int dy = 2 * ey;
+	int Dx = ex;
+	int Dy = ey;
+	int i = 0;
+	int Xincr = 1;
+	int Yincr = 1;
+
+	if (x1 > x2)
+		Xincr = -1;
+	if (y1 > y2)
+		Yincr = -1;
+	if (Dx > Dy)
+	{
+		while (i <= Dx)
+		{
+			mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x1, y1, 0xFF00FF);
+			i++;
+			x1 += Xincr;
+			ex -= dy;
+			if (ex < 0)
+			{
+				y1 += Yincr;
+				ex += dx;
+			}
+		}
+	}
+	else
+	{
+		while (i <= Dy)
+		{
+			mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x1, y1, 0x00FF00);
+			i++;
+			y1 += Yincr;
+			ey -= dx;
+			if (ey < 0)
+			{
+				x1 += Xincr;
+				ey += dy;
+			}
+		}
+	}
+}
+
+int		ft_pixel(int button, int x, int y, t_test *mlx)
+{
+	static int x1;
+	static int y1;
+	static int x2;
+	static int y2;
+	static int i;
+
+	mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, 0xFFFFFFF);
+	if (i == 0)
+	{
+		x1 = x;
+		y1 = y;
+	}
+	else if (i == 1)
+	{
+		x2 = x;
+		y2 = y;
+	}
+	if (i == 1)
+	{
+		ft_bresenham(x1, y1, x2, y2, mlx);
+		i = 0;
+		return (0);
+	}
+	i++;
+	mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, 0xFFFFFFF);
 	return (0);
 }
 
@@ -60,6 +132,8 @@ int		main(void)
 {
 	t_test	*mlx;
 
+	if (!(mlx = malloc(sizeof(t_test))))
+		return (-1);
 	mlx->x = 10;
 	mlx->y = 10;
 	mlx->mlx_ptr = mlx_init();
