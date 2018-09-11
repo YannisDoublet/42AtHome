@@ -12,7 +12,7 @@
 
 #include <fdf.h>
 
-void	ft_bresenham(int x1, int y1, int x2, int y2, t_test *mlx)
+/*void	ft_bresenham(int x1, int y1, int x2, int y2, t_test *mlx)
 {
 	int ex = abs(x2 - x1);
 	int ey = abs(y2 - y1);
@@ -58,7 +58,7 @@ void	ft_bresenham(int x1, int y1, int x2, int y2, t_test *mlx)
 			}
 		}
 	}
-}
+}*/
 
 int		ft_pixel(int button, int x, int y, t_test *mlx)
 {

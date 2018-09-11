@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:36:43 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/03 17:32:05 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/11 21:02:26 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
+#include <math.h>
 # include "../libft/includes/libft.h"
 
 typedef	struct		s_ligne
@@ -32,6 +33,14 @@ typedef	struct		s_point
 	int				height;
 	int 			color;
 }					t_point;
+
+typedef	struct		s_pos
+{
+	double			xinit;
+	double			yinit;
+	double			xfin;
+	double			yfin;
+}					t_pos;
 
 typedef struct		s_map
 {
@@ -61,4 +70,10 @@ int					ft_read_map(int fd, t_map *map);
 int					ft_parse_fdf(char *line);
 int					ft_count_to_charset(char *str, char c);
 int 				ft_create_tab(t_ligne *head, int i, t_map *map);
+void				ft_bresenham(double x1, double y1, double x2, double y2, t_mlx mlx);
+int					ft_draw(t_mlx mlx, t_map *map);
+t_pos				*ft_get_x_positions(t_mlx mlx, t_map *map, int x, int y);
+void				ft_draw_vertical_lines(t_mlx mlx, t_map *map, int x, int y);
+t_pos				*ft_get_y_positions(t_mlx mlx, t_map *map, int x, int y);
+void				ft_draw_horizontal_lines(t_mlx mlx, t_map *map, int x, int y);
 #endif

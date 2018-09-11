@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:48:36 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/20 18:02:26 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/10 15:32:20 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,12 @@ int		ft_read_map(int fd, t_map *map)
 int			ft_fdf(int fd, t_mlx mlx)
 {
 	t_map	*map;
-	int		x;
-	int		y;
-	int		zoom;
 
-	y = 0;
-	x = 0;
-	zoom = 50;
 	if (!(map = malloc(sizeof(t_map))))
 		return (-1);
 	if (ft_read_map(fd, map) == 0)
 		return (-1);	
-	while (y < map->height)
-	{
-		x = 0;
-		while (x < map->width[y])
-		{
-			mlx_pixel_put(mlx.mlx_ptr, mlx.win_ptr,
-			(x * mlx.x_size + map->tab[y][x].height) / map->width[y],
-			(y * mlx.y_size + map->tab[y][x].height) / map->height, 0xFFFFFF);
-			x++;
-		}
-		y++;
-	}
+	ft_draw(mlx, map);
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }
