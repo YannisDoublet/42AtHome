@@ -6,13 +6,13 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 18:54:00 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/11 21:16:23 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/13 17:33:11 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void	ft_bresenham(double x1, double y1, double x2, double y2, t_mlx mlx)
+void	ft_bresenham(double x1, double y1, double x2, double y2, t_mlx *mlx)
 {
 	double ex = fabs(x2 - x1);
 	double ey = fabs(y2 - y1);
@@ -28,7 +28,7 @@ void	ft_bresenham(double x1, double y1, double x2, double y2, t_mlx mlx)
 		Xincr = -1;
 	if (y1 > y2)
 		Yincr = -1;
-	mlx_pixel_put(mlx.mlx_ptr, mlx.win_ptr, (int)x1, (int)y1, 0xFF00FF);	
+	mlx_pixel_put_to_image(mlx, (int)x1, (int)y1, 0xFFFFFF);
 	if (Dx > Dy)
 	{
 		while (i <= Dx)
@@ -41,8 +41,7 @@ void	ft_bresenham(double x1, double y1, double x2, double y2, t_mlx mlx)
 				y1 += Yincr;
 				ex += dx;
 			}
-			printf("1er x1 : %f, 1er y1 : %f\n", x1, y1);
-			mlx_pixel_put(mlx.mlx_ptr, mlx.win_ptr, (int)x1, (int)y1, 0xFF00FF);
+			mlx_pixel_put_to_image(mlx, (int)x1, (int)y1, 0xFF00FF);
 
 		}
 	}
@@ -58,50 +57,53 @@ void	ft_bresenham(double x1, double y1, double x2, double y2, t_mlx mlx)
 				x1 += Xincr;
 				ey += dy;
 			}
-			mlx_pixel_put(mlx.mlx_ptr, mlx.win_ptr, (int)x1, (int)y1, 0x00FF00);
-
+			mlx_pixel_put_to_image(mlx, (int)x1, (int)y1, 0x00FF00);
 		}
 	}
 }
 
-t_pos	*ft_get_x_positions(t_mlx mlx, t_map *map, int x, int y)
+t_pos	*ft_get_x_positions(t_mlx *mlx, t_map *map, int x, int y)
 {
 	t_pos 		*pos;
+	int			pad_x;
+	int			pad_y;
 
+	pad_x = (mlx->x_size / 3);
+	pad_x *= 0.5;
+	pad_y = (mlx->y_size / 3);
+	pad_y *= 0.5;
 	if (!(pos = malloc(sizeof(t_pos))))
 		return (NULL);
-	pos->xinit = x * 0.2 * ((double)mlx.x_size / 8) + (double)map->tab[y][x].height + ((double)mlx.x_size / 3);
-	pos->xinit = round((sqrt(3) / 2) * pos->xinit);
-	printf("x :%f\n", pos->xinit);
-	pos->yinit = y * 0.2 * ((double)mlx.y_size / 8) + (double)map->tab[y][x].height + ((double)mlx.x_size / 3);
-	pos->yinit = round(pos->yinit * -0.5 + (mlx.y_size / 2));
-	printf("x : %f\n", pos->yinit);
-	pos->xfin = (x + 1) * 0.2 * ((double)mlx.x_size / 8) + (double)map->tab[y][x + 1].height + ((double)mlx.x_size / 3);
-	pos->xfin = round((sqrt(3) / 2) * pos->xfin);
-	printf("x : %f\n", pos->xfin);
-	pos->yfin = y * 0.2 * ((double)mlx.y_size / 8) + (double)map->tab[y][x + 1].height + ((double)mlx.x_size / 3);
-	pos->yfin = round(pos->yfin * 0.5 + (mlx.y_size / 2));
-	printf("x : %f\n", pos->yfin);
+	pos->xinit = x * 0.2 * pad_x - (double)map->tab[y][x].height + mlx->x_size + map->hzt;
+	pos->yinit = y * 0.2 * pad_y - (double)map->tab[y][x].height + map->vrt;
+	pos->xfin = (x + 1) * 0.2 * pad_x - (double)map->tab[y][x + 1].height + mlx->x_size + map->hzt;
+	pos->yfin = y * 0.2 * pad_y - (double)map->tab[y][x + 1].height + map->vrt;
+	pos->xinit = (pos->xinit - pos->yinit) / sqrt(3);
+	pos->yinit = (pos->xinit + pos->yinit) / sqrt(3);
+	pos->xfin = (pos->xfin - pos->yfin) / sqrt(3);
+	pos->yfin = (pos->xfin + pos->yfin) / sqrt(3);
 	return (pos);
 }
 
-t_pos	*ft_get_y_positions(t_mlx mlx, t_map *map, int x, int y)
+t_pos	*ft_get_y_positions(t_mlx *mlx, t_map *map, int x, int y)
 {
 	t_pos 		*pos;
+	int			pad_x;
+	int			pad_y;
 
+	pad_x = (mlx->x_size / 3);
+	pad_x *= 0.5;
+	pad_y = (mlx->y_size / 3);
+	pad_y *= 0.5;
 	if (!(pos = malloc(sizeof(t_pos))))
 		return (NULL);
-	pos->xinit = x * 0.2 * ((double)mlx.x_size / 8) + (double)map->tab[y][x].height + ((double)mlx.x_size / 3);
-	pos->xinit = round((sqrt(3) / 2) * pos->xinit);
-	printf("y : %f\n", pos->xinit);
-	pos->yinit = y * 0.2 * ((double)mlx.y_size / 8) + (double)map->tab[y][x].height + ((double)mlx.x_size / 3);
-	pos->yinit = round(pos->yinit * -0.5 + (mlx.y_size / 2));
-	printf("y : %f\n", pos->yinit);
-	pos->xfin = x * 0.2 * ((double)mlx.x_size / 8) + (double)map->tab[y + 1][x].height + ((double)mlx.x_size / 3);
-	pos->xfin = round((sqrt(3) / 2) * pos->xfin);
-	printf("y : %f\n", pos->xfin);
-	pos->yfin = (y + 1) * 0.2 * ((double)mlx.y_size / 8) + (double)map->tab[y + 1][x].height + ((double)mlx.x_size / 3);
-	pos->yfin = round(pos->yfin * 0.5 + (mlx.y_size / 2));
-	printf("y : %f\n", pos->yfin);
+	pos->xinit = x * 0.2 * pad_x - (double)map->tab[y][x].height + mlx->x_size + map->hzt;
+	pos->yinit = y * 0.2 * pad_y - (double)map->tab[y][x].height + map->vrt;
+	pos->xfin = x * 0.2 * pad_x - (double)map->tab[y + 1][x].height + mlx->x_size + map->hzt;
+	pos->yfin = (y + 1) * 0.2 * pad_y - (double)map->tab[y + 1][x].height + map->vrt;
+	pos->xinit = (pos->xinit - pos->yinit) / sqrt(3);
+	pos->yinit = (pos->xinit + pos->yinit) / sqrt(3);
+	pos->xfin = (pos->xfin - pos->yfin) / sqrt(3);
+	pos->yfin = (pos->xfin + pos->yfin) / sqrt(3);
 	return (pos);
 }

@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:48:36 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/10 15:32:20 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/13 16:00:38 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,16 @@ int		ft_read_map(int fd, t_map *map)
 	return (1);
 }
 
-int			ft_fdf(int fd, t_mlx mlx)
+int			ft_fdf(int fd, t_mlx *mlx)
 {
 	t_map	*map;
 
 	if (!(map = malloc(sizeof(t_map))))
 		return (-1);
 	if (ft_read_map(fd, map) == 0)
-		return (-1);	
+		return (-1);
+	ft_mlx_init(mlx);
+	ft_printf("%d\n", mlx->x_size);
 	ft_draw(mlx, map);
-	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }

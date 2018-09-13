@@ -6,7 +6,7 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/14 17:35:39 by yadouble          #+#    #+#              #
-#    Updated: 2018/09/10 15:59:02 by yadouble         ###   ########.fr        #
+#    Updated: 2018/09/13 14:38:41 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRCS = fdf.c \
 		parse.c \
 		utils.c \
 		bresenham.c \
-		draw.c
+		draw.c \
+		tools.c
 SRCS := $(addprefix $(SRCS_DIR)/,$(SRCS))
 OBJ = $(subst $(SRCS_DIR),$(OBJ_DIR),$(SRCS:.c=.o))
 
