@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 14:39:27 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/13 17:34:31 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/13 17:44:26 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	ft_draw_horizontal_lines(t_mlx *mlx, t_map *map, int x, int y)
 {
 	t_pos 	*pos;
 
-	ft_init_keycode(map, mlx);
-	ft_bzero(mlx->img_addr, (mlx->x_size * mlx->y_size * 4));
 	pos = ft_get_y_positions(mlx, map, x, y);
 	ft_bresenham(pos->xinit, pos->yinit, pos->xfin, pos->yfin, mlx);
 }
@@ -46,8 +44,6 @@ void	ft_draw_vertical_lines(t_mlx *mlx, t_map *map, int x, int y)
 {
 	t_pos	*pos;
 
-	ft_init_keycode(map, mlx);
-	ft_bzero(mlx->img_addr, (mlx->x_size * mlx->y_size * 4));
 	pos = ft_get_x_positions(mlx, map, x, y);
 	ft_bresenham(pos->xinit, pos->yinit, pos->xfin, pos->yfin, mlx);
 }
@@ -58,6 +54,7 @@ int		ft_draw(t_mlx *mlx, t_map *map)
 	int		y;
 
 	y = 0;
+	ft_init_keycode(map, mlx);
 	while (y < map->height)
 	{
 		x = 0;

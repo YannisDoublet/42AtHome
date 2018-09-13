@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:36:43 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/13 16:45:21 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/13 17:45:06 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ void				ft_draw_vertical_lines(t_mlx *mlx, t_map *map, int x, int y);
 t_pos				*ft_get_y_positions(t_mlx *mlx, t_map *map, int x, int y);
 void				ft_draw_horizontal_lines(t_mlx *mlx, t_map *map, int x, int y);
 void				ft_init_keycode(t_map *map, t_mlx *mlx);
-int					ft_keycode(int key, t_map *map);
+int					ft_keycode(int key, t_map *map, t_mlx *mlx);
 #endif

@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:14:30 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/13 17:33:23 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/13 17:44:56 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ void	ft_mlx_init(t_mlx *mlx)
 	mlx->img_addr = mlx_get_data_addr(mlx->img_ptr, &mlx->bpp, &mlx->size_line, &mlx->endian);
 }
 
-int		ft_keycode(int key, t_map *map)
+int		ft_keycode(int key, t_map *map, t_mlx *mlx)
 {
-	printf("%d\n", key);
 	if (key == 13)
 		map->vrt += 10;
 	else if (key == 0)
@@ -38,6 +37,7 @@ int		ft_keycode(int key, t_map *map)
 		map->vrt -= 10;
 	else if (key == 2)
 		map->vrt += 10;
+	ft_bzero(mlx->img_addr, (mlx->x_size * mlx->y_size * 4));
 	return (0);
 }
 
@@ -46,5 +46,5 @@ void	ft_init_keycode(t_map *map, t_mlx *mlx)
 	map->hzt = 0;
 	map->vrt = 0;
 	map->zoom = 0;
-	mlx_key_hook(mlx->win_ptr, ft_keycode, 0);
+	mlx_key_hook(mlx->win_ptr, ft_keycode, mlx);
 }
