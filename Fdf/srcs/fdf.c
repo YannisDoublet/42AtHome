@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:48:36 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/13 16:00:38 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/17 19:32:14 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_ligne		*create_maillon(t_ligne *head, char *line)
 	return (head);
 }
 
-int		ft_read_map(int fd, t_map *map)
+int		ft_read_map(int fd, t_stc *stc)
 {
 	t_ligne *head;
 	char 	*line;
@@ -48,23 +48,19 @@ int		ft_read_map(int fd, t_map *map)
 			return (0);
 		i++;
 	}
-	map->height = i;
-	if (!(map->width = malloc(sizeof(int *) * i + 1)))
+	stc->map.height = i;
+	if (!(stc->map.width = malloc(sizeof(int *) * i + 1)))
 		return (0);
-	ft_create_tab(head, i, map);
+	ft_create_tab(head, i, stc);
 	return (1);
 }
 
-int			ft_fdf(int fd, t_mlx *mlx)
+int			ft_fdf(int fd, t_stc *stc)
 {
-	t_map	*map;
-
-	if (!(map = malloc(sizeof(t_map))))
+	if (ft_read_map(fd, stc) == 0)
 		return (-1);
-	if (ft_read_map(fd, map) == 0)
-		return (-1);
-	ft_mlx_init(mlx);
-	ft_printf("%d\n", mlx->x_size);
-	ft_draw(mlx, map);
+	ft_mlx_init(stc);
+	ft_init_keycode(stc);
+	ft_draw(stc);
 	return (0);
 }
