@@ -6,60 +6,63 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 18:54:00 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/17 20:22:49 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/18 19:52:43 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void	ft_bresenham(int x1, int y1, int x2, int y2, t_stc *stc)
+void	ft_init_bres(t_bres *bres, t_pos *pos)
 {
-	int ex = abs(x2 - x1);
-	int ey = abs(y2 - y1);
-	int dx = 2 * ex;
-	int dy = 2 * ey;
-	int Dx = ex;
-	int Dy = ey;
-	int i = 0;
-	int Xincr = 1;
-	int Yincr = 1;
+	bres->ex = abs(pos->xfin - pos->xinit);
+	bres->ey = abs(pos->yfin - pos->yinit);
+	bres->dx = 2 * bres->ex;
+	bres->dy = 2 * bres->ey;
+	bres->Dx = bres->ex;
+	bres->Dy = bres->ey;
+	bres->i = 0;
+	bres->xincr = ((pos->xinit > pos->xfin) ? -1 : 1);
+	bres->yincr = ((pos->yinit > pos->yfin) ? -1 : 1);
+}
 
-	if (x1 > x2)
-		Xincr = -1;
-	if (y1 > y2)
-		Yincr = -1;
-	mlx_pixel_put_to_image(stc, x1, y1, 0xFFFFFF);
-	if (Dx > Dy)
+void	ft_bresenham_line_up(t_bres bres, t_pos *pos, t_stc *stc)	
+{
+	while (bres.i <= bres.Dy)
 	{
-		while (i <= Dx)
+		bres.i++;
+		pos->yinit += bres.yincr;
+		bres.ey -= bres.dx;
+		if (bres.ey < 0)
 		{
-			i++;
-			x1 += Xincr;
-			ex -= dy;
-			if (ex < 0)
-			{
-				y1 += Yincr;
-				ex += dx;
-			}
-			mlx_pixel_put_to_image(stc, x1, y1, 0xFF00FF);
+			pos->xinit += bres.xincr;
+			bres.ey += bres.dy;
+		}
+		mlx_pixel_put_to_image(stc, pos->xinit, pos->yinit, stc->map.color2);
+	}
+}
 
+void	ft_bresenham_line_down(t_pos *pos, t_stc *stc)
+{
+	t_bres bres;
+
+	ft_init_bres(&bres, pos);
+	if (bres.Dx > bres.Dy)
+	{
+		while (bres.i <= bres.Dx)
+		{
+			bres.i++;
+			pos->xinit += bres.xincr;
+			bres.ex -= bres.dy;
+			if (bres.ex < 0)
+			{
+				pos->yinit += bres.yincr;
+				bres.ex += bres.dx;
+			}
+			mlx_pixel_put_to_image(stc, pos->xinit, pos->yinit, stc->map.color1);
 		}
 	}
 	else
-	{
-		while (i <= Dy)
-		{
-			i++;
-			y1 += Yincr;
-			ey -= dx;
-			if (ey < 0)
-			{
-				x1 += Xincr;
-				ey += dy;
-			}
-			mlx_pixel_put_to_image(stc, x1, y1, 0x00FF00);
-		}
-	}
+		ft_bresenham_line_up(bres, pos, stc);
 }
 
 t_pos	*ft_get_x_positions(t_stc *stc, int x, int y)
@@ -68,15 +71,14 @@ t_pos	*ft_get_x_positions(t_stc *stc, int x, int y)
 
 	if (!(pos = malloc(sizeof(t_pos))))
 		return (NULL);
-	pos->xinit = stc->map.posx[y][x] - stc->map.tab[y][x].height * stc->map.zoom + stc->map.vrt;
-	pos->yinit = stc->map.posy[y][x] - stc->map.tab[y][x].height * stc->map.zoom - stc->map.hzt;
-	pos->xfin = stc->map.posx[y][x - 1] - stc->map.tab[y][x - 1].height * stc->map.zoom + stc->map.vrt;
-	pos->yfin = stc->map.posy[y][x - 1] - stc->map.tab[y][x - 1].height * stc->map.zoom - stc->map.hzt;
+	pos->xinit = stc->map.posx[y][x] - stc->map.tab[y][x].height * stc->map.alt + stc->map.vrt;
+	pos->yinit = stc->map.posy[y][x] - stc->map.tab[y][x].height * stc->map.alt - stc->map.hzt;
+	pos->xfin = stc->map.posx[y][x - 1] - stc->map.tab[y][x - 1].height * stc->map.alt + stc->map.vrt;
+	pos->yfin = stc->map.posy[y][x - 1] - stc->map.tab[y][x - 1].height * stc->map.alt - stc->map.hzt;
 	pos->xinit = (pos->xinit - pos->yinit) / 2;
 	pos->yinit = (pos->xinit + pos->yinit) / 2;
 	pos->xfin = (pos->xfin - pos->yfin) / 2;
 	pos->yfin = (pos->xfin + pos->yfin) / 2;
-
 	return (pos);
 }
 
@@ -86,10 +88,10 @@ t_pos	*ft_get_y_positions(t_stc *stc, int x, int y)
 
 	if (!(pos = malloc(sizeof(t_pos))))
 		return (NULL);
-	pos->xinit = stc->map.posx[y][x] - stc->map.tab[y][x].height * stc->map.zoom + stc->map.vrt;
-	pos->yinit = stc->map.posy[y][x] - stc->map.tab[y][x].height * stc->map.zoom - stc->map.hzt;
-	pos->xfin = stc->map.posx[y - 1][x] - stc->map.tab[y - 1][x].height * stc->map.zoom + stc->map.vrt;
-	pos->yfin = stc->map.posy[y - 1][x] - stc->map.tab[y - 1][x].height * stc->map.zoom - stc->map.hzt;
+	pos->xinit = stc->map.posx[y][x] - stc->map.tab[y][x].height * stc->map.alt + stc->map.vrt;
+	pos->yinit = stc->map.posy[y][x] - stc->map.tab[y][x].height * stc->map.alt - stc->map.hzt;
+	pos->xfin = stc->map.posx[y - 1][x] - stc->map.tab[y - 1][x].height * stc->map.alt + stc->map.vrt;
+	pos->yfin = stc->map.posy[y - 1][x] - stc->map.tab[y - 1][x].height * stc->map.alt - stc->map.hzt;
 	pos->xinit = (pos->xinit - pos->yinit) / 2;
 	pos->yinit = (pos->xinit + pos->yinit) / 2;
 	pos->xfin = (pos->xfin - pos->yfin) / 2;

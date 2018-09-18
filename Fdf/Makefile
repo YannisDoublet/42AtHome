@@ -6,7 +6,7 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/14 17:35:39 by yadouble          #+#    #+#              #
-#    Updated: 2018/09/13 14:38:41 by yadouble         ###   ########.fr        #
+#    Updated: 2018/09/18 19:12:49 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@make -C libft
-	@$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(FRAMEWORK) libft/libft.a minilibx_macos/libmlx.a
+	@$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(FRAMEWORK) -g3 libft/libft.a minilibx_macos/libmlx.a
 
 $(OBJ_DIR)/%.o : $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)

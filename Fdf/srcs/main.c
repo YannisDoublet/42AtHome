@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:39:40 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/17 17:08:23 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/18 19:02:54 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		main(int argc, char **argv)
 	int 	fd;
 	t_stc	*stc;
 
-	if (!(stc = malloc(sizeof(*stc))))
+	if (!(stc = ft_memalloc(sizeof(t_stc))))
 		return (-1);
 	if (argc == 2)
 	{

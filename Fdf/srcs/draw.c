@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 14:39:27 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/17 17:48:02 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/18 19:53:10 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	ft_draw_horizontal_lines(t_stc *stc, int x, int y)
 	if (y != 0)
 	{
 		pos = ft_get_y_positions(stc, x, y);
-		ft_bresenham(pos->xinit, pos->yinit, pos->xfin, pos->yfin, stc);
+		ft_bresenham_line_down(pos, stc);
+		free(pos);
 	}
 }
 
@@ -50,7 +51,8 @@ void	ft_draw_vertical_lines(t_stc *stc, int x, int y)
 	if (x != 0)
 	{
 		pos = ft_get_x_positions(stc, x, y);
-		ft_bresenham(pos->xinit, pos->yinit, pos->xfin, pos->yfin, stc);
+		ft_bresenham_line_down(pos, stc);
+		free(pos);
 	}
 }
 
@@ -66,7 +68,7 @@ int		ft_draw(t_stc *stc)
 		return (-1);
 	if (!(stc->map.posy = (int**)ft_memalloc(sizeof(int **) * stc->map.height + 1)))
 		return (-1);
-	stc->map.pad_y = ((stc->mlx.y_size / 3) * 2) / stc->map.height;
+	stc->map.pad_y = ((stc->mlx.y_size / 3) * 2) / stc->map.height + stc->map.zoom;
 	x_ecart = ((stc->mlx.x_size / 3) * 2);
 	y_ecart = ((stc->mlx.y_size / 3) * 2);
 	while (y < stc->map.height)
@@ -76,7 +78,7 @@ int		ft_draw(t_stc *stc)
 			return (-1);
 		if (!(stc->map.posy[y] = (int*)ft_memalloc(sizeof(int) * stc->map.width[y])))
 			return (-1);
-		stc->map.pad_x = ((stc->mlx.x_size / 3) * 2) / stc->map.width[y];
+		stc->map.pad_x = ((stc->mlx.x_size / 3) * 2) / stc->map.width[y] + stc->map.zoom;
 		while (x < stc->map.width[y])
 		{
 				stc->map.posx[y][x] = x * stc->map.pad_x + x_ecart;
@@ -87,5 +89,14 @@ int		ft_draw(t_stc *stc)
 		}
 		y++;
 	}
+	y = 0;
+	while (stc->map.width[y])
+	{
+		free(stc->map.posx[y]);
+		free(stc->map.posy[y]);
+		y++;
+	}
+	free(stc->map.posx);
+	free(stc->map.posy);
 	return (0);
 }
