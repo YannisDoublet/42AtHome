@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 14:39:27 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/18 19:53:10 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:58:47 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	mlx_pixel_put_to_image(t_stc *stc, int x, int y, int color)
 	float		img_size;
 
 	img_size = stc->mlx.x_size * stc->mlx.y_size * stc->mlx.bpp / 8;
-	if (x < 0 || y < 0 || y * stc->mlx.size_line + x * stc->mlx.bpp / 8 > img_size || x >= stc->mlx.size_line / (stc->mlx.bpp / 8) || y >= img_size / stc->mlx.size_line)
+	if (x < 0 || y < 0 || y * stc->mlx.size_line
+	+ x * stc->mlx.bpp / 8 > img_size || x >= stc->mlx.size_line /
+	(stc->mlx.bpp / 8) || y >= img_size / stc->mlx.size_line)
 		return ;
 	color1 = color;
 	color2 = color >> 8;
@@ -38,6 +40,14 @@ void	ft_draw_horizontal_lines(t_stc *stc, int x, int y)
 
 	if (y != 0)
 	{
+		if (stc->map.tab[y][x].height < 0 || stc->map.tab[y][x].height == 0)
+			stc->map.color = 0x00B9FF;
+		else if (stc->map.tab[y][x].height > 0 && stc->map.tab[y][x].height <= 10)
+			stc->map.color = 0x00FF66;
+		else if (stc->map.tab[y][x].height > 10 && stc->map.tab[y][x].height <= 20)
+			stc->map.color = 0xFEA021;
+		else if (stc->map.tab[y][x].height > 20)
+			stc->map.color = 0xA94F00;
 		pos = ft_get_y_positions(stc, x, y);
 		ft_bresenham_line_down(pos, stc);
 		free(pos);
@@ -50,6 +60,14 @@ void	ft_draw_vertical_lines(t_stc *stc, int x, int y)
 
 	if (x != 0)
 	{
+		if (stc->map.tab[y][x].height < 0 || stc->map.tab[y][x].height == 0)
+			stc->map.color = 0x00B9FF;
+		else if (stc->map.tab[y][x].height > 0 && stc->map.tab[y][x].height <= 10)
+			stc->map.color = 0x00FF66;
+		else if (stc->map.tab[y][x].height > 10 && stc->map.tab[y][x].height <= 20)
+			stc->map.color = 0xFEA021;
+		else if (stc->map.tab[y][x].height > 20)
+			stc->map.color = 0xA94F00;
 		pos = ft_get_x_positions(stc, x, y);
 		ft_bresenham_line_down(pos, stc);
 		free(pos);
@@ -59,18 +77,14 @@ void	ft_draw_vertical_lines(t_stc *stc, int x, int y)
 int		ft_draw(t_stc *stc)
 {
 	int		x;
-	int		x_ecart;
 	int		y;
-	int		y_ecart;
 
 	y = 0;
-	if (!(stc->map.posx = (int**)ft_memalloc(sizeof(int **) * stc->map.height + 1)))
+	if (!(stc->map.posx = (int**)ft_memalloc(sizeof(int **) * stc->map.height)))
 		return (-1);
-	if (!(stc->map.posy = (int**)ft_memalloc(sizeof(int **) * stc->map.height + 1)))
+	if (!(stc->map.posy = (int**)ft_memalloc(sizeof(int **) * stc->map.height)))
 		return (-1);
 	stc->map.pad_y = ((stc->mlx.y_size / 3) * 2) / stc->map.height + stc->map.zoom;
-	x_ecart = ((stc->mlx.x_size / 3) * 2);
-	y_ecart = ((stc->mlx.y_size / 3) * 2);
 	while (y < stc->map.height)
 	{
 		x = 0;
@@ -81,11 +95,11 @@ int		ft_draw(t_stc *stc)
 		stc->map.pad_x = ((stc->mlx.x_size / 3) * 2) / stc->map.width[y] + stc->map.zoom;
 		while (x < stc->map.width[y])
 		{
-				stc->map.posx[y][x] = x * stc->map.pad_x + x_ecart;
-				stc->map.posy[y][x] = y * stc->map.pad_y + y_ecart;
-				ft_draw_vertical_lines(stc, x, y);
-				ft_draw_horizontal_lines(stc, x, y);
-				x++;
+			stc->map.posx[y][x] = x * stc->map.pad_x + stc->map.x_ecart;
+			stc->map.posy[y][x] = y * stc->map.pad_y + stc->map.y_ecart;
+			ft_draw_vertical_lines(stc, x, y);
+			ft_draw_horizontal_lines(stc, x, y);
+			x++;
 		}
 		y++;
 	}

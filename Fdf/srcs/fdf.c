@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:48:36 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/18 19:00:45 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:58:43 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			ft_fdf(int fd, t_stc *stc)
 {
 	if (ft_read_map(fd, stc) == 0)
 		return (-1);
-	ft_mlx_init(stc);
+	ft_stc_init(stc);
 	ft_init_keycode(stc);
 	mlx_hook(stc->mlx.win_ptr, 2, 2, ft_keycode, stc);
 	mlx_mouse_hook(stc->mlx.win_ptr, ft_mousehook, stc);

@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 18:54:00 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/18 19:52:43 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/19 15:59:37 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_init_bres(t_bres *bres, t_pos *pos)
 	bres->yincr = ((pos->yinit > pos->yfin) ? -1 : 1);
 }
 
-void	ft_bresenham_line_up(t_bres bres, t_pos *pos, t_stc *stc)	
+void	ft_bresenham_line_up(t_bres bres, t_pos *pos, t_stc *stc)
 {
 	while (bres.i <= bres.Dy)
 	{
@@ -37,17 +37,17 @@ void	ft_bresenham_line_up(t_bres bres, t_pos *pos, t_stc *stc)
 			pos->xinit += bres.xincr;
 			bres.ey += bres.dy;
 		}
-		mlx_pixel_put_to_image(stc, pos->xinit, pos->yinit, stc->map.color2);
+		mlx_pixel_put_to_image(stc, pos->xinit, pos->yinit,
+		stc->map.color);
 	}
 }
 
 void	ft_bresenham_line_down(t_pos *pos, t_stc *stc)
 {
-	t_bres bres;
+	t_bres		bres;
 
 	ft_init_bres(&bres, pos);
 	if (bres.Dx > bres.Dy)
-	{
 		while (bres.i <= bres.Dx)
 		{
 			bres.i++;
@@ -58,23 +58,27 @@ void	ft_bresenham_line_down(t_pos *pos, t_stc *stc)
 				pos->yinit += bres.yincr;
 				bres.ex += bres.dx;
 			}
-			mlx_pixel_put_to_image(stc, pos->xinit, pos->yinit, stc->map.color1);
+			mlx_pixel_put_to_image(stc, pos->xinit, pos->yinit,
+			stc->map.color);
 		}
-	}
 	else
 		ft_bresenham_line_up(bres, pos, stc);
 }
 
 t_pos	*ft_get_x_positions(t_stc *stc, int x, int y)
 {
-	t_pos 		*pos;
+	t_pos		*pos;
 
-	if (!(pos = malloc(sizeof(t_pos))))
+	if (!(pos = ft_memalloc(sizeof(t_pos))))
 		return (NULL);
-	pos->xinit = stc->map.posx[y][x] - stc->map.tab[y][x].height * stc->map.alt + stc->map.vrt;
-	pos->yinit = stc->map.posy[y][x] - stc->map.tab[y][x].height * stc->map.alt - stc->map.hzt;
-	pos->xfin = stc->map.posx[y][x - 1] - stc->map.tab[y][x - 1].height * stc->map.alt + stc->map.vrt;
-	pos->yfin = stc->map.posy[y][x - 1] - stc->map.tab[y][x - 1].height * stc->map.alt - stc->map.hzt;
+	pos->xinit = stc->map.posx[y][x] - stc->map.tab[y][x].height
+	* stc->map.alt + stc->map.vrt;
+	pos->yinit = stc->map.posy[y][x] - stc->map.tab[y][x].height
+	* stc->map.alt - stc->map.hzt;
+	pos->xfin = stc->map.posx[y][x - 1] - stc->map.tab[y][x - 1].height
+	* stc->map.alt + stc->map.vrt;
+	pos->yfin = stc->map.posy[y][x - 1] - stc->map.tab[y][x - 1].height
+	* stc->map.alt - stc->map.hzt;
 	pos->xinit = (pos->xinit - pos->yinit) / 2;
 	pos->yinit = (pos->xinit + pos->yinit) / 2;
 	pos->xfin = (pos->xfin - pos->yfin) / 2;
@@ -84,17 +88,21 @@ t_pos	*ft_get_x_positions(t_stc *stc, int x, int y)
 
 t_pos	*ft_get_y_positions(t_stc *stc, int x, int y)
 {
-	t_pos 		*pos;
+	t_pos		*pos;
 
-	if (!(pos = malloc(sizeof(t_pos))))
+	if (!(pos = ft_memalloc(sizeof(t_pos))))
 		return (NULL);
-	pos->xinit = stc->map.posx[y][x] - stc->map.tab[y][x].height * stc->map.alt + stc->map.vrt;
-	pos->yinit = stc->map.posy[y][x] - stc->map.tab[y][x].height * stc->map.alt - stc->map.hzt;
-	pos->xfin = stc->map.posx[y - 1][x] - stc->map.tab[y - 1][x].height * stc->map.alt + stc->map.vrt;
-	pos->yfin = stc->map.posy[y - 1][x] - stc->map.tab[y - 1][x].height * stc->map.alt - stc->map.hzt;
+	pos->xinit = stc->map.posx[y][x] - stc->map.tab[y][x].height
+	* stc->map.alt + stc->map.vrt;
+	pos->yinit = stc->map.posy[y][x] - stc->map.tab[y][x].height
+	* stc->map.alt - stc->map.hzt;
+	pos->xfin = stc->map.posx[y - 1][x] - stc->map.tab[y - 1][x].height
+	* stc->map.alt + stc->map.vrt;
+	pos->yfin = stc->map.posy[y - 1][x] - stc->map.tab[y - 1][x].height
+	* stc->map.alt - stc->map.hzt;
 	pos->xinit = (pos->xinit - pos->yinit) / 2;
 	pos->yinit = (pos->xinit + pos->yinit) / 2;
 	pos->xfin = (pos->xfin - pos->yfin) / 2;
-	pos->yfin = (pos->xfin + pos->yfin) / 2;
+	pos->yfin = (pos->xfin + pos->yfin ) / 2;
 	return (pos);
 }

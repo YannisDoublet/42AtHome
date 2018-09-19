@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:36:43 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/18 19:50:48 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/19 16:00:41 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct		s_map
 	int				color;
 	int				color1;
 	int				color2;
+	int				x_ecart;
+	int				y_ecart;
 }					t_map;
 
 typedef struct		s_mlx
@@ -89,25 +91,17 @@ typedef struct		s_mlx
 	int				y_size;
 }					t_mlx;
 
-typedef	struct		s_test
-{
-	void			*mlx_ptr;
-	void			*win_ptr;
-	int				x;
-	int				y;
-}					t_test;
-
 typedef	struct		s_bres
 {
-					int ex;
-					int ey;
-					int dx;
-					int dy;
-					int Dx;
-					int Dy;
-					int i;
-					int xincr;
-					int yincr;
+	int 			ex;
+	int 			ey;
+	int 			dx;
+	int 			dy;
+	int 			Dx;
+	int 			Dy;
+	int 			i;
+	int 			xincr;
+	int 			yincr;
 }					t_bres;
 
 typedef	struct		s_stc
@@ -118,7 +112,7 @@ typedef	struct		s_stc
 }					t_stc;
 
 int					ft_fdf(int fd, t_stc *stc);
-void				ft_mlx_init(t_stc *stc);
+void				ft_stc_init(t_stc *stc);
 int					ft_read_map(int fd, t_stc *stc);
 int					ft_parse_fdf(char *line);
 int					ft_count_to_charset(char *str, char c);
