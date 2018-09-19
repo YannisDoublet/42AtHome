@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 14:14:30 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/19 16:02:43 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:29:42 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	ft_init_keycode(t_stc *stc)
 	stc->map.vrt = stc->mlx.x_size / 2;
 	stc->map.alt = 1;
 	stc->map.zoom = 1;
-	// stc->map.color1 = 0x3ECDFF;
-	// stc->map.color2 = 0x763D00;
 }
 
 int		ft_mousehook(int button, int x, int y, t_stc *stc)

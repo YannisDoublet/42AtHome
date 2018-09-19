@@ -6,11 +6,24 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 11:22:25 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/18 19:03:44 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:10:12 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
+
+void	ft_free_chain_list(t_ligne *head)
+{
+	t_ligne *tmp;
+
+	while (head)
+	{
+		free(head->str);
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+}
 
 int		ft_count(char *str)
 {
@@ -29,22 +42,39 @@ int		ft_count(char *str)
 	return (j);
 }
 
-int		ft_create_tab(t_ligne *head, int i, t_stc *stc)
+int		ft_count_longest_line(t_ligne *head, t_stc *stc)
+{
+	t_ligne *current;
+
+	current = head;
+	stc->map.width = 0;
+	while (current)
+	{
+		if (stc->map.width < ft_count(current->str))
+			stc->map.width = ft_count(current->str);
+		current = current->next;
+	}
+	return (stc->map.width);
+}
+
+int		ft_create_tab(t_ligne *head, t_stc *stc)
 {
 	int		x;
 	int		y;
+	int		i;
 	t_ligne	*current;
 
 	y = 0;
 	current = head;
-	if (!(stc->map.tab = malloc(sizeof(t_point **) * (stc->map.height + 1))))
+	stc->map.width = ft_count_longest_line(head, stc);
+	ft_printf("%d\n", stc->map.width);
+	if (!(stc->map.tab = ft_memalloc(sizeof(t_point **) * (stc->map.height + 1))))
 		return (0);
 	while (current)
 	{
 		i = 0;
 		x = 0;
-		stc->map.width[y] = ft_count(current->str);
-		if (!(stc->map.tab[y] = malloc(sizeof(t_point *) * (stc->map.width[y] + 1))))
+		if (!(stc->map.tab[y] = ft_memalloc(sizeof(t_point *) * (stc->map.width))))
 			return (0);
 		while (current->str[i])
 		{
@@ -68,7 +98,6 @@ int		ft_create_tab(t_ligne *head, int i, t_stc *stc)
 		y++;
 		current = current->next;
 	}
-	stc->map.width[y] = 0;
 	stc->map.tab[y] = NULL;
 	return (1);
 }

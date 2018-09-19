@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 18:54:00 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/19 15:59:37 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:42:58 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ t_pos	*ft_get_x_positions(t_stc *stc, int x, int y)
 	if (!(pos = ft_memalloc(sizeof(t_pos))))
 		return (NULL);
 	pos->xinit = stc->map.posx[y][x] - stc->map.tab[y][x].height
-	* stc->map.alt + stc->map.vrt;
+	* (stc->map.y_ecart / 25) * stc->map.alt + stc->map.vrt;
 	pos->yinit = stc->map.posy[y][x] - stc->map.tab[y][x].height
-	* stc->map.alt - stc->map.hzt;
+	* (stc->map.y_ecart / 25) * stc->map.alt - stc->map.hzt;
 	pos->xfin = stc->map.posx[y][x - 1] - stc->map.tab[y][x - 1].height
-	* stc->map.alt + stc->map.vrt;
+	* (stc->map.y_ecart / 25) * stc->map.alt + stc->map.vrt;
 	pos->yfin = stc->map.posy[y][x - 1] - stc->map.tab[y][x - 1].height
-	* stc->map.alt - stc->map.hzt;
+	* (stc->map.y_ecart / 25) * stc->map.alt - stc->map.hzt;
 	pos->xinit = (pos->xinit - pos->yinit) / 2;
 	pos->yinit = (pos->xinit + pos->yinit) / 2;
 	pos->xfin = (pos->xfin - pos->yfin) / 2;
@@ -93,13 +93,13 @@ t_pos	*ft_get_y_positions(t_stc *stc, int x, int y)
 	if (!(pos = ft_memalloc(sizeof(t_pos))))
 		return (NULL);
 	pos->xinit = stc->map.posx[y][x] - stc->map.tab[y][x].height
-	* stc->map.alt + stc->map.vrt;
+	* (stc->map.y_ecart / 25) * stc->map.alt + stc->map.vrt;
 	pos->yinit = stc->map.posy[y][x] - stc->map.tab[y][x].height
-	* stc->map.alt - stc->map.hzt;
+	* (stc->map.y_ecart / 25) * stc->map.alt - stc->map.hzt;
 	pos->xfin = stc->map.posx[y - 1][x] - stc->map.tab[y - 1][x].height
-	* stc->map.alt + stc->map.vrt;
+	* (stc->map.y_ecart / 25) * stc->map.alt + stc->map.vrt;
 	pos->yfin = stc->map.posy[y - 1][x] - stc->map.tab[y - 1][x].height
-	* stc->map.alt - stc->map.hzt;
+	* (stc->map.y_ecart / 25) * stc->map.alt - stc->map.hzt;
 	pos->xinit = (pos->xinit - pos->yinit) / 2;
 	pos->yinit = (pos->xinit + pos->yinit) / 2;
 	pos->xfin = (pos->xfin - pos->yfin) / 2;

@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 14:39:27 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/19 15:58:47 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/19 20:26:46 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,12 @@ int		ft_draw(t_stc *stc)
 	while (y < stc->map.height)
 	{
 		x = 0;
-		if (!(stc->map.posx[y] = (int*)ft_memalloc(sizeof(int) * stc->map.width[y])))
+		if (!(stc->map.posx[y] = (int*)ft_memalloc(sizeof(int) * stc->map.width)))
 			return (-1);
-		if (!(stc->map.posy[y] = (int*)ft_memalloc(sizeof(int) * stc->map.width[y])))
+		if (!(stc->map.posy[y] = (int*)ft_memalloc(sizeof(int) * stc->map.width)))
 			return (-1);
-		stc->map.pad_x = ((stc->mlx.x_size / 3) * 2) / stc->map.width[y] + stc->map.zoom;
-		while (x < stc->map.width[y])
+		stc->map.pad_x = ((stc->mlx.x_size / 3) * 2) / stc->map.width + stc->map.zoom;
+		while (x < stc->map.width)
 		{
 			stc->map.posx[y][x] = x * stc->map.pad_x + stc->map.x_ecart;
 			stc->map.posy[y][x] = y * stc->map.pad_y + stc->map.y_ecart;
@@ -104,7 +104,7 @@ int		ft_draw(t_stc *stc)
 		y++;
 	}
 	y = 0;
-	while (stc->map.width[y])
+	while (y < stc->map.height)
 	{
 		free(stc->map.posx[y]);
 		free(stc->map.posy[y]);

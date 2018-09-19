@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:48:36 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/19 15:58:43 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/19 19:43:32 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_ligne		*create_maillon(t_ligne *head, char *line)
 	if (!(new = ft_memalloc(sizeof(t_ligne))))
 		return (NULL);
 	new->str = ft_strdup(line);
+	if (!new->str)
+		return (NULL);
 	if (!head)
 	{
 		head = new;
@@ -32,10 +34,22 @@ t_ligne		*create_maillon(t_ligne *head, char *line)
 	return (head);
 }
 
+int		ft_allocate_check(int i, t_ligne *head, t_stc *stc, char *line)
+{
+	if (i > 0)
+	{
+		free(line);
+		ft_create_tab(head, stc);
+		ft_free_chain_list(head);
+	}
+	else
+		return (-1);
+	return (0);
+}
+
 int		ft_read_map(int fd, t_stc *stc)
 {
 	t_ligne *head;
-	t_ligne *tmp;
 	char 	*line;
 	int 	i;
 
@@ -44,30 +58,21 @@ int		ft_read_map(int fd, t_stc *stc)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (ft_parse_fdf(line) == -1)
-			return (0);
+			return (-1);
 		if (!(head = create_maillon(head, line)))
-			return (0);
+			return (-1);
 		free(line);
 		i++;
 	}
-	free(line);
 	stc->map.height = i;
-	if (!(stc->map.width = malloc(sizeof(int *) * i + 1)))
-		return (0);
-	ft_create_tab(head, i, stc);
-	while (head)
-	{
-		free(head->str);
-		tmp = head;
-		head = head->next;
-		free(tmp);
-	}
-	return (1);
+	if (ft_allocate_check(i, head, stc, line) == -1)
+		return (-1);
+	return (0);
 }
 
 int			ft_fdf(int fd, t_stc *stc)
 {
-	if (ft_read_map(fd, stc) == 0)
+	if (ft_read_map(fd, stc) == -1)
 		return (-1);
 	ft_stc_init(stc);
 	ft_init_keycode(stc);
