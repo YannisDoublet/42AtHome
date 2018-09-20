@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/06 14:59:45 by yadouble          #+#    #+#             */
-/*   Updated: 2018/08/16 14:12:01 by yadouble         ###   ########.fr       */
+/*   Created: 2018/09/20 16:26:43 by yadouble          #+#    #+#             */
+/*   Updated: 2018/09/20 17:15:04 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		ft_check_hexa(char *line, int i)
 	return (-1);
 }
 
-int		ft_parse_fdf(char *line)
+int		ft_check_fdf(char *line)
 {
 	int i;
 	int	a;

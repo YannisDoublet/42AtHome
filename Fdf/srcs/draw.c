@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 14:39:27 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/19 20:26:46 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/20 21:08:44 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,20 @@ void	mlx_pixel_put_to_image(t_stc *stc, int x, int y, int color)
 
 void	ft_draw_horizontal_lines(t_stc *stc, int x, int y)
 {
-	t_pos 	*pos;
+	t_pos	*pos;
 
 	if (y != 0)
 	{
-		if (stc->map.tab[y][x].height < 0 || stc->map.tab[y][x].height == 0)
+		if (stc->map.tab[y][x].color != 0)
+			stc->map.color = stc->map.tab[y][x].color;
+		else if (stc->map.tab[y][x].height < 0 || stc->map.tab[y][x].height
+				== 0)
 			stc->map.color = 0x00B9FF;
-		else if (stc->map.tab[y][x].height > 0 && stc->map.tab[y][x].height <= 10)
+		else if (stc->map.tab[y][x].height > 0 && stc->map.tab[y][x].height
+				<= 10)
 			stc->map.color = 0x00FF66;
-		else if (stc->map.tab[y][x].height > 10 && stc->map.tab[y][x].height <= 20)
+		else if (stc->map.tab[y][x].height > 10 && stc->map.tab[y][x].height
+				<= 20)
 			stc->map.color = 0xFEA021;
 		else if (stc->map.tab[y][x].height > 20)
 			stc->map.color = 0xA94F00;
@@ -60,11 +65,16 @@ void	ft_draw_vertical_lines(t_stc *stc, int x, int y)
 
 	if (x != 0)
 	{
-		if (stc->map.tab[y][x].height < 0 || stc->map.tab[y][x].height == 0)
+		if (stc->map.tab[y][x].color != 0)
+			stc->map.color = stc->map.tab[y][x].color;
+		else if (stc->map.tab[y][x].height < 0 || stc->map.tab[y][x].height
+				== 0)
 			stc->map.color = 0x00B9FF;
-		else if (stc->map.tab[y][x].height > 0 && stc->map.tab[y][x].height <= 10)
+		else if (stc->map.tab[y][x].height > 0 && stc->map.tab[y][x].height
+				<= 10)
 			stc->map.color = 0x00FF66;
-		else if (stc->map.tab[y][x].height > 10 && stc->map.tab[y][x].height <= 20)
+		else if (stc->map.tab[y][x].height > 10 && stc->map.tab[y][x].height
+				<= 20)
 			stc->map.color = 0xFEA021;
 		else if (stc->map.tab[y][x].height > 20)
 			stc->map.color = 0xA94F00;
@@ -80,19 +90,15 @@ int		ft_draw(t_stc *stc)
 	int		y;
 
 	y = 0;
-	if (!(stc->map.posx = (int**)ft_memalloc(sizeof(int **) * stc->map.height)))
+	if (ft_allocate_pos_tab(stc) == -1)
 		return (-1);
-	if (!(stc->map.posy = (int**)ft_memalloc(sizeof(int **) * stc->map.height)))
-		return (-1);
-	stc->map.pad_y = ((stc->mlx.y_size / 3) * 2) / stc->map.height + stc->map.zoom;
+	stc->map.pad_y = ((stc->mlx.y_size / 3) * 2) / stc->map.height
+	+ stc->map.zoom;
+	stc->map.pad_x = ((stc->mlx.x_size / 3) * 2) / stc->map.width
+	+ stc->map.zoom;
 	while (y < stc->map.height)
 	{
 		x = 0;
-		if (!(stc->map.posx[y] = (int*)ft_memalloc(sizeof(int) * stc->map.width)))
-			return (-1);
-		if (!(stc->map.posy[y] = (int*)ft_memalloc(sizeof(int) * stc->map.width)))
-			return (-1);
-		stc->map.pad_x = ((stc->mlx.x_size / 3) * 2) / stc->map.width + stc->map.zoom;
 		while (x < stc->map.width)
 		{
 			stc->map.posx[y][x] = x * stc->map.pad_x + stc->map.x_ecart;
@@ -103,14 +109,6 @@ int		ft_draw(t_stc *stc)
 		}
 		y++;
 	}
-	y = 0;
-	while (y < stc->map.height)
-	{
-		free(stc->map.posx[y]);
-		free(stc->map.posy[y]);
-		y++;
-	}
-	free(stc->map.posx);
-	free(stc->map.posy);
+	ft_free_pos_tab(stc);
 	return (0);
 }

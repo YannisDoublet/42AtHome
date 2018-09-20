@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 14:48:36 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/19 19:43:32 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/20 20:45:06 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,17 @@ t_ligne		*create_maillon(t_ligne *head, char *line)
 	return (head);
 }
 
-int		ft_allocate_check(int i, t_ligne *head, t_stc *stc, char *line)
-{
-	if (i > 0)
-	{
-		free(line);
-		ft_create_tab(head, stc);
-		ft_free_chain_list(head);
-	}
-	else
-		return (-1);
-	return (0);
-}
-
-int		ft_read_map(int fd, t_stc *stc)
+int			ft_read_map(int fd, t_stc *stc)
 {
 	t_ligne *head;
-	char 	*line;
-	int 	i;
+	char	*line;
+	int		i;
 
 	i = 0;
 	head = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (ft_parse_fdf(line) == -1)
+		if (ft_check_fdf(line) == -1)
 			return (-1);
 		if (!(head = create_maillon(head, line)))
 			return (-1);
@@ -78,6 +65,11 @@ int			ft_fdf(int fd, t_stc *stc)
 	ft_init_keycode(stc);
 	mlx_hook(stc->mlx.win_ptr, 2, 2, ft_keycode, stc);
 	mlx_mouse_hook(stc->mlx.win_ptr, ft_mousehook, stc);
+	if (ft_window() == -1)
+	{
+		ft_printf("Window instruction malloc error !\n");
+		return (0);
+	}
 	ft_draw(stc);
 	return (0);
 }
