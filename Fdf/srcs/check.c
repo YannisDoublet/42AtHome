@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 16:26:43 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/20 17:15:04 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/25 15:15:55 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_check_hexa(char *line, int i)
 			c++;
 		if (c != 6)
 			return (0);
-		while (ft_is_MAJ_hexa(line[i]) != -1)
+		while (ft_is_maj_hexa(line[i]) != -1)
 			i++;
 		return (i - save);
 	}
