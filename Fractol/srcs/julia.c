@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/29 13:36:20 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/29 15:45:43 by yadouble         ###   ########.fr       */
+/*   Created: 2018/09/29 22:09:35 by yadouble          #+#    #+#             */
+/*   Updated: 2018/09/29 23:25:46 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,35 @@
 
 int		ft_julia(t_stc *stc)
 {
-  double cre;
-  double cim; 
-  double newre;
-  double newim;
-  double oldre;
-  double oldim;
-  int maxiter;
-  int i;
-  int x;
-  int y;
-
-  cre = -0.75;
-  cim = -0.14;
-  x = 0;
-  y = 0;
-  i = 0;
-  maxiter = 150;
-
-  while(y < stc->mlx.y_size)
+	stc->par.i = 0;
+	stc->par.x = 0;
+	stc->par.y = 0;
+  while(stc->par.y < stc->mlx.y_size)
   {
-  	while(x < stc->mlx.x_size)
+  	while(stc->par.x < stc->mlx.x_size)
   	{
-		newre = 1.5 * (x - stc->mlx.x_size / 2) /
-		(0.5 * stc->key.zoom * stc->mlx.x_size) + stc->key.move_x;
-    	newim = (y - stc->mlx.y_size / 2) /
-		(0.5 * stc->key.zoom * stc->mlx.y_size) + stc->key.move_y;
-    	while(i < maxiter)
+		stc->par.c_r = 0.285;
+		stc->par.c_i = 0.01;
+		stc->par.z_r = stc->par.x / stc->key.zoom + stc->par.x1;
+		stc->par.z_i = stc->par.y / stc->key.zoom + stc->par.y1;
+    	while(stc->par.z_r * stc->par.z_r + stc->par.z_i * stc->par.z_i < 4
+		&& stc->par.i < stc->par.max_iter)
     	{
-			oldre = newre;
-			oldim = newim;
-    	  	newre = oldre * oldre - oldim * oldim + cre;
-    	  	newim = 2 * oldre * oldim + cim;
-    	  	if((newre * newre + newim * newim) > 4)
-		  		break;
-			mlx_pixel_put_to_image(stc, x, y, i * 510);
-		  	i++;
+			stc->par.tmp = stc->par.z_r;
+            stc->par.z_r = stc->par.z_r * stc->par.z_r - stc->par.z_i
+			* stc->par.z_i + stc->par.c_r;
+            stc->par.z_i = 2 * stc->par.z_i * stc->par.tmp + stc->par.c_i;
+		  	stc->par.i++;
     	}
-		x++;
-		i = 0;
+		if (stc->par.i == stc->par.max_iter)
+			mlx_pixel_put_to_image(stc, stc->par.x, stc->par.y, stc->par.i * ft_rgb_color(stc) / stc->par.max_iter);
+		else
+			mlx_pixel_put_to_image(stc, stc->par.x, stc->par.y, stc->par.i * ft_rgb_color(stc));
+		stc->par.x++;
+		stc->par.i = 0;
  	 }
-	x = 0;
-	y++;
+	stc->par.x = 0;
+	stc->par.y++;
   }
-  return 0;
+  return (0);
 }

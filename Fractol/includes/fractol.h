@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 17:03:56 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/29 19:55:39 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/29 23:26:23 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define ESC 53
 # define PLUS 24
 # define MINUS 27
+# define LEFT_CLICK 1
+# define RIGHT_CLICK 2
 # define MOUSE_UP 5
 # define MOUSE_DOWN 4
 # define RESET 15
@@ -50,6 +52,9 @@ typedef	struct		s_par
 	double			z_i;
 	double			tmp;
 	int				i;
+	int				color_r;
+	int				color_g;
+	int				color_b;
 	int				max_iter;
 }					t_par;
 
@@ -68,6 +73,7 @@ typedef struct		s_mlx
 
 typedef struct		s_key
 {
+	int				fract;
 	double			move_x;
 	double			move_y;
 	double			zoom;
@@ -86,11 +92,15 @@ typedef	struct		s_stc
 
 void	ft_init_mlx(t_stc *stc, char **argv);
 void	ft_init_keycode(t_stc *stc);
+int		ft_rgb_color(t_stc *stc);
 void	mlx_pixel_put_to_image(t_stc *stc, int x, int y, int color);
-void	ft_fractal_choice(char *str, t_stc *stc);
+void	ft_fractal_init(t_stc *stc, char *str);
+void	ft_fractal_choice(t_stc *stc);
 int		ft_julia(t_stc *stc);
 int		ft_keycode(int key, t_stc *stc);
 int		ft_mousehook(int button, int x, int y, t_stc *stc);
 int		ft_mandelbrot(t_stc *stc);
 void	ft_init_mandelbrot_param(t_stc *stc);
 void	ft_init_julia_param(t_stc *stc);
+int		ft_burning_ship(t_stc *stc);
+void	ft_init_burning_ship(t_stc *stc);

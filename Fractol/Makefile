@@ -6,7 +6,7 @@
 #    By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/28 18:32:07 by yadouble          #+#    #+#              #
-#    Updated: 2018/09/29 19:56:01 by yadouble         ###   ########.fr        #
+#    Updated: 2018/09/29 22:51:16 by yadouble         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = main.c \
 		fractal_choice.c \
 		julia.c \
 		mandelbrot.c \
+		burning_ship.c \
 		keyhook.c \
 		init_fractal_param.c
 SRCS := $(addprefix $(SRCS_DIR)/,$(SRCS))

@@ -6,11 +6,29 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 17:03:16 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/29 17:18:20 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/29 23:25:02 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
+
+int		ft_rgb_color(t_stc *stc)
+{
+	if (stc->par.color_r > 255)
+		stc->par.color_r = 55;
+	if (stc->par.color_g > 255)
+		stc->par.color_g = 55;
+	if (stc->par.color_b > 255)
+		stc->par.color_b = 55;
+	if (stc->par.color_r < 0)
+		stc->par.color_r = 0;
+	if (stc->par.color_g < 0)
+		stc->par.color_g = 0;
+	if (stc->par.color_b < 0)
+		stc->par.color_b = 0;
+	return ((stc->par.color_r & 0xff) << 16) + ((stc->par.color_g & 0xff) << 8) +
+	(stc->par.color_b & 0xff);
+}
 
 void	mlx_pixel_put_to_image(t_stc *stc, int x, int y, int color)
 {
@@ -67,12 +85,13 @@ int		main(int argc, char **argv)
 			return (-1);
 		ft_init_mlx(stc, argv);
 		ft_init_keycode(stc);
-		ft_fractal_choice(argv[1], stc);
+		ft_fractal_init(stc, argv[1]);
+		ft_fractal_choice(stc);
 		mlx_put_image_to_window(stc->mlx.mlx_ptr, stc->mlx.win_ptr,
 		stc->mlx.img_ptr, 0, 0);
 		mlx_loop(stc->mlx.mlx_ptr);
 	}
 	else
-		ft_printf("Usage : ./fractol [Julia], [Mandelbrot], [Burning ship]\n");
+		ft_printf("Usage : ./fractol [Julia], [Mandelbrot], [Burning_ship]\n");
 	return (0);
 }
