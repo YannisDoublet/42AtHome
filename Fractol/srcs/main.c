@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 17:03:16 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/30 11:08:44 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/30 14:09:30 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int		ft_rgb_color(t_stc *stc)
 		stc->par.color_g = 0;
 	if (stc->par.color_b < 0)
 		stc->par.color_b = 0;
-	return ((stc->par.color_r & 0xff) << 16) + ((stc->par.color_g & 0xff) << 8) +
-	(stc->par.color_b & 0xff);
+	return (((stc->par.color_r & 0xff) << 16) + ((stc->par.color_g & 0xff) << 8)
+	+ (stc->par.color_b & 0xff));
 }
 
 void	mlx_pixel_put_to_image(t_stc *stc, int x, int y, int color)
@@ -83,15 +83,20 @@ int		main(int argc, char **argv)
 	{
 		if (!(stc = malloc(sizeof(t_stc))))
 			return (-1);
+		if (ft_fractal_check(argv[1], stc) == -1)
+		{
+			ft_printf("Wrong fractal name !\n");
+			return (0);
+		}
 		ft_init_mlx(stc, argv);
 		ft_init_keycode(stc);
-		ft_fractal_init(stc, argv[1]);
+		ft_fractal_init(stc);
 		ft_fractal_choice(stc);
 		mlx_put_image_to_window(stc->mlx.mlx_ptr, stc->mlx.win_ptr,
 		stc->mlx.img_ptr, 0, 0);
 		mlx_loop(stc->mlx.mlx_ptr);
 	}
 	else
-		ft_printf("Usage : ./fractol [Julia], [Mandelbrot], [Burning_ship]\n");
+		ft_printf("Usage : ./fractol [Julia],[Mandelbrot],[Burning_ship]\n");
 	return (0);
 }

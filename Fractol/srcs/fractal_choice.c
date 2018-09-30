@@ -6,29 +6,40 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 13:30:01 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/30 12:22:52 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/30 13:36:25 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 
-void	ft_fractal_init(t_stc *stc, char *str)
+int		ft_fractal_check(char *str, t_stc *stc)
 {
 	if (ft_strcmp(str, "Julia") == 0)
 	{
-		ft_init_julia_param(stc);
 		stc->key.fract = 1;
+		return (1);
 	}
 	else if (ft_strcmp(str, "Mandelbrot") == 0)
 	{
-		ft_init_mandelbrot_param(stc);
 		stc->key.fract = 2;
+		return (1);
 	}
 	else if (ft_strcmp(str, "Burning_Ship") == 0)
 	{
-		ft_init_burning_ship(stc);
 		stc->key.fract = 3;
+		return (1);
 	}
+	return (-1);
+}
+
+void	ft_fractal_init(t_stc *stc)
+{
+	if (stc->key.fract == 1)
+		ft_init_julia_param(stc);
+	else if (stc->key.fract == 2)
+		ft_init_mandelbrot_param(stc);
+	else if (stc->key.fract == 3)
+		ft_init_burning_ship(stc);
 }
 
 void	ft_fractal_choice(t_stc *stc)

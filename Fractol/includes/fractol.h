@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 17:03:56 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/30 12:14:39 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/30 13:52:56 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,20 @@ void	ft_init_mlx(t_stc *stc, char **argv);
 void	ft_init_keycode(t_stc *stc);
 int		ft_rgb_color(t_stc *stc);
 void	mlx_pixel_put_to_image(t_stc *stc, int x, int y, int color);
-void	ft_fractal_init(t_stc *stc, char *str);
+int		ft_fractal_check(char *str, t_stc *stc);
+void	ft_fractal_init(t_stc *stc);
 void	ft_fractal_choice(t_stc *stc);
-int		ft_julia(t_stc *stc);
 int		ft_keycode(int key, t_stc *stc);
+int		ft_keycode2(int key, t_stc *stc);
 int		ft_mousehook(int button, int x, int y, t_stc *stc);
 int		ft_motion_hook(int x, int y, t_stc *stc);
-int		ft_mandelbrot(t_stc *stc);
+void	ft_redraw(t_stc *stc);
 void	ft_init_mandelbrot_param(t_stc *stc);
+int		ft_mandelbrot(t_stc *stc);
+void	ft_mandelbrot_calcul(t_stc *stc);
 void	ft_init_julia_param(t_stc *stc);
-int		ft_burning_ship(t_stc *stc);
+int		ft_julia(t_stc *stc);
+void	ft_julia_calcul(t_stc *stc);
 void	ft_init_burning_ship(t_stc *stc);
+int		ft_burning_ship(t_stc *stc);
+void	ft_burning_ship_calcul(t_stc *stc);
