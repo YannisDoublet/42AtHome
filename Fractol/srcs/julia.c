@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 22:09:35 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/29 23:25:46 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/30 11:12:19 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int		ft_julia(t_stc *stc)
   {
   	while(stc->par.x < stc->mlx.x_size)
   	{
-		stc->par.c_r = 0.285;
-		stc->par.c_i = 0.01;
 		stc->par.z_r = stc->par.x / stc->key.zoom + stc->par.x1;
 		stc->par.z_i = stc->par.y / stc->key.zoom + stc->par.y1;
     	while(stc->par.z_r * stc->par.z_r + stc->par.z_i * stc->par.z_i < 4

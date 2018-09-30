@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 17:03:56 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/29 23:26:23 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/30 12:14:39 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define FOUR 21
 # define FIVE 23
 # define SIX 22
+# define M 46
+# define X 7
 #endif
 
 typedef	struct		s_par
@@ -80,6 +82,7 @@ typedef struct		s_key
 	int				color_bonus;
 	double			x_pos;
 	double			y_pos;
+	int				act_mouse;
 }					t_key;
 
 typedef	struct		s_stc
@@ -99,6 +102,7 @@ void	ft_fractal_choice(t_stc *stc);
 int		ft_julia(t_stc *stc);
 int		ft_keycode(int key, t_stc *stc);
 int		ft_mousehook(int button, int x, int y, t_stc *stc);
+int		ft_motion_hook(int x, int y, t_stc *stc);
 int		ft_mandelbrot(t_stc *stc);
 void	ft_init_mandelbrot_param(t_stc *stc);
 void	ft_init_julia_param(t_stc *stc);
