@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 18:56:06 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/30 11:33:43 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/30 15:21:25 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_init_burning_ship(t_stc *stc)
 	stc->par.color_r = 25;
 	stc->par.color_g = 10;
 	stc->key.act_mouse = 0;
+	stc->key.click = 0;
 }
 
 void	ft_init_mandelbrot_param(t_stc *stc)
@@ -34,6 +35,7 @@ void	ft_init_mandelbrot_param(t_stc *stc)
 	stc->par.color_r = 15;
 	stc->par.color_g = 20;
 	stc->key.act_mouse = 0;
+	stc->key.click = 0;
 }
 
 void	ft_init_julia_param(t_stc *stc)
@@ -48,4 +50,5 @@ void	ft_init_julia_param(t_stc *stc)
 	stc->par.color_r = 30;
 	stc->par.color_g = 15;
 	stc->key.act_mouse = 0;
+	stc->key.click = 0;
 }

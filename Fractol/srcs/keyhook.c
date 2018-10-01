@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 14:31:54 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/30 14:19:52 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/09/30 15:29:03 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		ft_motion_hook(int x, int y, t_stc *stc)
 
 int		ft_mousehook(int button, int x, int y, t_stc *stc)
 {
-	if (button == LEFT_CLICK || button == MOUSE_UP)
+	if ((button == LEFT_CLICK && stc->key.click == 1) || button == MOUSE_UP)
 	{
 		stc->key.zoom *= 1.1;
 		stc->par.x1 = stc->par.x1 + ((double)x - ((double)stc->mlx.x_size / 2))
@@ -47,9 +47,9 @@ int		ft_mousehook(int button, int x, int y, t_stc *stc)
 		stc->par.y1 = stc->par.y1 + ((double)y - ((double)stc->mlx.y_size / 2))
 			/ stc->key.zoom;
 	}
-	else if (button == RIGHT_CLICK || button == MOUSE_DOWN)
+	if ((button == RIGHT_CLICK && stc->key.click == 1) || button == MOUSE_DOWN)
 	{
-		stc->key.zoom *= 0.9;
+		stc->key.zoom *= 1.1;
 		stc->par.x1 = stc->par.x1 + ((double)x - ((double)stc->mlx.x_size / 2))
 			/ stc->key.zoom;
 		stc->par.y1 = stc->par.y1 + ((double)y - ((double)stc->mlx.y_size / 2))
@@ -77,6 +77,10 @@ int		ft_keycode2(int key, t_stc *stc)
 		stc->key.act_mouse = 1;
 	if (key == X)
 		stc->key.act_mouse = 0;
+	if (key == POINT)
+		stc->key.click = 1;
+	if (key == COMA)
+		stc->key.click = 0;
 	ft_redraw(stc);
 	return (0);
 }
