@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>Ballon</title>
+		<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+		<style>
+			.circle {
+				height: 200px;
+				width: 200px;
+				border-radius: 100%;
+				background-color: red;
+				margin:auto;
+			}
+		</style>
+		<script type="text/javascript">
+			var tab_color = {0: '#ff0000', 1: '#00ff00', 2: '#0000ff'};
+			var color = 0;
+			var circle;
+			var size = 200;
+			$(document).ready(function()
+			{
+				circle = $('#circle');
+				circle.click(click);
+				circle.mouseleave(mouseout);
+			})
+	
+			function click()
+			{
+				size += 10;
+				if (size > 420)
+					size = 200;
+				color++;
+				if (color > 2)
+					color = 0;
+				drawCircle(color);
+			}
+	
+			function mouseout()
+			{
+				size -= 5;
+				if (size < 200)
+					size = 200;
+				color--;
+				if (color < 0)
+					color = 2;
+				drawCircle(color);
+			}
+			
+			function drawCircle(color){
+				circle.css('height', size);
+				circle.css('width', size);
+				circle.css('backgroundColor', tab_color[color]);
+			}
+		</script>
+	</head>
+	<body>
+		<div id="circle" class="circle">
+		</div>
+	</body>
+</html>
