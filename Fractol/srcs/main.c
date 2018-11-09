@@ -6,7 +6,7 @@
 /*   By: yadouble <yadouble@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 17:03:16 by yadouble          #+#    #+#             */
-/*   Updated: 2018/09/30 14:15:30 by yadouble         ###   ########.fr       */
+/*   Updated: 2018/11/05 17:57:02 by yadouble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,14 @@ void	ft_init_mlx(t_stc *stc, char **argv)
 	&stc->mlx.size_line, &stc->mlx.endian);
 }
 
+#include <stdio.h>
+
 int		main(int argc, char **argv)
 {
 	t_stc	*stc;
 
+	ft_printf("%- 12.20s  \n", "coucou");
+	printf("%- 12.20s  \n", "coucou");
 	if (argc == 2)
 	{
 		if (!(stc = malloc(sizeof(t_stc))))
