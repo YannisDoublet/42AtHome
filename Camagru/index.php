@@ -34,11 +34,8 @@ session_start();
                     <?php if (empty($_SESSION['logued_user'])){?>
                         <li class="sidenavbar_account-box-content none"><a class="sidenavbar_links" href="sign_up.php" >Sign Up</a></li>
                     <?php }else{?>
-                        <li class="sidenavbar_account-box-content none"><a class="sidenavbar_links">My Profile</a></li>
-                        <li class="sidenavbar_account-box-content none"><a class="sidenavbar_links">Change your Username</a></li>
-                        <li class="sidenavbar_account-box-content none"><a class="sidenavbar_links">Change your Email</a></li>
-                        <li class="sidenavbar_account-box-content none"><a class="sidenavbar_links">Change your Password</a></li>
-                        <li class="sidenavbar_account-box-content none"><a class="sidenavbar_links">Sign Out</a></li>
+                        <li class="sidenavbar_account-box-content none"><a class="sidenavbar_links" href="profile.php">My Profile</a></li>
+                        <li class="sidenavbar_account-box-content none"><a class="sidenavbar_links" href="back/logout.php">Sign Out</a></li>
                     <?php }?>
                 </div>
             </ul>
@@ -46,7 +43,7 @@ session_start();
     </aside>
     <main class="content">
         <div class="content_banner">
-            <div class="content_banner-user">Hello <strong>Yannis</strong></div>
+            <div class="content_banner-user"><?php if (!empty($_SESSION['logued_user'])) {?>Hello <strong><?= $_SESSION['logued_user'];?></strong><?php }?></div>
             <div class="content_banner-overview">
                 <div class="banner-overview_content">
                     <div class="total_content">4</div>
@@ -169,7 +166,7 @@ session_start();
                     <p>26/06/2018</p>
                 </div>
                 <div>
-                    <img class="card_picture" src="https://cdn.pixabay.com/photo/2016/05/24/16/48/mountains-1412683_960_720.png">
+                    <img class="card_picture" src="assets/mountains.png">
                 </div>
                 <div class="card_picture-rating">
                     <p>24 likes</p>

@@ -1,5 +1,19 @@
 <?php
 require_once("back/user_management.php");
+session_start();
+if (!empty($_SESSION['logued_user'])) {
+    header("Location: ../index.php?error=access_denied");
+    exit;
+}
+else {
+    session_abort();
+}
+$error = $_GET['error'];
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
+$email = $_POST['email'];
+$phonenumber = $_POST['phone'];
+$username = $_POST['username'];
 ?>
 <html>
     <head>
@@ -30,9 +44,9 @@ require_once("back/user_management.php");
                         <div class="forms_header">
                             <p style="margin-top: 35px; margin-bottom: 20px;">Already a member ?</p>
                         </div>
-                        <form class="sign-in_form" action="<?php sign_up()?>" method="POST">
-                                <input class="form_input" type="text" name="user" placeholder="Username or Email">
-                                <input class="form_input" type="password" name="psw" placeholder="Password">
+                        <form class="sign-in_form" action="back/user_management.php" method="POST">
+                                <input class="form_input" type="text" name="user" placeholder="Username or Email" required>
+                                <input class="form_input" type="password" name="psw" placeholder="Password" required>
                                 <button class="sign-in_button">Sign In</button>
                         </form>
                         <div class="account_management">
@@ -44,13 +58,13 @@ require_once("back/user_management.php");
                             <p style="margin-top: 35px; margin-bottom: 20px;">Create your account !</p>
                         </div>
                         <form class="sign-up_form" action="back/user_management.php" method="POST">
-                            <input class="form_input" type="text" name="firstname" placeholder="Firstname">
-                            <input class="form_input" type="text" name="lastname" placeholder="Lastname">
-                            <input class="form_input" type="email" name="email" placeholder="Email">
-                            <input class="form_input" type="text" name="phone" placeholder="Phonenumber">
-                            <input class="form_input" type="text" name="username" placeholder="Username">
-                            <input class="form_input" type="password" name="psw" placeholder="Password">
-                            <input class="form_input" type="password" name="check-psw" placeholder="Repeat password">
+                            <input class="form_input" type="text" name="firstname" placeholder="Firstname" required pattern="^[a-zA-Z]+$" value="<?= $firstname?>">
+                            <input class="form_input" type="text" name="lastname" placeholder="Lastname" required pattern="^[a-zA-Z]+$" value="<?= $lastname?>">
+                            <input class="form_input" type="email" name="email" placeholder="Email" required value="<?= $email?>">
+                            <input class="form_input" type="text" name="phone" placeholder="Phonenumber" required pattern="^(?:(?:\+|00)33|0)*[1-9](?:\d{2}){4}$" value="<?= $phonenumber?>">
+                            <input class="form_input" type="text" name="username" placeholder="Username" required pattern="^[a-zA-Z0-9]{1,10}$" value="<?= $username?>">
+                            <input class="form_input" type="password" name="psw" placeholder="Password" required pattern="^.{8,40}$">
+                            <input class="form_input" type="password" name="check-psw" placeholder="Repeat password" required pattern="^.{8,40}$">
                             <button class="sign-up_button">Sign Up</button>
                         </form>
                     </div>
