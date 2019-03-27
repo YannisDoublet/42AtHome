@@ -9,13 +9,13 @@
 			`firstname` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 			`lastname` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 			`email` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
-			`phonenumber` VARCHAR( 12 ) ,
 			`username` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 			`password` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 			`photo_uploaded` INT ,
 			`comment_uploaded` INT ,
-			`followers` INT ,
 			`acc_id` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 			`validate` INT ,
+			`comments_notify` INT,
+			`likes_notify` INT,
 			`creation_time` DATETIME NOT NULL
 			);";

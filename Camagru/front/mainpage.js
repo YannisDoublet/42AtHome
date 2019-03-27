@@ -29,7 +29,6 @@ function Erase() {
 
 [].forEach.call(document.querySelectorAll('#sidenavbar_button'), function(el) {
     el.addEventListener('click', function() {
-        let account = document.getElementById('sidenavbar_button');
         let content = document.getElementsByClassName('sidenavbar_account-box-content');
 
         for (let i = 0; i < content.length; i++) {

@@ -1,3 +1,11 @@
+<?php
+if (!empty($_GET['email'])) {
+    $email_error = $_GET['email'];
+}
+else if (!empty($_GET['recover'])) {
+    $recover_error = $_GET['recover'];
+}
+?>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -25,15 +33,30 @@
         <div class="forms">
             <div class="sign-in">
                 <div class="forms_header">
-                    <p style="margin-bottom: 10px; margin-top: 35px;">Recover your account</p>
+                    <p style="margin-top: 35px; margin-bottom: 20px;">Recover your account</p>
+                </div>
+                <div id="alert-box error recover" class="alert-message error-message invisible">
+                    <p style="margin: 0; padding: 0"><strong>Error : </strong><?= $recover_error?></p>
                 </div>
                 <form class="sign-in_form" action="back/user_management.php" method="POST">
-                    <input class="form_input" type="text" placeholder="Username or Email">
+                    <input class="form_input" type="text" name="recover_email" placeholder="Email" required>
                     <button class="sign-in_button">Recover</button>
                 </form>
                 <div class="account_management">
                     <a class="recovery_option" href="sign_up.php"><p style="padding-left: 10px;">No need to recover ?</p></a>
                 </div>
+            </div>
+            <div class="sign-in">
+                <div class="forms_header">
+                    <p style="margin-top: 35px; margin-bottom: 20px;">Send your verification email</p>
+                </div>
+                <div id="alert-box error email" class="alert-message error-message invisible">
+                    <p style="margin: 0; padding: 0"><strong>Error : </strong><?= $email_error?></p>
+                </div>
+                <form class="sign-in_form" action="back/user_management.php" method="POST">
+                    <input class="form_input" type="text" name="resend_email" placeholder="Email" required>
+                    <button class="sign-in_button">Send</button>
+                </form>
             </div>
         </div>
     </main>

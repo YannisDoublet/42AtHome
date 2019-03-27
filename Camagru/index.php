@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!file_exists("users")) {
+    mkdir("users", 0700);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,11 +12,34 @@ session_start();
 	<title>Camagru</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" media="screen" href="style/mainpage_style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style/post_style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="icon" href="assets/photography-icon-png-2382.png" type="image/x-icon">
     <script async src="front/mainpage.js"></script>
+    <script async src="front/post.js"></script>
 </head>
 <body>
+<div id="post_picture" class="post_picture hidden">
+    <div class="post_container">
+        <div class="post_card">
+            <div id="post_card_content">
+                <div class="post_card_header">
+                    <i class="fas fa-arrow-left" onclick="togglePost()"></i>
+                    <p class="post_card_header_title">Post a picture</p>
+                </div>
+                <div class="post_card_picture">
+                    <div id="webcam" class="webcam_option" onclick="toggleWebcam()">
+                        <video id="video" autoplay></video>
+                        <canvas id="canvas" style="display: none;"></canvas>
+                    </div>
+                    <div id="img" class="upload_option" onclick="upload_img()">
+                    </div>
+                </div>
+                <div id="stickers" class="post_card_stickers hidden" onclick="toggleStickers()"></div>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="grid-container" class="grid-container">
     <header class="header">
         <i class="fas fa-bars" onclick="Sidebar()"></i>
@@ -25,8 +51,7 @@ session_start();
         <div class="sidenavbar_content">
             <h1>SHARE</h1>
             <ul class="sidenavbar_box">
-                <li class="sidenavbar_box-content"><a class="sidenavbar_links" href="#">Post a Picture</a></li>
-                <li class="sidenavbar_box-content"><a class="sidenavbar_links" href="#">Social</a></li>
+                <li class="sidenavbar_box-content"><a class="sidenavbar_links" <?php if (!empty($_SESSION['logued_user'])) { echo 'onclick="togglePost();"'; } else { echo 'href="sign_up.php?error=You must be logged in!"'; }?>>Post a Picture</a></li>
                 <button id="sidenavbar_button" class="sidenavbar_button">Account
                     <i class="fa fa-caret-down"></i>
                 </button>
@@ -42,20 +67,26 @@ session_start();
         </div>
     </aside>
     <main class="content">
-        <div class="content_banner">
-            <div class="content_banner-user"><?php if (!empty($_SESSION['logued_user'])) {?>Hello <strong><?= $_SESSION['logued_user'];?></strong><?php }?></div>
+        <div style="background: url('<?php if (!empty($_SESSION['username'])) {
+            ?>users/<?= $_SESSION['username']?>/banner.jpg<?php }
+            else { echo "assets/mountains.png"; }?>') no-repeat center; background-size: cover;" class="content_banner">
+            <?php if (!empty($_SESSION['logued_user'])) {?>
+                <div class="content_banner-user"><p style="margin: 0; padding: 2px" class="banner_total_desc">Hello <?= $_SESSION['logued_user'];?>, how are you today ?</p></div>
+            <?php } else {?>
+                <div class="content_banner-user"><p style="margin: 0; padding: 2px" class="banner_total_desc">Welcome to Share ! The new social network based on photography !</p></div>
+            <?php }?>
             <div class="content_banner-overview">
                 <div class="banner-overview_content">
                     <div class="total_content">4</div>
-                    <div>Photo Uploaded</div>
+                    <div class="banner_total_desc">Photos Uploaded on Share</div>
                 </div>
                 <div class="banner-overview_content">
                     <div class="total_content">40</div>
-                    <div>Comments Written</div>
+                    <div class="banner_total_desc">Comments Written on Share</div>
                 </div>
                 <div class="banner-overview_content">
                     <div class="total_content">10</div>
-                    <div>Users Registered</div>
+                    <div class="banner_total_desc">Users Registered on Share</div>
                 </div>
             </div>
         </div>
@@ -151,7 +182,7 @@ session_start();
                     <p>26/06/2018</p>
                 </div>
                 <div>
-                    <img class="card_picture" src="assets/banner.jpg">
+                    <img class="card_picture" src="assets/mountains.png">
                 </div>
                 <div class="card_picture-rating">
                     <p>23 likes</p>
@@ -179,7 +210,7 @@ session_start();
     </main>
     <footer class="footer">
         <div class="copyright">&copy; 2019 Yannis Doublet</div>
-        <div class="signature">Camagru</div>
+        <div class="signature">Camagru, a 42 Project</div>
     </footer>
 </div>
 </body>

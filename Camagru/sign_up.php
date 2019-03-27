@@ -8,18 +8,23 @@ if (!empty($_SESSION['logued_user'])) {
 else {
     session_abort();
 }
-$error = $_GET['error'];
+if (!empty($_GET['error'])) {
+    $error = $_GET['error'];
+}
+else if (!empty($_GET['account'])) {
+    $success = $_GET['account'];
+}
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $email = $_POST['email'];
-$phonenumber = $_POST['phone'];
 $username = $_POST['username'];
+$user = $_POST['user'];
 ?>
 <html>
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Camagru</title>
+        <title>Camagru - Sign up</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" media="screen" href="style/sign_up_style.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -44,13 +49,19 @@ $username = $_POST['username'];
                         <div class="forms_header">
                             <p style="margin-top: 35px; margin-bottom: 20px;">Already a member ?</p>
                         </div>
+                        <div id="alert-box error" class="alert-message error-message invisible">
+                            <p style="margin: 0; padding: 0"><strong>Error : </strong><?= $error?></p>
+                        </div>
+                        <div id="alert-box success" class="alert-message success-message invisible">
+                            <p style="margin: 0; padding: 0"><strong>Success : </strong><?= $success?></p>
+                        </div>
                         <form class="sign-in_form" action="back/user_management.php" method="POST">
-                                <input class="form_input" type="text" name="user" placeholder="Username or Email" required>
+                                <input class="form_input" type="text" name="user" placeholder="Username or Email" value="<?= $user?>" required>
                                 <input class="form_input" type="password" name="psw" placeholder="Password" required>
                                 <button class="sign-in_button">Sign In</button>
                         </form>
                         <div class="account_management">
-                            <a class="recovery_option" href="account_recovery.php"><p style="padding-left: 10px;">Forgot your password ?</p></a>
+                            <a class="recovery_option" href="account_recovery.php"><p style="padding-left: 10px;">Forgot your password or your confirmation email ?</p></a>
                         </div>
                     </div>
                     <div class="sign-up">
@@ -61,7 +72,6 @@ $username = $_POST['username'];
                             <input class="form_input" type="text" name="firstname" placeholder="Firstname" required pattern="^[a-zA-Z]+$" value="<?= $firstname?>">
                             <input class="form_input" type="text" name="lastname" placeholder="Lastname" required pattern="^[a-zA-Z]+$" value="<?= $lastname?>">
                             <input class="form_input" type="email" name="email" placeholder="Email" required value="<?= $email?>">
-                            <input class="form_input" type="text" name="phone" placeholder="Phonenumber" required pattern="^(?:(?:\+|00)33|0)*[1-9](?:\d{2}){4}$" value="<?= $phonenumber?>">
                             <input class="form_input" type="text" name="username" placeholder="Username" required pattern="^[a-zA-Z0-9]{1,10}$" value="<?= $username?>">
                             <input class="form_input" type="password" name="psw" placeholder="Password" required pattern="^.{8,40}$">
                             <input class="form_input" type="password" name="check-psw" placeholder="Repeat password" required pattern="^.{8,40}$">

@@ -86,6 +86,10 @@ body {
     border-color: #c3e6cb;
 }
 
+.visible {
+    display: block;
+}
+
 .invisible {
     display: none;
 }
@@ -99,15 +103,7 @@ body {
     align-items: center;
 }
 
-.sign-in {
-    width: 400px;
-    border-radius: 5px;
-    background-color: white;
-    margin: 40px 120px;
-    box-shadow: 2px 2px 3px black;
-}
-
-.sign-up {
+.settings {
     width: 400px;
     border-radius: 5px;
     background-color: white;
@@ -122,7 +118,19 @@ body {
     font-size: 25px;
 }
 
-.sign-in_form {
+.settings_header {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 20px;
+    background-color: rgba(204, 203, 206, 0.5);
+    font-family: 'Roboto Slab', serif;
+    border: 2px solid rgba(204, 203, 206, 0.8);
+    width: 80%;
+}
+
+.settings_form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -139,18 +147,36 @@ body {
     padding-left: 10px;
     font-size: 20px;
     font-family: 'Roboto Slab', serif;
+    box-shadow: 4px 4px 9px -1px rgba(0, 0, 0, .2);
 }
 
-.sign-in_button {
+.checkbox_container {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox_input {
+    font-size: 20px;
+    box-shadow: 4px 4px 9px -1px rgba(0, 0, 0, .2);
+}
+
+.checkbox_info {
+    font-family: 'Roboto Slab', sans-serif;
+    font-size: 20px;
+    margin: 0;
+}
+
+.settings_button {
     width: 120px;
     height: 35px;
     border: none;
     outline: none;
-    background: whitesmoke;
+    background-color: rgba(204, 203, 206, 0.5);
     font-size: 20px;
     border-radius: 5px;
     margin-top: 10px;
     cursor: pointer;
+    box-shadow: 4px 4px 9px -1px rgba(0, 0, 0, .2);
 }
 
 .recovery_option {
@@ -160,26 +186,6 @@ body {
     font-family: 'Roboto Slab', serif;
     font-size: 16px;
     text-align: center;
-}
-
-.sign-up_form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-}
-
-.sign-up_button {
-    width: 120px;
-    height: 40px;
-    border: none;
-    outline: none;
-    background: whitesmoke;
-    font-size: 20px;
-    border-radius: 5px;
-    margin: 10px 0 20px 0;
-    cursor: pointer;
 }
 
 .footer {
