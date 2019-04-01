@@ -1,5 +1,10 @@
+.active {
+    background-color: rgba(33, 25, 34, 0.5);
+}
+
 .no_cursor {
     cursor: default !important;
+    /*pointer-events: none*/
 }
 
 .none {
@@ -36,7 +41,6 @@
 
 .post_card {
     width: 770px;
-    height: 900px;
     background-color: white;
     border-radius: 5px;
 }
@@ -49,10 +53,38 @@
     border-bottom: 1.5px solid rgb(220,220,220);
 }
 
-.fa-arrow-left {
+.fas {
     cursor: pointer;
     font-size: 15px;
     padding: 5px 0 0 5px;
+}
+
+.move_sticker {
+    font-size: 35px;
+    z-index: 10;
+    color: white;
+}
+
+#move_left {
+    position: absolute;
+    top: 250px;
+}
+
+#move_up {
+    position: absolute;
+    left: 370px;
+}
+
+#move_right {
+    position: absolute;
+    left: 730px;
+    top: 250px;
+}
+
+#move_down {
+    position: absolute;
+    left: 370px;
+    top: 470px;
 }
 
 .post_card_header_title {
@@ -68,6 +100,7 @@
 }
 
 .post_card_picture {
+    position: relative;
     width: 770px;
     height: 515px;
     border-bottom: 2px solid rgb(220,220,220);
@@ -81,10 +114,6 @@
     background: url("/assets/webcam_icon.jpg");
 }
 
-#video:hover > .post_card_stickers {
-    visibility: visible;
-}
-
 .upload_option {
     cursor: pointer;
     float: right;
@@ -93,10 +122,103 @@
     background: url("/assets/upload_icon.jpg");
 }
 
-.post_card_stickers {
-    width:100%;
-    background-color:blue;
-    bottom:0;
-    margin:0;
-    padding:0;
+.post_card_bar {
+    width: 25%;
+    margin: 10px 39%;
+    font-size: 20px;
+    font-family: 'Roboto Slab', serif;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.post_card_bar_header {
+    margin: 0;
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+.post_card_utils {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+}
+
+#stickers {
+    height: 0;
+    width: 600px;
+    margin: 0 -111%;
+    padding: 0;
+    transition: height 0.3s;
+    border-radius: 5px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+#stickers.toggle {
+    height: 120px;
+}
+
+#stickers_container {
+    height: 120px;
+}
+
+.stickers_img {
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+}
+
+#prev {
+    align-self: center;
+}
+
+#take_photo {
+    border: none;
+    outline: none;
+    background: whitesmoke;
+    font-size: 18px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    box-shadow: 4px 4px 9px -1px rgba(0, 0, 0, 0.3);
+}
+
+#title {
+    width: 40%;
+    border: 1px solid rgba(0, 0, 0, .5);
+    border-radius: 5px;
+    outline: none;
+    margin: 5px;
+    padding-left: 10px;
+    font-size: 20px;
+    font-family: 'Roboto Slab', serif;
+    box-shadow: 4px 4px 9px -1px rgba(0, 0, 0, 0.3);
+}
+
+#post {
+    width: 60px;
+    border: none;
+    outline: none;
+    background: whitesmoke;
+    font-size: 18px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    box-shadow: 4px 4px 9px -1px rgba(0, 0, 0, 0.3);
+}
+
+#old {
+    height: 100px;
+    width: 600px;
+    background-color: red;
+    margin: 0 -111%;
+    padding: 0;
+    transition: height 0.3s;
+    border-radius: 5px;
+}
+
+#old.toggle {
+    height: 0;
 }

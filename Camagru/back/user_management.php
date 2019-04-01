@@ -47,7 +47,7 @@ function    resend_confirm($email) {
         if (!empty($user)) {
             if ($user['email'] === $email) {
                 $from = "no-reply@camagru.com";
-                mail($email, "Resend confirmation",
+                echo mail($email, "Resend confirmation",
                     "Welcome to Share please confirm your account by clicking this link http://localhost:8080/sign_up.php?confirm_code=".$user['acc_id'], "From: ".$from);
                 header("Location: ../sign_up.php?account=Email resend !");
             } else {
@@ -96,7 +96,6 @@ function    resubmit_info($error, $dodge) {
             ;
         }
         else {
-            echo $resub[$key];
             $resub[$key] = $value;
         }
     }?>
@@ -186,6 +185,7 @@ function    sign_up() {
                     $stmt->execute([$_POST['firstname'], $_POST['lastname'], $_POST['email'],
                         $_POST['username'], $psw, 0, 0, $acc_id, 0, 0, 0, date('Y-m-d H:i:s')]);
                     mkdir("../users/".$_POST['username']);
+                    mkdir("../users/".$_POST['username']."/pictures");
                     copy("../assets/banner.jpg", "../users/".$_POST['username']."/banner.jpg");
                     copy("../assets/profile_pic.jpg", "../users/".$_POST['username']."/profile_pic.jpg");
                     $from = "no-reply@camagru.com";

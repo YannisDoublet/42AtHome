@@ -180,7 +180,6 @@ body {
     background: url("/assets/mountains.png") no-repeat center;
     background-size: cover;
     color: black;
-    /*filter: grayscale(100%);*/
     font-size: 20px;
     box-shadow: 4px 4px 9px -1px rgba(0, 0, 0, 0.2);
 

@@ -3,6 +3,10 @@ session_start();
 if (!file_exists("users")) {
     mkdir("users", 0700);
 }
+if (file_exists("assets/stickers")) {
+    $files = array_diff(scandir('assets/stickers'), array('.', '..'));
+}
+$i = 0;
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,13 +33,38 @@ if (!file_exists("users")) {
                 </div>
                 <div class="post_card_picture">
                     <div id="webcam" class="webcam_option" onclick="toggleWebcam()">
-                        <video id="video" autoplay></video>
+                        <img id="selected" style=" position: absolute; top: 0px; left: 0px" src="">
+                        <i id="move_left" class="fas fa-arrow-left move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
+                        <i id="move_up" class="fas fa-arrow-up move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
+                        <i id="move_right" class="fas fa-arrow-right move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
+                        <i id="move_down" class="fas fa-arrow-down move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
+                        <video id="video" class="" autoplay></video>
+                        <img id="picture" src="" class="none">
                         <canvas id="canvas" style="display: none;"></canvas>
                     </div>
                     <div id="img" class="upload_option" onclick="upload_img()">
                     </div>
                 </div>
-                <div id="stickers" class="post_card_stickers hidden" onclick="toggleStickers()"></div>
+                <div id="utils" class="post_card_utils none">
+                    <i id="prev" class="fas fa-arrow-left none" onclick="toggleUtils()"></i>
+                    <button disabled id="take_photo" class="" onclick="photo()">Take a photo</button>
+                    <input id="title" class="none" type="text" placeholder="Name your picture !" required>
+                    <button id="post" class="none" onclick="submit()">Post</button>
+                </div>
+                <div id="stickers_bar" class="post_card_bar none">
+                    <p class="post_card_bar_header" onclick="toggleStickers()">Stickers</p>
+                    <div id="stickers">
+                        <div id="stickers_container">
+                            <?php foreach($files as $value) {
+                                ?><img id="<?= $i?>" class="stickers_img" src="assets/stickers/<?= $value?>" onclick="toggleActive(event)">
+                            <?php $i++; }?>
+                        </div>
+                    </div>
+                </div>
+                <div id="old_pic" class="post_card_bar none">
+                    <p class="post_card_bar_header" onclick="toggleOld()">Previous picture</p>
+                    <div id="old"></div>
+                </div>
             </div>
         </div>
     </div>

@@ -157,10 +157,12 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 20px 20px 0 20px;
-    height: 203px;
+    height: 190px;
     background-size: cover;
     color: black;
     font-size: 20px;
+    box-shadow: 4px 4px 9px -1px rgba(0, 0, 0, 0.2);
+
 }
 
 .content_banner-user {
@@ -187,6 +189,7 @@ body {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     padding: 0 10px 0 10px;
+    box-shadow: 4px 4px 9px -1px rgba(0, 0, 0, 0.3);
 }
 
 .banner_total_desc {
@@ -194,6 +197,7 @@ body {
     padding: 0 7px 0 7px;
     border-radius: 10px;
     margin: 0;
+    box-shadow: 4px 4px 9px -1px rgba(0, 0, 0, 0.3);
 }
 
 .content_card {
@@ -215,6 +219,13 @@ body {
     padding-right: 10px;
     box-sizing: border-box;
     border-radius: 5px;
+    box-shadow: 4px 4px 9px -1px rgba(0, 0, 0, .2);
+}
+
+.card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 18px 1px rgba(0, 0, 0, .2);
+    transition: box-shadow 0.1s ease-in-out;
 }
 
 .card_picture-info {
