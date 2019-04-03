@@ -1,3 +1,7 @@
+let content = document.getElementById('content_card');
+console.log(content.offsetHeight);
+console.log(content.offsetWidth);
+
 function Sidebar() {
     let sidebar = document.getElementById('sidenavbar');
     sidebar.classList.toggle('isOpen');

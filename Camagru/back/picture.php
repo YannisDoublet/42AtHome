@@ -34,7 +34,7 @@ function    save_image_in_db($title, $username, $img_id) {
 function submit_photo($b64, $stickers, $title, $top, $left)
 {
     $img_id = uniqid();
-    $file = "../users/".$_SESSION['username']."/pictures/".$img_id.".jpg";
+    $file = "../pictures/$img_id.jpg";
     $stickers_size = getimagesize($stickers);
     $data = str_replace('data:image/png;base64', '', $b64);
     $data = str_replace(' ', '+', $data);
@@ -44,5 +44,6 @@ function submit_photo($b64, $stickers, $title, $top, $left)
     imagecopy($source_img, $stickers_img,$left,$top,0,0, $stickers_size[0], $stickers_size[1]);
     imagejpeg($source_img, $file, 75);
     save_image_in_db($title, $_SESSION['username'], $img_id);
+    echo "OK";
     http_response_code(200);
 }

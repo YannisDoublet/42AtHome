@@ -185,7 +185,6 @@ function    sign_up() {
                     $stmt->execute([$_POST['firstname'], $_POST['lastname'], $_POST['email'],
                         $_POST['username'], $psw, 0, 0, $acc_id, 0, 0, 0, date('Y-m-d H:i:s')]);
                     mkdir("../users/".$_POST['username']);
-                    mkdir("../users/".$_POST['username']."/pictures");
                     copy("../assets/banner.jpg", "../users/".$_POST['username']."/banner.jpg");
                     copy("../assets/profile_pic.jpg", "../users/".$_POST['username']."/profile_pic.jpg");
                     $from = "no-reply@camagru.com";

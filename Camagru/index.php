@@ -119,69 +119,51 @@ $i = 0;
                 </div>
             </div>
         </div>
-        <div class="content_card">
-            <div class="card">
-                <div class="card_picture-info">
-                    <div class="picture_poster">
-                        <img class="profile_pic_card" src="assets/profile_pic.jpg">
-                        <p>First picture by Yannis</p>
-                    </div>
-                    <div class="picture_date">
-                        <i class="far fa-calendar-alt"></i>
-                        <p class="date">26/06/2018</p>
-                    </div>
-                </div>
-                <div class="card_picture">
-                    <img src="https://sd-cdn.fr/wp-content/uploads/2018/02/instagram-770x515.jpg">
-                </div>
-                <div class="card_picture_description">
-                    <div class="picture_description">
-                        <p class="comment_author">Yannis :</p>
-                        <p class="description">Un site de photo rigolo</p>
-                    </div>
-                </div>
-                <div class="card_picture-rating">
-                    <div class="picture_likes">
-                        <p id="likes">21</p>
-                        <i id="heart" class="far fa-heart" onclick="Likes()"></i>
-                    </div>
-                    <p class="comment_number">10 comments</p>
-                </div>
-                <div class="card_picture-comments">
-                    <div class="comment">
-                        <div class="comment_content">
-                            <p class="comment_author">William</p>
-                            <p id="comment_text" class="comment_text">Lol kopieur</p>
+            <div id="content_card" class="content_card">
+                <div class="card">
+                    <div class="card_picture-info">
+                        <div class="picture_poster">
+                            <img class="profile_pic_card" src="assets/profile_pic.jpg">
+                            <p>First picture by Yannis</p>
                         </div>
-                        <div class="comments_management">
-                            <i id="edit" class="far fa-edit" onclick="Edit()"></i>
-                            <form action="#">
-                                <button id="erase" class="fas fa-times"></button>
-                            </form>
+                        <div class="picture_date">
+                            <i class="far fa-calendar-alt"></i>
+                            <p class="date">26/06/2018</p>
                         </div>
                     </div>
+                    <div class="card_picture">
+                        <img src="https://sd-cdn.fr/wp-content/uploads/2018/02/instagram-770x515.jpg">
+                    </div>
+                    <div class="card_picture_description">
+                        <div class="picture_description">
+                            <p class="comment_author">Yannis :</p>
+                            <p class="description">Un site de photo rigolo</p>
+                        </div>
+                    </div>
+                    <div class="card_picture-rating">
+                        <div class="picture_likes">
+                            <p id="likes">21</p>
+                            <i id="heart" class="far fa-heart" onclick="Likes()"></i>
+                        </div>
+                        <p class="comment_number">10 comments</p>
+                    </div>
+                    <div class="card_picture-comments">
+                        <div class="comment">
+                            <div class="comment_content">
+                                <p class="comment_author">William</p>
+                                <p id="comment_text" class="comment_text">Lol kopieur</p>
+                            </div>
+                        </div>
                     <div class="comment">
                         <div class="comment_content">
                             <p class="comment_author">Thibaut</p>
                             <p id="comment_text" class="comment_text">C toi lkkopieur bollos gro naz mdr</p>
-                        </div>
-                        <div class="comments_management">
-                            <i id="edit" class="far fa-edit" onclick="Edit()"></i>
-                            <form action="#">
-                                <button id="erase" class="fas fa-times"></button>
-                            </form>
                         </div>
                     </div>
                     <div class="comment">
                         <div class="comment_content">
                             <p class="comment_author">Florent</p>
                             <p id="comment_text" class="comment_text">Wow bravo</p>
-                        </div>
-                        <div class="comments_management">
-                            <i id="edit" class="far fa-edit" onclick="Edit()"></i>
-                            <form action="#">
-                                <button id="erase" class="fas fa-times"></button>
-                            </form>
                         </div>
                     </div>
                 </div>
