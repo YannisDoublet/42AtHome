@@ -27,7 +27,7 @@ try {
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Camagru</title>
+    <title>Share - Settings</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="style/settings_style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -88,6 +88,13 @@ try {
                             </div>
                             <input type="hidden" name="notify" value="1">
                             <input class="settings_button" type="submit" value="Change">
+                        </form>
+                    </div>
+                    <p style="margin: 3px 0 5px 0; border-radius: 5px" class="settings_header"
+                       onclick="toggleDelete()">Delete your account</p>
+                    <div id ="delete" class="invisible">
+                        <form class="settings_form" method="POST" action="back/account_changes.php">
+                            <input name="del" class="settings_button" type="submit" value="Delete">
                         </form>
                     </div>
                 </div>

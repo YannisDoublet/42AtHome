@@ -1,9 +1,22 @@
 <?php
 if (!empty($_POST['user']) && !empty($_POST['psw'])) {
-    sign_in($_POST['user'], $_POST['psw']);
+    // Check if user is connected
+    session_start();
+    if (!empty($_SESSION)) {
+        header('Location: ../index.php?error=already_connected');
+    } else {
+        session_destroy();
+        sign_in($_POST['user'], $_POST['psw']);
+    }
 } else if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email'])
         && !empty($_POST['username']) && !empty($_POST['psw']) && !empty($_POST['check-psw'])) {
+    session_start();
+    if (!empty($_SESSION)) {
+        header('Location: ../index.php?error=already_connected');
+    } else {
+        session_destroy();
         sign_up();
+    }
 } else if (!empty($_GET['confirm_code'])) {
     confirm($_GET['confirm_code']);
 } else if (!empty($_POST['resend_email'])) {
@@ -47,7 +60,7 @@ function    resend_confirm($email) {
         if (!empty($user)) {
             if ($user['email'] === $email) {
                 $from = "no-reply@camagru.com";
-                echo mail($email, "Resend confirmation",
+                mail($email, "Resend confirmation",
                     "Welcome to Share please confirm your account by clicking this link http://localhost:8080/sign_up.php?confirm_code=".$user['acc_id'], "From: ".$from);
                 header("Location: ../sign_up.php?account=Email resend !");
             } else {
@@ -183,13 +196,13 @@ function    sign_up() {
                       username, `password`, photo_uploaded, comment_uploaded, acc_id, validate, comments_notify, likes_notify, creation_time)
                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                     $stmt->execute([$_POST['firstname'], $_POST['lastname'], $_POST['email'],
-                        $_POST['username'], $psw, 0, 0, $acc_id, 0, 0, 0, date('Y-m-d H:i:s')]);
+                        $_POST['username'], $psw, 0, 0, $acc_id, 0, 1, 1, date('Y-m-d H:i:s')]);
                     mkdir("../users/".$_POST['username']);
                     copy("../assets/banner.jpg", "../users/".$_POST['username']."/banner.jpg");
                     copy("../assets/profile_pic.jpg", "../users/".$_POST['username']."/profile_pic.jpg");
                     $from = "no-reply@camagru.com";
                     mail($_POST['email'], "Confirm your account",
-                        "Welcome to Share please confirm your account by clicking this link http://localhost:8080/sign_up.php?confirm_code=".$acc_id, "From: ".$from);
+                        "Welcome to Share please confirm your account by clicking this link http://".$_SERVER['HTTP_HOST']."/sign_up.php?confirm_code=".$acc_id, "From: ".$from);
                     header("Location: ../email_confirmation.php");
                 }
                 else {

@@ -13,14 +13,16 @@ $i = 0;
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Camagru</title>
+	<title>Share</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" media="screen" href="style/mainpage_style.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="style/post_style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="icon" href="assets/photography-icon-png-2382.png" type="image/x-icon">
     <script async src="front/mainpage.js"></script>
-    <script async src="front/post.js"></script>
+    <script async src="front/update_mainpage.js"></script>
+    <script async src="front/post_photos.js"></script>
+    <script async src="front/photo_options.js"></script>
 </head>
 <body>
 <div id="post_picture" class="post_picture hidden">
@@ -33,20 +35,21 @@ $i = 0;
                 </div>
                 <div class="post_card_picture">
                     <div id="webcam" class="webcam_option" onclick="toggleWebcam()">
-                        <img id="selected" style=" position: absolute; top: 0px; left: 0px" src="">
-                        <i id="move_left" class="fas fa-arrow-left move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
-                        <i id="move_up" class="fas fa-arrow-up move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
-                        <i id="move_right" class="fas fa-arrow-right move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
-                        <i id="move_down" class="fas fa-arrow-down move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
                         <video id="video" class="" autoplay></video>
-                        <img id="picture" src="" class="none">
-                        <canvas id="canvas" style="display: none;"></canvas>
                     </div>
-                    <div id="img" class="upload_option" onclick="upload_img()">
+                    <div id="upload" class="upload_option">
+                        <label id="upload_label" for="file_profile" class="label_upload"></label>
+                        <input id="file_profile" style="display: none;" type="file" name="picture" accept="image/*" onchange="upload_img(event)">
                     </div>
+                    <img id="selected" style=" position: absolute; top: 0px; left: 0px">
+                    <i id="move_left" class="fas fa-arrow-left move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
+                    <i id="move_up" class="fas fa-arrow-up move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
+                    <i id="move_right" class="fas fa-arrow-right move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
+                    <i id="move_down" class="fas fa-arrow-down move_sticker none" onmousedown="mousedownfunc(event)" onmouseup="mouseupfunc(event)" onmouseleave="mouseupfunc(event)"></i>
+                    <img id="picture" src="" class="none">
+                    <canvas id="canvas" style="display: none;"></canvas>
                 </div>
                 <div id="utils" class="post_card_utils none">
-                    <i id="prev" class="fas fa-arrow-left none" onclick="toggleUtils()"></i>
                     <button disabled id="take_photo" class="" onclick="photo()">Take a photo</button>
                     <input id="title" class="none" type="text" placeholder="Name your picture !" required>
                     <button id="post" class="none" onclick="submit()">Post</button>
@@ -106,118 +109,22 @@ $i = 0;
             <?php }?>
             <div class="content_banner-overview">
                 <div class="banner-overview_content">
-                    <div class="total_content">4</div>
+                    <div class="total_content"></div>
                     <div class="banner_total_desc">Photos Uploaded on Share</div>
                 </div>
                 <div class="banner-overview_content">
-                    <div class="total_content">40</div>
+                    <div class="total_content"></div>
                     <div class="banner_total_desc">Comments Written on Share</div>
                 </div>
                 <div class="banner-overview_content">
-                    <div class="total_content">10</div>
+                    <div class="total_content"></div>
                     <div class="banner_total_desc">Users Registered on Share</div>
                 </div>
             </div>
         </div>
             <div id="content_card" class="content_card">
-                <div class="card">
-                    <div class="card_picture-info">
-                        <div class="picture_poster">
-                            <img class="profile_pic_card" src="assets/profile_pic.jpg">
-                            <p>First picture by Yannis</p>
-                        </div>
-                        <div class="picture_date">
-                            <i class="far fa-calendar-alt"></i>
-                            <p class="date">26/06/2018</p>
-                        </div>
-                    </div>
-                    <div class="card_picture">
-                        <img src="https://sd-cdn.fr/wp-content/uploads/2018/02/instagram-770x515.jpg">
-                    </div>
-                    <div class="card_picture_description">
-                        <div class="picture_description">
-                            <p class="comment_author">Yannis :</p>
-                            <p class="description">Un site de photo rigolo</p>
-                        </div>
-                    </div>
-                    <div class="card_picture-rating">
-                        <div class="picture_likes">
-                            <p id="likes">21</p>
-                            <i id="heart" class="far fa-heart" onclick="Likes()"></i>
-                        </div>
-                        <p class="comment_number">10 comments</p>
-                    </div>
-                    <div class="card_picture-comments">
-                        <div class="comment">
-                            <div class="comment_content">
-                                <p class="comment_author">William</p>
-                                <p id="comment_text" class="comment_text">Lol kopieur</p>
-                            </div>
-                        </div>
-                    <div class="comment">
-                        <div class="comment_content">
-                            <p class="comment_author">Thibaut</p>
-                            <p id="comment_text" class="comment_text">C toi lkkopieur bollos gro naz mdr</p>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <div class="comment_content">
-                            <p class="comment_author">Florent</p>
-                            <p id="comment_text" class="comment_text">Wow bravo</p>
-                        </div>
-                    </div>
-                </div>
-                <form class="card_picture-add_comments" action="#" method="POST">
-                    <input id="comment_bar" class="comment_bar" type="text" placeholder="Comment...">
-                </form>
+                <p id="message" style="color: black; font-size: 40px; align-items: center">Be the first to post on Share !</p>
             </div>
-            <div class="card">
-                <div class="card_picture-info">
-                    <p>Posted by Yannis</p>
-                    <p>26/06/2018</p>
-                </div>
-                <div>
-                    <img class="card_picture" src="https://www.toriaezu-japan.com/wp-content/uploads/2018/10/dog-3724261-740x532.jpg">
-                </div>
-                <div class="card_picture-rating">
-                    <p>22 likes</p>
-                    <p>10 comments</p>
-                </div>
-                <div class="card_picture-comments">
-                </div>
-                <div class="card_picture-add_comments"></div>
-            </div>
-            <div class="card">
-                <div class="card_picture-info">
-                    <p>Posted by Yannis</p>
-                    <p>26/06/2018</p>
-                </div>
-                <div>
-                    <img class="card_picture" src="assets/mountains.png">
-                </div>
-                <div class="card_picture-rating">
-                    <p>23 likes</p>
-                    <p>10 comments</p>
-                </div>
-                <div class="card_picture-comments"></div>
-                <div class="card_picture-add_comments"></div>
-            </div>
-            <div class="card">
-                <div class="card_picture-info">
-                    <p>Posted by Yannis</p>
-                    <p>26/06/2018</p>
-                </div>
-                <div>
-                    <img class="card_picture" src="assets/mountains.png">
-                </div>
-                <div class="card_picture-rating">
-                    <p>24 likes</p>
-                    <p>10 comments</p>
-                </div>
-                <div class="card_picture-comments"></div>
-                <div class="card_picture-add_comments"></div>
-            </div>
-        </div>
     </main>
     <footer class="footer">
         <div class="copyright">&copy; 2019 Yannis Doublet</div>

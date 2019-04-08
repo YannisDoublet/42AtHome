@@ -1,6 +1,7 @@
-let content = document.getElementById('content_card');
-console.log(content.offsetHeight);
-console.log(content.offsetWidth);
+
+// TOGGLE ELEMENT FROM INDEX.
+
+// Function to toggle sidebar.
 
 function Sidebar() {
     let sidebar = document.getElementById('sidenavbar');
@@ -9,27 +10,20 @@ function Sidebar() {
     grid.classList.toggle('no_sidenavbar');
 }
 
-function Likes() {
-    let heart = document.getElementById('heart');
-    heart.classList.toggle('isLiked');
-    let likes_inner = document.getElementById('likes').innerHTML;
-    let likes = parseInt(likes_inner);
-    if (heart.className.search("isLiked") > 0)
-        likes++;
-    else
-        likes--;
-    document.getElementById('likes').innerHTML = likes.toString();
-}
+// Like?
 
-function Edit() {
-    let text = document.getElementById('comment_text');
-    let comment_bar = document.getElementById('comment_bar');
-    comment_bar.value = text.innerHTML;
-}
+// function Likes(event) {
+//    event.srcElement.classList.toggle('isLiked');
+//     let likes_inner = document.getElementById('likes').innerHTML;
+//     let likes = parseInt(likes_inner);
+//     if (event.srcElement.className.search("isLiked") > 0)
+//         likes++;
+//     else
+//         likes--;
+//     document.getElementById('likes').innerHTML = likes.toString();
+// }
 
-function Erase() {
-
-}
+// Javascript call to extends dropdown in sidebar.
 
 [].forEach.call(document.querySelectorAll('#sidenavbar_button'), function(el) {
     el.addEventListener('click', function() {
