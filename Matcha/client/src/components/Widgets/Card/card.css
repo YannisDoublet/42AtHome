@@ -1,0 +1,12 @@
+.grid_container {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: auto minmax(0, 1000px) auto;
+    grid-template-areas: "empty1 content empty2";
+}
+
+.content {
+    grid-area: content;
+    background: silver;
+}
