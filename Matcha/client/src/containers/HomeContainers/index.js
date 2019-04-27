@@ -29,9 +29,7 @@ class HomeContainer extends Component {
     render() {
         return (
             <div>
-                <div className="home_image">
-                    Salut mon pote
-                </div>
+                <div className="home_image" />
              <Card content={this.state.card} />
             </div>
         );

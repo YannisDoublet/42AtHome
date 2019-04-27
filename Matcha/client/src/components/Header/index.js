@@ -38,27 +38,29 @@ class Header extends Component {
         showNav: true
     };
 
-    componentDidMount() {
-        window.addEventListener("scroll", () => {
-            let st = window.pageYOffset || document.documentElement.scrollTop;
-            if (st > this.state.scrollPosition) {
-                this.setState({
-                    showNav: false
-                })
-                // document.querySelector('#navbar').style.add('transform: translateY(-100%)')
-                // document.querySelector('#navbar').classList.add('hide')
-            } else {
-                this.setState({
-                    showNav: true
-                })
-                // document.querySelector('#navbar').classList.remove('hide')
-            }
+    hideNavbar = () => {
+        let st = window.pageYOffset || document.documentElement.scrollTop;
+        if (st > this.state.scrollPosition) {
             this.setState({
-                scrollPosition: st <= 0 ? 0 : st
+                showNav: false
             })
-        }, false);
+        } else {
+            this.setState({
+                showNav: true
+            })
+        }
+        this.setState({
+            scrollPosition: st <= 0 ? 0 : st
+        })
+    };
+
+    componentDidMount() {
+        window.addEventListener("scroll", this.hideNavbar, false);
     }
 
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.hideNavbar);
+    }
 
     renderNavbarContent = (items) => {
         return Object.entries(items).map((item, i) => (
@@ -72,7 +74,6 @@ class Header extends Component {
         const nav = this.state.showNav ? '' : 'hide';
         return (
             <div id={'navbar'} className={`navbar ${nav}`}>
-                {/*<div className={styles.blur}></div>*/}
                 <div className={'navbar_content_left'}>
                     {this.renderNavbarContent({
                             meet: this.state.navbarItems.meet,
