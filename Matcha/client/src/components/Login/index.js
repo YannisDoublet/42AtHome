@@ -2,14 +2,14 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import './login.css'
 
-import SignInForm from './Sign_in'
 import SignUpForm from './Sign_up'
+import SignInForm from './Sign_in'
 
 class Login extends Component {
 
     state = {
-        sign_in: true,
-        sign_up: false,
+        sign_in: false,
+        sign_up: true,
         last_clicked: 'sign_in'
     };
 
@@ -36,24 +36,26 @@ class Login extends Component {
             sign_up: this.state.sign_up ? 'active_button' : ''
         };
         return (
-            <div className={'login_container'}>
-                <div className={'login_nav'}>
-                    <Link to={'/'}>
-                        <img className={'logo2'} src={'/assets/love.svg'} alt={'Logo'}/>
-                    </Link>
-                    <p className={'title'}>Matcha</p>
-                </div>
-                <div className="login_content">
-                    <div className="login_picture"/>
-                    <div className="login_forms">
-                        <div className="login_box">
-                            <div className={'login_option'}>
-                                <div id={'sign_in'} className={`login_sign_in_button ${active.sign_in}`}
-                                     onClick={this.toggleForms}>Sign in</div>
-                                <div id={'sign_up'} className={`login_sign_up_button ${active.sign_up}`}
-                                     onClick={this.toggleForms}>Sign up</div>
-                            </div>
-                            <div>
+            <div className={'container'}>
+                <div className={'login_container'}>
+                    <div className={'login_nav'}>
+                        <Link to={'/'}>
+                            <img className={'logo2'} src={'/assets/love.svg'} alt={'Logo'}/>
+                        </Link>
+                        <p className={'title'}>Matcha</p>
+                    </div>
+                    <div className="login_content">
+                        <div className="login_picture">
+                            <img src={'/assets/undraw_super_thank_you_obwk.svg'} className={'picture'}/>
+                        </div>
+                        <div className="login_forms">
+                            <div className="login_box">
+                                <div className={'login_option'}>
+                                    <div id={'sign_up'} className={`login_sign_up_button ${active.sign_up}`}
+                                         onClick={this.toggleForms}>Sign up</div>
+                                    <div id={'sign_in'} className={`login_sign_in_button ${active.sign_in}`}
+                                         onClick={this.toggleForms}>Sign in</div>
+                                </div>
                                 {this.state.sign_in ? <SignInForm /> : <SignUpForm />}
                             </div>
                         </div>
