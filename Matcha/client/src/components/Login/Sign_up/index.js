@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import './sign_up.css'
 
 // Fonction pour envvoyer les values dans le prochain composant pour tout envoyer en validation au back
@@ -8,224 +7,108 @@ import './sign_up.css'
 // Faire le select.
 // Faire le Sign-in / Forget-password etc
 
-import SignUpForm_2 from "./sign_up_2";
+import SignUpStep1 from './sign_up_step_1'
+import SignUpStep2 from "./sign_up_step_2";
 
 class SignUpForm extends Component {
 
     state = {
         stage: 1,
-        mounted: false,
-        formData: {
-            name: {
-                element: 'input',
-                config: {
-                    type: 'text',
-                    name: 'firstname',
-                    placeholder: 'Firstname',
-                    required: true
-                },
-                value: '',
-                touched: true,
-                valid: false,
-                icon: 'fas fa-id-badge',
-                stage: 1
-            },
-            lastname: {
-                element: 'input',
-                config: {
-                    type: 'text',
-                    name: 'lastname',
-                    placeholder: 'Lastname',
-                    required: true
-                },
-                value: '',
-                touched: false,
-                valid: true,
-                icon: 'fas fa-address-card',
-                stage: 1
-            },
-            age: {
-                element: 'input',
-                config: {
-                    type: 'text',
-                    name: 'age',
-                    placeholder: 'Age',
-                    required: true
-                },
-                value: '',
-                touched: false,
-                valid: false,
-                icon: 'fas fa-birthday-cake',
-                stage: 1
-            },
-            gender: {
-                element: 'select',
-                type: 'select',
-                name: 'Gender',
-                options: [
-                    'Man',
-                    'Woman',
-                    'Undefined'
-                ],
-                required: true,
-                touched: false,
-                valid: true,
-                stage: 1
-            },
-            sexuality: {
-                element: 'select',
-                type: 'select',
-                name: 'Sexuality',
-                options: [
-                    'Heterosexual',
-                    'Bisexual',
-                    'Homosexual'
-                ],
-                touched: false,
-                valid: true,
-                stage: 1
-            },
-            button: {
-                element: 'button',
-                value: 'Continue',
-                stage: 1
-            },
-            email: {
-                element: 'input',
-                config: {
-                    type: 'email',
-                    name: 'email',
-                    placeholder: 'Email',
-                    required: true
-                },
-                value: '',
-                touched: false,
-                valid: true,
-                stage: 2
-            },
-            username: {
-                element: 'input',
-                config: {
-                    type: 'text',
-                    name: 'username',
-                    placeholder: 'Username',
-                    required: true
-                },
-                value: '',
-                touched: false,
-                valid: true,
-                stage: 2
-            },
-            password: {
-                element: 'input',
-                config: {
-                    type: 'password',
-                    name: 'password',
-                    placeholder: 'Password',
-                    required: true
-                },
-                value: '',
-                touched: false,
-                valid: true,
-                stage: 2
-            },
-            check_password: {
-                element: 'input',
-                config: {
-                    type: 'password',
-                    name: 'check',
-                    placeholder: 'Password again',
-                    required: true
-                },
-                value: '',
-                touched: false,
-                valid: true,
-                stage: 2
-            }
+        firstname: {
+            required: true,
+            valid: true,
+            touched: false,
+            value: ''
+        },
+        lastname: {
+            required: true,
+            valid: true,
+            touched: false,
+            value: ''
+        },
+        age: {
+            required: true,
+            valid: true,
+            touched: false,
+            value: ''
+        },
+        gender: {
+            required: true,
+            valid: true,
+            touched: false,
+            value: ''
+        },
+        sexuality: {
+            required: false,
+            valid: true,
+            touched: false,
+            value: ''
+        },
+        email: {
+            required: true,
+            valid: true,
+            touched: false,
+            value: ''
+        },
+        username: {
+            required: true,
+            valid: true,
+            touched: false,
+            value: ''
+        },
+        password: {
+            required: true,
+            valid: true,
+            touched: false,
+            value: ''
+        },
+        check_password: {
+            required: true,
+            valid: true,
+            touched: false,
+            value: ''
         }
     };
 
-    fetchStageInput = (stage) => {
-        if (stage === 1 || stage === 2) {
-            const formArray = [];
-            for (let element in this.state.formData) {
-                if (stage === this.state.formData[element].stage) {
-                    formArray.push({element: this.state.formData[element]});
-                }
-            }
-            console.log(formArray);
-            return formArray.map((item, i) => {
-                return (
-                    this.renderInput(item, i)
-                )
-            })
-        }
+    handleStage = (stage) => {
+        stage === 1 ? this.setState({stage: stage + 1}) : this.setState({stage: stage - 1});
     };
 
-    renderInput = (data, i) => {
-        let inputTemplate = null;
-        const input_classes = [
-            'sign_up_input',
-            data.element.touched && (data.element.valid ? 'valid_input' : 'error_input')
-        ].filter(v => !!v).join(' ');
-        const icon_classes = [
-            'input_icon',
-            data.element.touched && (data.element.valid ? 'valid_icon' : 'error_icon')
-        ].filter(v => !!v).join(' ');
-        switch (data.element.element) {
-            case('input'):
-                inputTemplate = (
-                    <CSSTransition key={i} timeout={1500} classNames="input_container" in={this.state.mounted}>
-                        <div className={'input_container'}>
-                            <input {...data.element.config} value={data.element.value}
-                                   className={input_classes}/>
-                            <span className={icon_classes}>
-                            <i className={data.element.icon}/>
-                        </span>
-                        </div>
-                    </CSSTransition>
-                );
-                break;
-            case('select'):
-                inputTemplate = (
-                    <CSSTransition key={i} timeout={1500} classNames="sign_up_select" in={this.state.mounted}>
-                        <select className={'sign_up_select'}>
-                            <option hidden selected>{data.element.name}</option>
-                            {data.element.options ? data.element.options.map(item => (
-                                <option>{item}</option>
-                            )) : null}
-                        </select>
-                    </CSSTransition>);
-                break;
-            default:
-                inputTemplate = null;
-                break;
-        }
-        return inputTemplate;
+    inputValidation = () => {
+
     };
 
-    componentDidMount() {
+
+    handleChange = (evt) => {
+        const {name, value} = evt.target;
+        console.log(this.state[name]);
         this.setState({
-            mounted: true
+            ...this.state[name],
+            [name]: value
         })
-    }
+    };
+
+    submitForm = () => {
+
+    };
 
     render() {
-        console.log(this.state.mounted);
         const stage = this.state.stage;
         return (
-            <div className={'sign_up_container'}>
-                {stage === 1 ?
-                    <div className={'sign_up_container'}>{this.fetchStageInput(stage)}
-                        <div className={'button_container'}>
-                            <CSSTransition timeout={1500} classNames="sign_up_button" in={this.state.mounted}>
-                                <button className={'sign_up_button'}
-                                        onClick={() => this.setState({stage: this.state.stage + 1})}>
-                                    Continue
-                                </button>
-                            </CSSTransition>
-                        </div>
-                    </div> : <SignUpForm_2/>}
+            <div>
+                {stage === 1 ? <SignUpStep1 data={{
+                        firstname: this.state.firstname,
+                        lastname: this.state.lastname,
+                        age: this.state.age,
+                        gender: this.state.gender,
+                        sexuality: this.state.sexuality
+                    }} stage={stage} change={this.handleChange} handleStage={this.handleStage}/>
+                    : <SignUpStep2 data={{
+                        email: this.state.email,
+                        username: this.state.username,
+                        password: this.state.password,
+                        check_password: this.state.check_password
+                    }} stage={stage} change={this.handleChange} handleStage={this.handleStage} submit={this.submitForm}/>}
             </div>
         );
     }

@@ -21,7 +21,7 @@ module.exports = {
 		if (dbUtils.searchEmail(email) != undefined) {
 			psw = bcrypt.hashSync(psw, 10);
 			let token = rand.generate(50);
-			if (dbUtils.insertTable('user', email, prenom, nom, psw, age, gender, 0, token, 0) === true) {
+			if (dbUtils.insertUser('user', email, prenom, nom, psw, age, gender, 0, token, 0) === true) {
 				mailsUtils.sendEmail(email, token);
 			}
 		}

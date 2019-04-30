@@ -12,7 +12,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer_author">
-               <p className={'footer_title'}>Made with <i className="fas fa-heart" style={{color: 'red'}}></i> by yadouble and shcohen</p>
+               <p className={'footer_title'}>Made with <i className="fas fa-heart" style={{color: 'red'}}></i> by shcohen and yadouble</p>
             </div>
             <div className="footer_contact">
                 <p className={'footer_title'}>Feel free to send feedback !</p>

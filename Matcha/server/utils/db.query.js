@@ -39,7 +39,7 @@ module.exports = {
         });
         return user;
     },
-    insertTable: function (table, email, prenom, nom, psw, age, gender, like, token, activate) {
+    insertUser: function (table, email, prenom, nom, psw, age, gender, like, token, activate) {
         con.query("INSERT INTO" + table + "SET E_MAIL=?, FIRST_NAME=?," +
             "LAST_NAME=?, PASSWORD=?, AGE=?, GENDER=?, LIKE=?, TOKEN=?, ACTIVATE=?",
             [email, prenom, nom, psw, age, gender, like, token, activate],

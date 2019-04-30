@@ -63,6 +63,7 @@
     border: none;
     background-color: #e6e6e6;
     font-family: 'Rubik', sans-serif;
+    font-size: 18px;
     color: #666666;
     padding-left: 3rem;
     outline: none;
@@ -114,6 +115,7 @@
     transition: 2s;
     outline: none;
     border: solid 2px #9dc5ed;
+    cursor: pointer;
 }
 
 .sign_up_button-enter {
