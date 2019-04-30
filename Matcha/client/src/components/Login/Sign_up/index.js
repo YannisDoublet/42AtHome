@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import './sign_up.css'
 
 // Fonction pour envvoyer les values dans le prochain composant pour tout envoyer en validation au back
 // et controler le form avec la validation (si non valide, ne pas update le state donc ne pas changer de composant)
-// Apprendre transition entre composant.
 // Faire le select.
 // Faire le Sign-in / Forget-password etc
 
@@ -14,6 +14,7 @@ class SignUpForm extends Component {
 
     state = {
         stage: 1,
+        mounted: false,
         formData: {
             name: {
                 element: 'input',
@@ -24,9 +25,10 @@ class SignUpForm extends Component {
                     required: true
                 },
                 value: '',
-                touched: false,
+                touched: true,
                 valid: false,
-                icon: 'fas fa-id-badge'
+                icon: 'fas fa-id-badge',
+                stage: 1
             },
             lastname: {
                 element: 'input',
@@ -59,7 +61,12 @@ class SignUpForm extends Component {
             gender: {
                 element: 'select',
                 type: 'select',
-                name: 'gender',
+                name: 'Gender',
+                options: [
+                    'Man',
+                    'Woman',
+                    'Undefined'
+                ],
                 required: true,
                 touched: false,
                 valid: true,
@@ -68,13 +75,17 @@ class SignUpForm extends Component {
             sexuality: {
                 element: 'select',
                 type: 'select',
-                name: 'sexuality',
-                required: true,
+                name: 'Sexuality',
+                options: [
+                    'Heterosexual',
+                    'Bisexual',
+                    'Homosexual'
+                ],
                 touched: false,
                 valid: true,
                 stage: 1
             },
-            button : {
+            button: {
                 element: 'button',
                 value: 'Continue',
                 stage: 1
@@ -164,29 +175,28 @@ class SignUpForm extends Component {
         switch (data.element.element) {
             case('input'):
                 inputTemplate = (
-                    <div key={i} className={'input_container'}>
-                        <input {...data.element.config} value={data.element.value}
-                               className={input_classes}/>
-                        <span className={icon_classes}>
+                    <CSSTransition key={i} timeout={1500} classNames="input_container" in={this.state.mounted}>
+                        <div className={'input_container'}>
+                            <input {...data.element.config} value={data.element.value}
+                                   className={input_classes}/>
+                            <span className={icon_classes}>
                             <i className={data.element.icon}/>
                         </span>
-                    </div>
+                        </div>
+                    </CSSTransition>
                 );
                 break;
             case('select'):
-                inputTemplate = <select>
-                    <option>Heterosexual</option>
-                    <option selected>Bisexual</option>
-                    <option>Homosexual</option>
-                    <option>Non precise</option>
-                </select>;
+                inputTemplate = (
+                    <CSSTransition key={i} timeout={1500} classNames="sign_up_select" in={this.state.mounted}>
+                        <select className={'sign_up_select'}>
+                            <option hidden selected>{data.element.name}</option>
+                            {data.element.options ? data.element.options.map(item => (
+                                <option>{item}</option>
+                            )) : null}
+                        </select>
+                    </CSSTransition>);
                 break;
-            case('button'):
-                inputTemplate = <button className={'sign_up_button'}
-                                        onClick={() => this.setState({stage: this.state.stage + 1})}>
-                    {data.element.value}
-                </button>;
-            break;
             default:
                 inputTemplate = null;
                 break;
@@ -194,11 +204,28 @@ class SignUpForm extends Component {
         return inputTemplate;
     };
 
+    componentDidMount() {
+        this.setState({
+            mounted: true
+        })
+    }
+
     render() {
+        console.log(this.state.mounted);
         const stage = this.state.stage;
         return (
             <div className={'sign_up_container'}>
-                {stage === 1 ? this.fetchStageInput(stage) : <SignUpForm_2 /> }
+                {stage === 1 ?
+                    <div className={'sign_up_container'}>{this.fetchStageInput(stage)}
+                        <div className={'button_container'}>
+                            <CSSTransition timeout={1500} classNames="sign_up_button" in={this.state.mounted}>
+                                <button className={'sign_up_button'}
+                                        onClick={() => this.setState({stage: this.state.stage + 1})}>
+                                    Continue
+                                </button>
+                            </CSSTransition>
+                        </div>
+                    </div> : <SignUpForm_2/>}
             </div>
         );
     }

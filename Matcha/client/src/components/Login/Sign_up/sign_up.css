@@ -8,7 +8,7 @@
 }
 
 .valid_icon {
-    color: lightgreen;
+    color: #9dc5ed;
 }
 
 .error_icon {
@@ -16,7 +16,8 @@
 }
 
 .valid_input {
-    border: solid 2px lightgreen !important;
+    border: solid 2px #9dc5ed !important;
+    /*transition: border-color .25s ease;*/
 }
 
 .error_input {
@@ -26,6 +27,24 @@
 .input_container {
     position: relative;
 }
+
+.input_container-enter {
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 1.5s, transform 1s;
+}
+.input_container-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+}
+.input_container-exit {
+    opacity: 1;
+}
+.input_container-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+}
+
 
 .input_icon {
     position: absolute;
@@ -43,20 +62,78 @@
     border-radius: 10px;
     border: none;
     background-color: #e6e6e6;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Rubik', sans-serif;
     color: #666666;
     padding-left: 3rem;
     outline: none;
 }
 
-.sign_up_button {
-    width: 10rem;
+.sign_up_select {
+    width: 27.5rem;
     height: 2.5rem;
+    margin: 0.5rem;
+    padding: 5px 35px 5px 5px;
+    background-color: #e6e6e6;
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    transition: 0.3s;
+}
+
+.sign_up_select-enter {
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 1.5s, transform 1s;
+}
+.sign_up_select-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+}
+.sign_up_select-exit {
+    opacity: 1;
+}
+.sign_up_select-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+}
+
+.button_container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.sign_up_button {
+    width: 9rem;
+    height: 2.5rem;
+    margin: 0.5rem 0 0 1rem;
     border-radius: 25px;
     font-size: 1.5rem;
     font-family: Rubik, serif;
     transition: 2s;
     outline: none;
+    border: solid 2px #9dc5ed;
+}
+
+.sign_up_button-enter {
+    transform: translateX(-75%);
+    opacity: 0;
+    transition: opacity 1.5s, transform 1s;
+}
+
+.sign_up_button-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.sign_up_button-exit {
+    opacity: 1;
+}
+
+.sign_up_button-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
 }
 
 .sign_up_button:hover {

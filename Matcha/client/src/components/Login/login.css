@@ -13,7 +13,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to bottom right, pink, white);
+    background-image: linear-gradient(to bottom right, rgb(104,103,246), white);
 }
 
 .login_container {
@@ -30,8 +30,8 @@ p {
     margin-left: 1.5rem;
     font-size: 1.5rem;
     font-weight: 100;
-    color: #373D3F;
-    /*color: white;*/
+    /*color: #373D3F;*/
+    color: white;
 }
 
 .login_nav {
@@ -46,11 +46,12 @@ p {
     width: 70rem;
     height: 35rem;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 30px;
 }
 
 .login_picture {
     width: 50%;
+    z-index: 3;
 }
 
 .picture {
