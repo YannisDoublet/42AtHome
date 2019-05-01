@@ -17,7 +17,6 @@
 
 .valid_input {
     border: solid 2px #9dc5ed !important;
-    /*transition: border-color .25s ease;*/
 }
 
 .error_input {

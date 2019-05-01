@@ -16,55 +16,55 @@ class SignUpForm extends Component {
         stage: 1,
         firstname: {
             required: true,
-            valid: true,
+            valid: null,
             touched: false,
             value: ''
         },
         lastname: {
             required: true,
-            valid: true,
+            valid: null,
             touched: false,
             value: ''
         },
         age: {
             required: true,
-            valid: true,
+            valid: null,
             touched: false,
             value: ''
         },
         gender: {
             required: true,
-            valid: true,
+            valid: null,
             touched: false,
             value: ''
         },
         sexuality: {
             required: false,
-            valid: true,
+            valid: null,
             touched: false,
             value: ''
         },
         email: {
             required: true,
-            valid: true,
+            valid: null,
             touched: false,
             value: ''
         },
         username: {
             required: true,
-            valid: true,
+            valid: null,
             touched: false,
             value: ''
         },
         password: {
             required: true,
-            valid: true,
+            valid: null,
             touched: false,
             value: ''
         },
         check_password: {
             required: true,
-            valid: true,
+            valid: null,
             touched: false,
             value: ''
         }
@@ -74,23 +74,19 @@ class SignUpForm extends Component {
         stage === 1 ? this.setState({stage: stage + 1}) : this.setState({stage: stage - 1});
     };
 
-    inputValidation = () => {
-
-    };
-
-
-    handleChange = (evt) => {
-        const {name, value} = evt.target;
-        console.log(this.state[name]);
+    handleChange = (newState) => {
         this.setState({
-            ...this.state[name],
-            [name]: value
+            newState
         })
     };
 
     submitForm = () => {
 
     };
+
+    componentWillUnmount() {
+        this.props.error();
+    }
 
     render() {
         const stage = this.state.stage;
@@ -102,13 +98,14 @@ class SignUpForm extends Component {
                         age: this.state.age,
                         gender: this.state.gender,
                         sexuality: this.state.sexuality
-                    }} stage={stage} change={this.handleChange} handleStage={this.handleStage}/>
+                    }} stage={stage} change={this.handleChange} handleStage={this.handleStage} showError={this.props.error}/>
                     : <SignUpStep2 data={{
                         email: this.state.email,
                         username: this.state.username,
                         password: this.state.password,
                         check_password: this.state.check_password
-                    }} stage={stage} change={this.handleChange} handleStage={this.handleStage} submit={this.submitForm}/>}
+                    }} stage={stage} change={this.handleChange} handleStage={this.handleStage}
+                                   submit={this.submitForm} showError={this.props.error}/>}
             </div>
         );
     }

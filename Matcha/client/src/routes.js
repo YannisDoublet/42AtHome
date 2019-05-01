@@ -7,14 +7,12 @@ import Layout from "./HOC/Layout";
 
 const Routes = () => {
     return (
-        <div>
-            <Switch>
-                <Route path={'/register'} exact component={Login}/>
-                <Layout>
-                    <Route path={'/'} exact component={Home}/>
-                </Layout>
-            </Switch>
-        </div>
+        <Switch>
+            <Route path={'/register'} exact component={Login}/>
+            <Layout>
+                <Route path={'/'} exact component={Home}/>
+            </Layout>
+        </Switch>
     );
 };
 

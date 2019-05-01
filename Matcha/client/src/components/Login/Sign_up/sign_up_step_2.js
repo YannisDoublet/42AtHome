@@ -64,6 +64,57 @@ class SignUpStep2 extends Component {
         });
     };
 
+    validation = (newState, name) => {
+        console.log(this.props);
+        if (name === 'email') {
+            if (parseInt(newState[name].value.length) === 0) {
+                newState[name].valid = false;
+                this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
+            } else if (!newState[name].value.match('^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$')) {
+                newState[name].valid = false;
+                this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should be valid !');
+            } else {
+                this.props.showError();
+                newState[name].valid = true;
+            }
+        } else if (name === 'username') {
+            if (parseInt(newState[name].value.length) === 0) {
+                newState[name].valid = false;
+                this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
+            } else {
+                this.props.showError();
+                newState[name].valid = true;
+            }
+        } else if (name === 'password') {
+            if (parseInt(newState[name].value.length) === 0) {
+                newState[name].valid = false;
+                this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
+            } else {
+                this.props.showError();
+                newState[name].valid = true;
+            }
+        } else if (name === 'check_password') {
+            if (parseInt(newState[name].value.length) === 0) {
+                newState[name].valid = false;
+                this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
+            } else if (newState[name].value !== newState['password'].value) {
+                newState[name].valid = false;
+                this.props.showError('Passwords doesn\'t match !');
+            } else {
+                this.props.showError();
+                newState[name].valid = true;
+            }
+        }
+        this.props.change(newState);
+    };
+
+    handleChange = (evt, name) => {
+        let newState = this.props.data;
+        newState[name].value = evt.target.value;
+        newState[name].touched = true;
+        this.validation(newState, name);
+    };
+
     renderInput = (input, settings, i) => {
         let inputTemplate = null;
         const input_classes = [
@@ -74,31 +125,20 @@ class SignUpStep2 extends Component {
             'input_icon',
             settings.touched && (settings.valid ? 'valid_icon' : 'error_icon')
         ].filter(v => !!v).join(' ');
-        console.log(this.props);
         switch (input.element) {
             case('input'):
                 inputTemplate = (
                     <CSSTransition key={i} timeout={1500} classNames="input_container" in={this.state.mounted}>
                         <div className={'input_container'}>
                             <input {...input.config} value={settings.value}
-                                   className={input_classes} onChange={this.props.change}/>
+                                   className={input_classes}
+                                   onChange={(evt) => this.handleChange(evt, input.config.name)}/>
                             <span className={icon_classes}>
                             <i className={input.icon}/>
                         </span>
                         </div>
                     </CSSTransition>
                 );
-                break;
-            case('select'):
-                inputTemplate = (
-                    <CSSTransition key={i} timeout={1500} classNames="sign_up_select" in={this.state.mounted}>
-                        <select className={'sign_up_select'}>
-                            <option hidden selected>{input.name}</option>
-                            {input.options ? input.options.map(item => (
-                                <option>{item}</option>
-                            )) : null}
-                        </select>
-                    </CSSTransition>);
                 break;
             default:
                 inputTemplate = null;

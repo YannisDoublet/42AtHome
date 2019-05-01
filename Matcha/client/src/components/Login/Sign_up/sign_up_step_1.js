@@ -66,6 +66,48 @@ class SignUpStep1 extends Component {
         });
     };
 
+    validation = (newState, name) => {
+        console.log(this.props);
+        if (name === 'firstname' || name === 'lastname') {
+            if (parseInt(newState[name].value.length) === 0) {
+                newState[name].valid = false;
+                this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
+            }
+            else if (!newState[name].value.match('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')) {
+                newState[name].valid = false;
+                this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should only contain letters !');
+            } else {
+                this.props.showError();
+                newState[name].valid = true;
+            }
+        } else if (name === 'age') {
+            if (parseInt(newState[name].value.length) === 0) {
+                newState[name].valid = false;
+                this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
+            } else if (!newState[name].value.match('^[0-9]+$')) {
+                newState[name].valid = false;
+                this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should only contain numbers !');
+            } else if (parseInt(newState[name].value) < 18) {
+                newState[name].valid = false;
+                this.props.showError('You need to be adult to register !');
+            } else if (parseInt(newState[name].value.length) >= 3) {
+                newState[name].valid = false;
+                this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' need to be between 18 and 99 !');
+            } else {
+                this.props.showError();
+                newState[name].valid = true;
+            }
+        }
+        this.props.change(newState);
+    };
+
+    handleChange = (evt, name) => {
+        let newState = this.props.data;
+        newState[name].value = evt.target.value;
+        newState[name].touched = true;
+        this.validation(newState, name);
+    };
+
     renderInput = (input, settings, i) => {
         let inputTemplate = null;
         const input_classes = [
@@ -83,7 +125,8 @@ class SignUpStep1 extends Component {
                     <CSSTransition key={i} timeout={1500} classNames="input_container" in={this.state.mounted}>
                         <div className={'input_container'}>
                             <input {...input.config} value={settings.value}
-                                   className={input_classes} onChange={this.props.change}/>
+                                   className={input_classes}
+                                   onChange={(evt) => this.handleChange(evt, input.config.name)}/>
                             <span className={icon_classes}>
                             <i className={input.icon}/>
                         </span>
@@ -117,17 +160,18 @@ class SignUpStep1 extends Component {
 
     render() {
         const settings = this.props;
-        console.log(settings);
         return (
-            <div className={'sign_up_container'}>
-                {this.fetchInput(settings.data)}
-                <div className={'button_container'}>
-                    <CSSTransition timeout={1500} classNames="sign_up_button" in={this.state.mounted}>
-                        <button className={'sign_up_button'}
-                                onClick={() => this.props.handleStage(settings.stage)}>
-                            Continue
-                        </button>
-                    </CSSTransition>
+            <div>
+                <div className={'sign_up_container'}>
+                    {this.fetchInput(settings.data)}
+                    <div className={'button_container'}>
+                        <CSSTransition timeout={1500} classNames="sign_up_button" in={this.state.mounted}>
+                            <button className={'sign_up_button'}
+                                    onClick={() => this.props.handleStage(settings.stage)}>
+                                Continue
+                            </button>
+                        </CSSTransition>
+                    </div>
                 </div>
             </div>
         );
