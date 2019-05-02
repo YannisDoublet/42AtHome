@@ -14,6 +14,8 @@ class SignUpStep2 extends Component {
 
     state = {
         mounted: false,
+        error: false,
+        error_message: false,
         formData: {
             email: {
                 element: 'input',
@@ -54,6 +56,22 @@ class SignUpStep2 extends Component {
         }
     };
 
+    isDisabled = (data) => {
+        const item = Object.keys(data).map(key => data[key]);
+        for (let i = 0; i < item.length; i++) {
+            if (!item[i].value) {
+                break;
+            } else if (i + 1 === parseInt(item.length)) {
+                if (this.state.error_message && this.state.error) {
+                    break ;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+
     fetchInput = (data) => {
         const formArray = Object.keys(this.state.formData).map(key => this.state.formData[key]);
         const dataSettings = Object.keys(data).map(key => data[key]);
@@ -64,48 +82,68 @@ class SignUpStep2 extends Component {
         });
     };
 
+    errorStateHandler = (status) => {
+        status ? this.setState({
+                error_message: true,
+                error: true
+            })
+            : this.setState({
+                error_message: false,
+                error: false
+            })
+    };
+
     validation = (newState, name) => {
-        console.log(this.props);
         if (name === 'email') {
             if (parseInt(newState[name].value.length) === 0) {
                 newState[name].valid = false;
                 this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
+                this.errorStateHandler(true);
             } else if (!newState[name].value.match('^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$')) {
                 newState[name].valid = false;
                 this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should be valid !');
+                this.errorStateHandler(true);
             } else {
                 this.props.showError();
                 newState[name].valid = true;
+                this.errorStateHandler(false);
             }
         } else if (name === 'username') {
             if (parseInt(newState[name].value.length) === 0) {
                 newState[name].valid = false;
                 this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
+                this.errorStateHandler(true);
             } else {
                 this.props.showError();
                 newState[name].valid = true;
+                this.errorStateHandler(false);
             }
         } else if (name === 'password') {
             if (parseInt(newState[name].value.length) === 0) {
                 newState[name].valid = false;
                 this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
+                this.errorStateHandler(true);
             } else {
                 this.props.showError();
                 newState[name].valid = true;
+                this.errorStateHandler(false);
             }
         } else if (name === 'check_password') {
             if (parseInt(newState[name].value.length) === 0) {
                 newState[name].valid = false;
                 this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
+                this.errorStateHandler(true);
             } else if (newState[name].value !== newState['password'].value) {
                 newState[name].valid = false;
                 this.props.showError('Passwords doesn\'t match !');
+                this.errorStateHandler(true);
             } else {
                 this.props.showError();
                 newState[name].valid = true;
+                this.errorStateHandler(false);
             }
         }
-        this.props.change(newState);
+        this.props.change();
     };
 
     handleChange = (evt, name) => {
@@ -161,13 +199,15 @@ class SignUpStep2 extends Component {
                 <div className={'button_container'}>
                     <CSSTransition timeout={1500} classNames="sign_up_button" in={this.state.mounted}>
                         <button className={'sign_up_button'}
-                                onClick={() => this.props.handleStage(settings.stage)}>
+                                onClick={() => this.props.handleStage(settings.stage)}
+                                disabled={this.isDisabled(settings.data) ? 'disabled' : ''}>
                             Back
                         </button>
                     </CSSTransition>
                     <CSSTransition timeout={1500} classNames="sign_up_button" in={this.state.mounted}>
                         <button className={'sign_up_button'}
-                                onClick={() => this.props.submit}>
+                                onClick={(evt) => this.props.submit(evt)}
+                                disabled={this.isDisabled(settings.data) ? 'disabled' : ''}>
                             Submit
                         </button>
                     </CSSTransition>

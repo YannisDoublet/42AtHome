@@ -73,11 +73,11 @@ p {
     color: white;
     background: #FF1744;
     z-index: 10;
-    position: absolute;
-    top: 30%;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
     border-radius: 10px;
     font-family: Rubik, sans-serif;
     font-size: 16px;
@@ -89,7 +89,6 @@ p {
     position: relative;
     top: 20%;
     width: 35rem;
-    padding: 1rem 1rem;
     transition: 0.3s;
 }
 

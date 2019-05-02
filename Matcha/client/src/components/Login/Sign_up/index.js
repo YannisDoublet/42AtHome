@@ -42,7 +42,7 @@ class SignUpForm extends Component {
             required: false,
             valid: null,
             touched: false,
-            value: ''
+            value: 'Bisexual'
         },
         email: {
             required: true,
@@ -74,13 +74,15 @@ class SignUpForm extends Component {
         stage === 1 ? this.setState({stage: stage + 1}) : this.setState({stage: stage - 1});
     };
 
-    handleChange = (newState) => {
+    handleChange = () => {
+        let item = this.state;
         this.setState({
-            newState
-        })
+            ...item
+        });
     };
 
-    submitForm = () => {
+    submitForm = (evt) => {
+        evt.preventDefault();
 
     };
 

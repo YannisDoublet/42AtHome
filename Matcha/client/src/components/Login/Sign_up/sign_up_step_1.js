@@ -5,6 +5,8 @@ class SignUpStep1 extends Component {
 
     state = {
         mounted: false,
+        error: false,
+        error_message: false,
         formData: {
             firstname: {
                 element: 'input',
@@ -36,24 +38,40 @@ class SignUpStep1 extends Component {
             gender: {
                 element: 'select',
                 type: 'select',
-                name: 'Gender',
+                name: 'gender',
                 options: [
                     'Man',
                     'Woman',
                     'Undefined'
-                ]
+                ],
             },
             sexuality: {
                 element: 'select',
                 type: 'select',
-                name: 'Sexuality',
+                name: 'sexuality',
                 options: [
-                    'Heterosexual',
                     'Bisexual',
+                    'Heterosexual',
                     'Homosexual'
                 ]
             }
         }
+    };
+
+    isDisabled = (data) => {
+        const item = Object.keys(data).map(key => data[key]);
+        for (let i = 0; i < item.length; i++) {
+            if (!item[i].value) {
+                break;
+            } else if (i + 1 === parseInt(item.length)) {
+                if (this.state.error_message && this.state.error) {
+                    break ;
+                } else {
+                   return false;
+                }
+            }
+        }
+        return true;
     };
 
     fetchInput = (data) => {
@@ -66,40 +84,58 @@ class SignUpStep1 extends Component {
         });
     };
 
+    errorStateHandler = (status) => {
+        status ? this.setState({
+                error_message: true,
+                error: true
+            })
+            : this.setState({
+                error_message: false,
+                error: false
+            })
+    };
+
     validation = (newState, name) => {
-        console.log(this.props);
         if (name === 'firstname' || name === 'lastname') {
             if (parseInt(newState[name].value.length) === 0) {
                 newState[name].valid = false;
                 this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
-            }
-            else if (!newState[name].value.match('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')) {
+                this.errorStateHandler(true);
+            } else if (!newState[name].value.match('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')) {
                 newState[name].valid = false;
                 this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should only contain letters !');
+                this.errorStateHandler(true);
             } else {
                 this.props.showError();
+                this.errorStateHandler(false);
                 newState[name].valid = true;
             }
         } else if (name === 'age') {
             if (parseInt(newState[name].value.length) === 0) {
                 newState[name].valid = false;
                 this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should not be empty !');
+                this.errorStateHandler(true);
             } else if (!newState[name].value.match('^[0-9]+$')) {
                 newState[name].valid = false;
                 this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' should only contain numbers !');
+                this.errorStateHandler(true);
             } else if (parseInt(newState[name].value) < 18) {
                 newState[name].valid = false;
                 this.props.showError('You need to be adult to register !');
+                this.errorStateHandler(true);
             } else if (parseInt(newState[name].value.length) >= 3) {
                 newState[name].valid = false;
                 this.props.showError(name.charAt(0).toUpperCase() + name.slice(1) + ' need to be between 18 and 99 !');
+                this.errorStateHandler(true);
             } else {
                 this.props.showError();
+                this.errorStateHandler(false);
                 newState[name].valid = true;
             }
         }
-        this.props.change(newState);
+        this.props.change();
     };
+
 
     handleChange = (evt, name) => {
         let newState = this.props.data;
@@ -118,7 +154,6 @@ class SignUpStep1 extends Component {
             'input_icon',
             settings.touched && (settings.valid ? 'valid_icon' : 'error_icon')
         ].filter(v => !!v).join(' ');
-        console.log(this.props);
         switch (input.element) {
             case('input'):
                 inputTemplate = (
@@ -136,11 +171,11 @@ class SignUpStep1 extends Component {
                 break;
             case('select'):
                 inputTemplate = (
-                    <CSSTransition key={i} timeout={1500} classNames="sign_up_select" in={this.state.mounted}>
-                        <select className={'sign_up_select'}>
-                            <option hidden selected>{input.name}</option>
-                            {input.options ? input.options.map(item => (
-                                <option>{item}</option>
+                    <CSSTransition key={i} timeout={1500} classNames="sign_up_select" in={this.state.mounted} value={settings.value}>
+                        <select className={'sign_up_select'} onChange={(evt) => this.handleChange(evt, input.name)}>
+                            <option hidden>{input.name.charAt(0).toUpperCase() + input.name.slice(1)}</option>
+                            {input.options ? input.options.map((item, i) => (
+                                <option key={i}>{item}</option>
                             )) : null}
                         </select>
                     </CSSTransition>);
@@ -160,6 +195,7 @@ class SignUpStep1 extends Component {
 
     render() {
         const settings = this.props;
+        console.log(settings.data);
         return (
             <div>
                 <div className={'sign_up_container'}>
@@ -167,7 +203,8 @@ class SignUpStep1 extends Component {
                     <div className={'button_container'}>
                         <CSSTransition timeout={1500} classNames="sign_up_button" in={this.state.mounted}>
                             <button className={'sign_up_button'}
-                                    onClick={() => this.props.handleStage(settings.stage)}>
+                                    onClick={() => this.props.handleStage(settings.stage)}
+                                    disabled={this.isDisabled(settings.data) ? 'disabled' : ''}>
                                 Continue
                             </button>
                         </CSSTransition>
