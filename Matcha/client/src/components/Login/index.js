@@ -61,7 +61,7 @@ class Login extends Component {
                     </div>
                     <div className="login_content">
                         <div className="login_picture">
-                            <img src={'/assets/undraw_super_thank_you_obwk.svg'} className={'picture'}/>
+                            <img src={'/assets/undraw_super_thank_you_obwk.svg'} className={'picture'} alt={'Heart'}/>
                         </div>
                         <div className="login_forms">
                             {this.state.error ? <div className={'login_error'}>{this.state.error_value}</div> : null}
@@ -74,7 +74,7 @@ class Login extends Component {
                                          onClick={this.toggleForms}>Sign in
                                     </div>
                                 </div>
-                                {this.state.sign_in ? <SignInForm/>
+                                {this.state.sign_in ? <SignInForm error={this.errorHandler}/>
                                     : <SignUpForm error={this.errorHandler}/>}
                             </div>
                         </div>

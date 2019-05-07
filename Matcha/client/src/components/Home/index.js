@@ -4,9 +4,7 @@ import HomeContainer from '../../containers/HomeContainers'
 
 const Home = (props) => {
     return (
-        <div>
-            <HomeContainer />
-        </div>
+        <HomeContainer/>
     );
 };
 

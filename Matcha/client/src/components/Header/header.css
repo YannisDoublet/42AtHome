@@ -9,6 +9,11 @@
     grid-template-areas: "empty1 left middle right empty2";
     transition: .4s;
     z-index: 10;
+    /*background-color: rgba(0, 0, 0, .5);*/
+}
+
+.background {
+    /*background-color: rgba(0, 0, 0, .3);*/
 }
 
 .blur {
@@ -19,8 +24,8 @@
     width: 100vw;
     height: 4rem;
     /*87, 91, 134*/
-    /*background: rgba(30, 29, 29, 0.3);*/
-    /*filter: blur(3px);*/
+    background: rgba(30, 29, 29, 0.3);
+    filter: blur(3px);
 }
 
 .navbar a {
@@ -65,7 +70,6 @@
     height: 40px;
     margin-top: 0.8rem;
     transition: .3s;
-    /*transform: translateX(-1500%);*/
 }
 
 .navbar_content_right {
@@ -78,6 +82,20 @@
         background-color: rgb(234, 87, 107);
         box-shadow: 0 0 10px 5px rgb(234, 87, 107);
     }
+}
+
+@media screen and (max-width: 840px) {
+    .navbar_item{
+        margin: 0.5rem 0.2rem;
+    }
+}
+
+@media screen and (max-width: 675px) {
+    .navbar_item {
+        width: 5rem;
+        margin: 0.5rem 0;
+    }
+
 }
 
 @media screen and (max-width: 541px) {
@@ -100,5 +118,24 @@
 
     .logo {
         margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .navbar {
+        grid-template-columns: 1px 5fr 5fr 5fr 1px;
+        height: 4rem;
+    }
+
+    .navbar_item:first-child {
+        margin-right: 0;
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 250px) {
+    .navbar_item:first-child {
+        margin: 0;
+        font-size: 10px;
     }
 }

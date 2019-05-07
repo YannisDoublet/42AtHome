@@ -30,7 +30,6 @@ p {
     margin-left: 1.5rem;
     font-size: 1.5rem;
     font-weight: 100;
-    /*color: #373D3F;*/
     color: white;
 }
 
@@ -86,8 +85,9 @@ p {
 }
 
 .login_box {
-    position: relative;
-    top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 35rem;
     transition: 0.3s;
 }
@@ -125,4 +125,38 @@ p {
 .login_sign_up_button:hover {
     border-bottom: solid 5px rgba(253, 103, 134, 0.8);
     cursor: pointer;
+}
+
+@media screen and (max-width: 1160px) {
+    .login_content {
+        width: 30rem;
+    }
+
+    .login_option {
+        width: 86%;
+    }
+
+    .login_error {
+        margin-left: -2.5rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .login_content {
+        width: 20rem;
+    }
+
+    .login_forms {
+        width: 100%;
+    }
+
+    .login_option {
+        width: 100%;
+    }
+
+    .login_error {
+        padding-left: 0.3rem;
+        width: 10rem;
+        margin-left: 0;
+    }
 }

@@ -1,14 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {CSSTransition} from 'react-transition-group';
 import './sign_up.css'
 
-// Fonction pour envvoyer les values dans le prochain composant pour tout envoyer en validation au back
-// et controler le form avec la validation (si non valide, ne pas update le state donc ne pas changer de composant)
-// Faire le select.
-// Faire le Sign-in / Forget-password etc
-
-import SignUpForm from "./";
+// Faire le Forgot password etc
 
 class SignUpStep2 extends Component {
 
@@ -31,7 +26,8 @@ class SignUpStep2 extends Component {
                 config: {
                     type: 'text',
                     name: 'username',
-                    placeholder: 'Username'
+                    placeholder: 'Username',
+                    autoComplete: 'username'
                 },
                 icon: 'fas fa-user'
             },
@@ -40,7 +36,8 @@ class SignUpStep2 extends Component {
                 config: {
                     type: 'password',
                     name: 'password',
-                    placeholder: 'Password'
+                    placeholder: 'Password',
+                    autoComplete: 'new-password'
                 },
                 icon: 'fas fa-lock'
             },
@@ -49,7 +46,9 @@ class SignUpStep2 extends Component {
                 config: {
                     type: 'password',
                     name: 'check_password',
-                    placeholder: 'Repeat password'
+                    placeholder: 'Repeat password',
+                    autoComplete: 'new-password'
+
                 },
                 icon: 'fas fa-lock'
             }
@@ -166,7 +165,7 @@ class SignUpStep2 extends Component {
         switch (input.element) {
             case('input'):
                 inputTemplate = (
-                    <CSSTransition key={i} timeout={1500} classNames="input_container" in={this.state.mounted}>
+                    <CSSTransition key={i} timeout={950} classNames="input_container" in={this.state.mounted}>
                         <div className={'input_container'}>
                             <input {...input.config} value={settings.value}
                                    className={input_classes}
@@ -197,14 +196,14 @@ class SignUpStep2 extends Component {
             <div className={'sign_up_container'}>
                 {this.fetchInput(settings.data)}
                 <div className={'button_container'}>
-                    <CSSTransition timeout={1500} classNames="sign_up_button" in={this.state.mounted}>
+                    <CSSTransition timeout={950} classNames="sign_up_button" in={this.state.mounted}>
                         <button className={'sign_up_button'}
                                 onClick={() => this.props.handleStage(settings.stage)}
-                                disabled={this.isDisabled(settings.data) ? 'disabled' : ''}>
+                                /*disabled={this.isDisabled(settings.data) ? 'disabled' : ''}*/>
                             Back
                         </button>
                     </CSSTransition>
-                    <CSSTransition timeout={1500} classNames="sign_up_button" in={this.state.mounted}>
+                    <CSSTransition timeout={950} classNames="sign_up_button" in={this.state.mounted}>
                         <button className={'sign_up_button'}
                                 onClick={(evt) => this.props.submit(evt)}
                                 disabled={this.isDisabled(settings.data) ? 'disabled' : ''}>

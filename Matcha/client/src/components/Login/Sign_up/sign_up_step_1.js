@@ -65,9 +65,9 @@ class SignUpStep1 extends Component {
                 break;
             } else if (i + 1 === parseInt(item.length)) {
                 if (this.state.error_message && this.state.error) {
-                    break ;
+                    break;
                 } else {
-                   return false;
+                    return false;
                 }
             }
         }
@@ -157,7 +157,7 @@ class SignUpStep1 extends Component {
         switch (input.element) {
             case('input'):
                 inputTemplate = (
-                    <CSSTransition key={i} timeout={1500} classNames="input_container" in={this.state.mounted}>
+                    <CSSTransition key={i} timeout={950} classNames="input_container" in={this.state.mounted}>
                         <div className={'input_container'}>
                             <input {...input.config} value={settings.value}
                                    className={input_classes}
@@ -171,7 +171,8 @@ class SignUpStep1 extends Component {
                 break;
             case('select'):
                 inputTemplate = (
-                    <CSSTransition key={i} timeout={1500} classNames="sign_up_select" in={this.state.mounted} value={settings.value}>
+                    <CSSTransition key={i} timeout={950} classNames="sign_up_select" in={this.state.mounted}
+                                   value={settings.value}>
                         <select className={'sign_up_select'} onChange={(evt) => this.handleChange(evt, input.name)}>
                             <option hidden>{input.name.charAt(0).toUpperCase() + input.name.slice(1)}</option>
                             {input.options ? input.options.map((item, i) => (
@@ -197,18 +198,16 @@ class SignUpStep1 extends Component {
         const settings = this.props;
         console.log(settings.data);
         return (
-            <div>
-                <div className={'sign_up_container'}>
-                    {this.fetchInput(settings.data)}
-                    <div className={'button_container'}>
-                        <CSSTransition timeout={1500} classNames="sign_up_button" in={this.state.mounted}>
-                            <button className={'sign_up_button'}
-                                    onClick={() => this.props.handleStage(settings.stage)}
-                                    disabled={this.isDisabled(settings.data) ? 'disabled' : ''}>
-                                Continue
-                            </button>
-                        </CSSTransition>
-                    </div>
+            <div className={'sign_up_container'}>
+                {this.fetchInput(settings.data)}
+                <div className={'button_container'}>
+                    <CSSTransition timeout={950} classNames="sign_up_button" in={this.state.mounted}>
+                        <button className={'sign_up_button'}
+                                onClick={() => this.props.handleStage(settings.stage)}
+                                disabled={this.isDisabled(settings.data) ? 'disabled' : ''}>
+                            Continue
+                        </button>
+                    </CSSTransition>
                 </div>
             </div>
         );

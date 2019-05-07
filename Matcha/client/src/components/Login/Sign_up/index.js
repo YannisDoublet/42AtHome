@@ -83,7 +83,6 @@ class SignUpForm extends Component {
 
     submitForm = (evt) => {
         evt.preventDefault();
-
     };
 
     componentWillUnmount() {
@@ -93,7 +92,7 @@ class SignUpForm extends Component {
     render() {
         const stage = this.state.stage;
         return (
-            <div>
+            <form onSubmit={this.submitForm}>
                 {stage === 1 ? <SignUpStep1 data={{
                         firstname: this.state.firstname,
                         lastname: this.state.lastname,
@@ -108,7 +107,7 @@ class SignUpForm extends Component {
                         check_password: this.state.check_password
                     }} stage={stage} change={this.handleChange} handleStage={this.handleStage}
                                    submit={this.submitForm} showError={this.props.error}/>}
-            </div>
+            </form>
         );
     }
 }

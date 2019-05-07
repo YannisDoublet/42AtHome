@@ -35,7 +35,21 @@ class Header extends Component {
             }
         },
         scrollPosition: 0,
-        showNav: true
+        showNav: true,
+        background: false
+    };
+
+    toggleBackground = () => {
+        let st = window.pageYOffset || document.documentElement.scrollTop;
+        if (st >= document.body.clientHeight / 2.80) {
+            this.setState({
+                background: true
+            })
+        } else {
+            this.setState({
+                background: false
+            })
+        }
     };
 
     hideNavbar = () => {
@@ -56,10 +70,12 @@ class Header extends Component {
 
     componentDidMount() {
         window.addEventListener("scroll", this.hideNavbar, false);
+        window.addEventListener('scroll', this.toggleBackground, false)
     }
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.hideNavbar);
+        window.removeEventListener('scroll', this.toggleBackground);
     }
 
     renderNavbarContent = (items) => {
@@ -72,8 +88,10 @@ class Header extends Component {
 
     render() {
         const nav = this.state.showNav ? '' : 'hide';
+        const background = this.state.background ? 'background' : '';
         return (
-            <div id={'navbar'} className={`navbar ${nav}`}>
+            <div id={'navbar'} className={`navbar ${nav} ${background}`}>
+                <div className={'blur'}/>
                 <div className={'navbar_content_left'}>
                     {this.renderNavbarContent({
                             meet: this.state.navbarItems.meet,
