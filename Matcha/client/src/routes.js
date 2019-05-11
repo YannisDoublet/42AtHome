@@ -4,7 +4,8 @@ import {Switch, Route} from 'react-router-dom'
 import Home from './components/Home'
 import Login from './components/Login'
 import Profile from './components/Profile'
-import Layout from "./HOC/Layout";
+import Matcher from './components/Matcher'
+import Layout from "./HOC/Layout"
 
 const Routes = () => {
     return (
@@ -13,6 +14,7 @@ const Routes = () => {
             <Layout>
                 <Route path={'/'} exact component={Home}/>
                 <Route path={'/profile'} exact component={Profile} />
+                <Route path={'/match'} exact component={Matcher} />
             </Layout>
         </Switch>
     );

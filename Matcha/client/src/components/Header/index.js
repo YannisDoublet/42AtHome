@@ -7,14 +7,14 @@ class Header extends Component {
     state = {
         navbarItems: {
             meet: {
-                title: 'Meet',
-                path: '/meet',
+                title: 'Match',
+                path: '/match',
                 restricted: true,
                 exclude: false
             },
             search: {
-                title: 'Search',
-                path: '/search',
+                title: 'Chat',
+                path: '/chat',
                 restricted: false
             },
             sign_in: {

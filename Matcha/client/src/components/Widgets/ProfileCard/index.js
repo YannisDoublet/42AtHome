@@ -4,7 +4,6 @@ import './profile_card.css'
 // import Tags from '../Tags'
 
 const ProfileCard = (props) => {
-    console.log(props);
     return (
         <div className={'card'}>
             <div id={'profile_pic'} style={{backgroundImage: "url('/assets/zuckywola.jpg')"}}/>
