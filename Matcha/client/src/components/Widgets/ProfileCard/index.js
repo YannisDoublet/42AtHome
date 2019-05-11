@@ -35,9 +35,12 @@ const ProfileCard = (props) => {
                 {/*<p id={'status_offline'}>Disconnected</p>*/}
             </div>
             <div id={'interactions'}>
-                {props.match.path === '/profile' && <button id={'match_button'}>Like</button>}
+                {props.match.path === '/profile' && props.like_status === 0 &&
+                <button id={'like_button'} onClick={props.like}>Like</button>}
+                {props.match.path === '/profile' && props.like_status === 1 &&
+                <button id={'unlike_button'} onClick={props.like}>Unlike</button>}
                 {props.match.path === '/search' && <button id={'view_button'}>Profile</button>}
-                <button id={'report'}>Report</button>
+                <button id={'report'} onClick={props.report}>Report</button>
             </div>
         </div>
     );

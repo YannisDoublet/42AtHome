@@ -160,7 +160,7 @@ button {
     margin: 1rem;
 }
 
-#profile #match_button {
+#profile #like_button {
     width: 5rem;
     border: solid 2px #9dc5ed;
     background: #FFFFFF;
@@ -169,8 +169,22 @@ button {
     transition: 0.3s;
 }
 
-#profile #match_button:hover {
+#profile #like_button:hover {
     box-shadow: 1px 1px 10px #9dc5ed;
+}
+
+#profile #unlike_button {
+    width: 5rem;
+    border: solid 2px #FFFFFF;
+    background: #9dc5ed;
+    cursor: pointer;
+    color: #FFFFFF;
+    box-shadow: 1px 1px 10px lightgray;
+    transition: 0.3s;
+}
+
+#profile #unlike_button:hover {
+    box-shadow: 1px 1px 10px #FFFFFF;
 }
 
 #profile #report {

@@ -1,15 +1,24 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import GoogleMaps from '../../components/GoogleMaps'
 
 import './profile_container.css'
 
+import Alert from '../../components/Widgets/Alert'
+import ReportPopUp from '../../components/Widgets/ReportPopUp'
 import ProfileCard from '../../components/Widgets/ProfileCard'
 import Tags from '../../components/Widgets/Tags'
-import GoogleMaps from '../../components/GoogleMaps'
 
 class ProfileContainer extends Component {
 
     state = {
+        alert: {
+            status: false,
+            type: '',
+            message: ''
+        },
+        like: 0,
+        popUp: 0,
         tags: [
             '#Funny',
             '#Facebook',
@@ -29,6 +38,38 @@ class ProfileContainer extends Component {
         ]
     };
 
+    closePopUp = () => {
+        this.setState({
+            popUp: 0
+        });
+    };
+
+    handleAlert = (alert) => {
+        let newState = this.state;
+        newState.alert.status = alert.status;
+        newState.alert.type = alert.type;
+        newState.alert.message = alert.message;
+        this.setState({
+            ...newState
+        })
+    };
+
+    like = () => {
+        this.state.like ? this.setState({
+            like: 0
+        }) : this.setState({
+            like: 1
+        })
+    };
+
+    showReport = () => {
+        this.state.popUp ? this.setState({
+            popUp: 0
+        }) : this.setState({
+            popUp: 1
+        })
+    };
+
     renderGallery = (pictures) => {
         return pictures.map((pic, i) => (
             <div key={i} className={'gallery_picture'} style={{backgroundImage: `url('${pic}')`}}/>
@@ -36,11 +77,18 @@ class ProfileContainer extends Component {
     };
 
     render() {
+        let alert = this.state.alert;
+        let popUp = this.state.popUp;
         return (
             <div id={'profile'}>
+                {alert.status ? <Alert alert={alert} handleAlert={this.handleAlert}/> : null}
+                {popUp ? <ReportPopUp popUp={this.showReport} alert={alert}
+                                      handleAlert={this.handleAlert} closePopUp={this.closePopUp}/>
+                                      : null}
                 <div id={'banner_pic_container'} style={{backgroundImage: "url('/assets/banner.png')"}}/>
                 <div id={'profile_content_container'}>
-                    <ProfileCard {...this.props}/>
+                    <ProfileCard {...this.props} like={this.like} like_status={this.state.like}
+                                 report={this.showReport} popUp_status={this.state.popUp}/>
                     <div id={'profile_content'}>
                         <div id={'bio_container'}>
                             <p id={'bio_title'}>Biography</p>

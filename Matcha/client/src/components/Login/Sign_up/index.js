@@ -2,10 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './sign_up.css'
 
-// Fonction pour envvoyer les values dans le prochain composant pour tout envoyer en validation au back
-// et controler le form avec la validation (si non valide, ne pas update le state donc ne pas changer de composant)
-// Faire le select.
-// Faire le Sign-in / Forget-password etc
+// Forgot-password remaining
 
 import SignUpStep1 from './sign_up_step_1'
 import SignUpStep2 from "./sign_up_step_2";
